@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>English Kids - Aprendizado Total</title>
+    <title>English Kids - Vozes Divertidas!</title>
     <style>
         :root {
             --primary: #004AAD;
@@ -22,19 +22,18 @@
         }
 
         body {
-            font-family: 'Comic Sans MS', 'Arial', sans-serif;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
             background-color: var(--bg);
             color: var(--text);
             margin: 0;
             transition: 0.3s;
-            overflow-x: hidden;
+            text-align: center;
         }
 
         header {
             background: var(--primary);
             color: var(--accent);
-            padding: 30px;
-            text-align: center;
+            padding: 25px;
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -44,14 +43,13 @@
         .theme-toggle {
             position: absolute;
             right: 20px;
-            top: 30px;
+            top: 25px;
             background: var(--accent);
             border: none;
-            padding: 12px;
+            padding: 10px;
             border-radius: 50%;
             cursor: pointer;
-            font-size: 1.2rem;
-            box-shadow: 0 4px 0 var(--text);
+            font-size: 1.5rem;
         }
 
         nav {
@@ -61,19 +59,19 @@
             padding: 15px;
             gap: 12px;
             border-bottom: 5px solid var(--primary);
-            scrollbar-width: none;
             justify-content: center;
+            scrollbar-width: none;
         }
 
         .nav-btn {
             padding: 12px 25px;
             background: var(--bg);
             border: 3px solid var(--primary);
-            border-radius: 30px;
-            white-space: nowrap;
+            border-radius: 50px;
             cursor: pointer;
             font-weight: bold;
             color: var(--primary);
+            white-space: nowrap;
             transition: 0.2s;
         }
 
@@ -83,22 +81,21 @@
             transform: scale(1.1);
         }
 
-        .container { padding: 25px; max-width: 1300px; margin: auto; }
+        .container { padding: 20px; max-width: 1200px; margin: auto; }
 
         .search-bar {
-            width: 100%;
+            width: 90%;
             padding: 18px;
             border-radius: 50px;
             border: 4px solid var(--primary);
             margin-bottom: 30px;
             font-size: 1.2rem;
             outline: none;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
             gap: 25px;
         }
 
@@ -106,36 +103,30 @@
             background: var(--card-bg);
             border-radius: 30px;
             padding: 25px;
-            text-align: center;
             box-shadow: 0 10px 0 var(--primary);
-            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 2px solid transparent;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            transition: 0.3s;
+            position: relative;
+            animation: popIn 0.4s ease-out;
         }
 
-        .card:hover { transform: translateY(-12px); border-color: var(--accent); }
-
-        .big-icon { font-size: 4rem; margin-bottom: 15px; }
-        .card h2 { margin: 5px 0; font-size: 1.8rem; color: var(--primary); }
-        .card .translation { font-weight: bold; color: #555; margin-bottom: 10px; }
-        .card .sentence { font-size: 0.9rem; color: #008CFF; font-weight: bold; min-height: 40px; }
-
-        .audio-row {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 15px;
+        @keyframes popIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
 
-        .speak-btn {
+        .card:hover { transform: translateY(-10px) rotate(1deg); }
+
+        .visual-element { font-size: 3.5rem; margin-bottom: 10px; }
+        .color-box { width: 70px; height: 70px; border-radius: 50%; margin: 0 auto 10px; border: 4px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+
+        .btn-audio {
             border: none;
             padding: 10px 15px;
             border-radius: 20px;
             cursor: pointer;
             font-weight: bold;
-            display: flex;
+            margin: 5px;
+            display: inline-flex;
             align-items: center;
             gap: 5px;
         }
@@ -143,20 +134,9 @@
         .btn-en { background: var(--primary); color: var(--accent); }
         .btn-pt { background: #28a745; color: white; }
 
-        /* Color Section Special Styles */
-        .color-circle {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            margin: 0 auto 15px;
-            border: 4px solid white;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-
         @media (max-width: 600px) {
             nav { justify-content: flex-start; }
             .grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
-            h1 { font-size: 1.5rem; }
         }
     </style>
 </head>
@@ -167,114 +147,104 @@
     <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
 </header>
 
-<nav id="cats">
-    <button class="nav-btn active" onclick="setCat('alphabet', this)">🔤 ABC</button>
-    <button class="nav-btn" onclick="setCat('numbers', this)">🔢 1-100</button>
-    <button class="nav-btn" onclick="setCat('colors', this)">🎨 Colors</button>
-    <button class="nav-btn" onclick="setCat('animals', this)">🦁 Animals</button>
-    <button class="nav-btn" onclick="setCat('flags', this)">🚩 Flags</button>
-    <button class="nav-btn" onclick="setCat('symbols', this)">❓ Symbols</button>
+<nav id="navbar">
+    <button class="nav-btn active" onclick="setCategory('alphabet', this)">ABC</button>
+    <button class="nav-btn" onclick="setCategory('numbers', this)">1-100</button>
+    <button class="nav-btn" onclick="setCategory('colors', this)">Colors</button>
+    <button class="nav-btn" onclick="setCategory('animals', this)">Animals</button>
+    <button class="nav-btn" onclick="setCategory('flags', this)">Flags</button>
+    <button class="nav-btn" onclick="setCategory('symbols', this)">Symbols</button>
 </nav>
 
 <div class="container">
-    <input type="text" class="search-bar" id="search" placeholder="Search word or translation... / Pesquisar..." onkeyup="search()">
-    <div class="grid" id="grid"></div>
+    <input type="text" class="search-bar" placeholder="Search... / Pesquisar..." onkeyup="doSearch()">
+    <div class="grid" id="mainGrid"></div>
 </div>
 
 <script>
-    const db = {
-        alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map(l => {
-            const examples = {
-                A: {w: "Apple", s: "The apple is sweet."}, B: {w: "Ball", s: "The ball is big."},
-                C: {w: "Cat", s: "The cat says meow."}, D: {w: "Dog", s: "The dog is happy."},
-                E: {w: "Elephant", s: "The elephant is grey."}, F: {w: "Fish", s: "The fish swims."},
-                G: {w: "Grape", s: "I like grapes."}, H: {w: "House", s: "My house is blue."}
-            };
-            return { 
-                en: l, pt: l, 
-                word: examples[l]?.w || "Word", 
-                sentence: examples[l]?.s || `${l} is a great letter!` 
-            };
-        }),
+    const database = {
+        alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map(l => ({ en: l, pt: l })),
         numbers: Array.from({length: 100}, (_, i) => ({ en: (i+1).toString(), pt: (i+1).toString() })),
         colors: [
-            {en: "Red", pt: "Vermelho", hex: "#FF0000"}, {en: "Blue", pt: "Azul", hex: "#004AAD"},
-            {en: "Yellow", pt: "Amarelo", hex: "#FFDE59"}, {en: "Green", pt: "Verde", hex: "#28A745"},
-            {en: "Orange", pt: "Laranja", hex: "#FF8C00"}, {en: "Pink", pt: "Rosa", hex: "#FFC0CB"},
-            {en: "Purple", pt: "Roxo", hex: "#800080"}, {en: "Brown", pt: "Marrom", hex: "#8B4513"},
-            {en: "Black", pt: "Preto", hex: "#000000"}, {en: "White", pt: "Branco", hex: "#FFFFFF"}
+            {en: "Red", pt: "Vermelho", hex: "#FF0000"}, {en: "Blue", pt: "Azul", hex: "#0000FF"},
+            {en: "Yellow", pt: "Amarelo", hex: "#FFFF00"}, {en: "Green", pt: "Verde", hex: "#008000"},
+            {en: "Pink", pt: "Rosa", hex: "#FFC0CB"}, {en: "Orange", pt: "Laranja", hex: "#FFA500"}
         ],
         animals: [
-            {en: "Lion", pt: "Leão"}, {en: "Tiger", pt: "Tigre"}, {en: "Elephant", pt: "Elefante"},
-            {en: "Giraffe", pt: "Girafa"}, {en: "Zebra", pt: "Zebra"}, {en: "Monkey", pt: "Macaco"},
-            {en: "Shark", pt: "Tubarão"}, {en: "Whale", pt: "Baleia"}, {en: "Dolphin", pt: "Golfinho"},
-            {en: "Snake", pt: "Cobra"}, {en: "Eagle", pt: "Águia"}, {en: "Parrot", pt: "Papagaio"},
-            {en: "Dog", pt: "Cachorro"}, {en: "Cat", pt: "Gato"}, {en: "Cow", pt: "Vaca"}
+            {en: "Lion", pt: "Leão"}, {en: "Tiger", pt: "Tigre"}, {en: "Monkey", pt: "Macaco"},
+            {en: "Elephant", pt: "Elefante"}, {en: "Giraffe", pt: "Girafa"}, {en: "Bee", pt: "Abelha"}
         ],
         flags: [
-            {en: "Brazil", pt: "Brasil", f: "🇧🇷"}, {en: "USA", pt: "EUA", f: "🇺🇸"},
-            {en: "UK", pt: "Reino Unido", f: "🇬🇧"}, {en: "Canada", pt: "Canadá", f: "🇨🇦"},
-            {en: "Japan", pt: "Japão", f: "🇯🇵"}, {en: "France", pt: "França", f: "🇫🇷"},
-            {en: "Portugal", pt: "Portugal", f: "🇵🇹"}, {en: "Argentina", pt: "Argentina", f: "🇦🇷"}
+            {en: "Brazil", pt: "Brasil", emoji: "🇧🇷"}, {en: "USA", pt: "EUA", emoji: "🇺🇸"},
+            {en: "Japan", pt: "Japão", emoji: "🇯🇵"}, {en: "UK", pt: "Reino Unido", emoji: "🇬🇧"}
         ],
         symbols: [
-            {en: "Comma", pt: "Vírgula", icon: ","}, {en: "Full Stop", pt: "Ponto Final", icon: "."},
-            {en: "Question Mark", pt: "Interrogação", icon: "?"}, {en: "Exclamation", pt: "Exclamação", icon: "!"},
-            {en: "Brackets", pt: "Parênteses", icon: "( )"}, {en: "Plus", pt: "Mais", icon: "+"},
-            {en: "Minus", pt: "Menos", icon: "-"}, {en: "Equals", pt: "Igual", icon: "="}
+            {en: "Comma", pt: "Vírgula", s: ","}, {en: "Full Stop", pt: "Ponto Final", s: "."},
+            {en: "Question Mark", pt: "Interrogação", s: "?"}, {en: "Exclamation", pt: "Exclamação", s: "!"}
         ]
     };
 
-    let activeCat = 'alphabet';
+    let current = 'alphabet';
 
     function toggleTheme() {
         document.body.dataset.theme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
     }
 
-    function setCat(cat, btn) {
-        activeCat = cat;
+    function setCategory(cat, btn) {
+        current = cat;
         document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         render();
     }
 
     function render() {
-        const grid = document.getElementById('grid');
+        const grid = document.getElementById('mainGrid');
         grid.innerHTML = "";
-        db[activeCat].forEach(item => {
+        database[current].forEach(item => {
             const card = document.createElement('div');
             card.className = 'card';
             
-            let visual = "";
-            if(activeCat === 'colors') visual = `<div class="color-circle" style="background:${item.hex}"></div>`;
-            if(activeCat === 'flags') visual = `<div class="big-icon">${item.f}</div>`;
-            if(activeCat === 'symbols') visual = `<div class="big-icon" style="color:var(--primary)">${item.icon}</div>`;
-            if(activeCat === 'alphabet') visual = `<div class="big-icon">${item.en}</div>`;
+            let visual = `<div class="visual-element">${item.en}</div>`;
+            if(current === 'colors') visual = `<div class="color-box" style="background:${item.hex}"></div>`;
+            if(current === 'flags') visual = `<div class="visual-element">${item.emoji}</div>`;
+            if(current === 'symbols') visual = `<div class="visual-element">${item.s}</div>`;
 
             card.innerHTML = `
                 ${visual}
-                <h2>${item.en}</h2>
-                <div class="translation">🇧🇷 ${item.pt}</div>
-                ${item.word ? `<div class="sentence">${item.word} <br> <small>${item.sentence}</small></div>` : ''}
-                <div class="audio-row">
-                    <button class="speak-btn btn-en" onclick="speak('${item.en}', 'en-US')">🇺🇸 EN</button>
-                    <button class="speak-btn btn-pt" onclick="speak('${item.pt}', 'pt-BR')">🇧🇷 PT</button>
+                <div style="font-size: 1.5rem; font-weight: bold;">${item.en}</div>
+                <div style="opacity: 0.7;">🇧🇷 ${item.pt}</div>
+                <div style="margin-top: 15px;">
+                    <button class="btn-audio btn-en" onclick="speak('${item.en}', 'en-US')">🇺🇸 Speak</button>
+                    <button class="btn-audio btn-pt" onclick="speak('${item.pt}', 'pt-BR')">🇧🇷 Fala</button>
                 </div>
             `;
             grid.appendChild(card);
         });
     }
 
+    // --- SMART CHILD VOICE ENGINE ---
     function speak(text, lang) {
         window.speechSynthesis.cancel();
         const msg = new SpeechSynthesisUtterance(text);
         msg.lang = lang;
-        msg.rate = 0.75;
+
+        // Randomly choose between "Boy" and "Girl" style
+        // We simulate a girl voice with high pitch and boy with medium pitch
+        const isGirl = Math.random() > 0.5;
+        
+        if (isGirl) {
+            msg.pitch = 1.6; // High, sweet voice
+            msg.rate = 0.9;
+        } else {
+            msg.pitch = 1.2; // Energetic boy voice
+            msg.rate = 0.85;
+        }
+
         window.speechSynthesis.speak(msg);
     }
 
-    function search() {
-        const q = document.getElementById('search').value.toLowerCase();
+    function doSearch() {
+        const q = document.querySelector('.search-bar').value.toLowerCase();
         document.querySelectorAll('.card').forEach(c => {
             c.style.display = c.innerText.toLowerCase().includes(q) ? "block" : "none";
         });

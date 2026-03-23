@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Kids - Aprenda Inglês Brincando!</title>
+    <style>
+        :root {
+            --primary-blue: #004AAD;
+            --bright-yellow: #FFDE59;
+            --soft-white: #FFFFFF;
+            --bg-light: #F0F7FF;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif;
+            background-color: var(--bg-light);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--primary-blue);
+        }
+
+        header {
+            background-color: var(--primary-blue);
+            color: var(--bright-yellow);
+            width: 100%;
+            padding: 30px 10px;
+            text-align: center;
+            border-bottom: 8px solid var(--bright-yellow);
+        }
+
+        h1 { margin: 0; font-size: 2.5rem; letter-spacing: 2px; }
+
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 20px;
+            padding: 30px;
+            width: 90%;
+            max-width: 900px;
+        }
+
+        .topic-card {
+            background-color: var(--soft-white);
+            border: 4px solid var(--primary-blue);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 0 var(--primary-blue);
+        }
+
+        .topic-card:hover {
+            transform: translateY(-5px);
+            background-color: var(--bright-yellow);
+            box-shadow: 0 10px 0 var(--primary-blue);
+        }
+
+        #learning-area {
+            width: 90%;
+            max-width: 800px;
+            margin: 20px 0;
+            padding: 25px;
+            border-radius: 30px;
+            display: none;
+            background: white;
+            border: 5px dashed var(--bright-yellow);
+        }
+
+        .item-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--bg-light);
+            margin: 12px 0;
+            padding: 15px;
+            border-radius: 15px;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .btn-audio {
+            background-color: var(--primary-blue);
+            color: var(--bright-yellow);
+            border: none;
+            font-size: 1.5rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .btn-test {
+            background-color: #FF5757;
+            color: white;
+            font-size: 1.3rem;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            margin: 20px auto;
+            display: block;
+            cursor: pointer;
+            box-shadow: 0 5px 0 #c0392b;
+        }
+
+        .translation { color: #555; font-size: 1rem; margin-top: 5px; }
+        .example { color: #008CFF; font-size: 0.9rem; margin-top: 3px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>🚀 ENGLISH KIDS 🚀</h1>
+    <p>Vamos aprender inglês! / Let's learn English!</p>
+</header>
+
+<div class="nav-grid">
+    <div class="topic-card" onclick="showTopic('alphabet')">🔤<br>Alphabet</div>
+    <div class="topic-card" onclick="showTopic('numbers')">🔢<br>Numbers</div>
+    <div class="topic-card" onclick="showTopic('colors')">🎨<br>Colors</div>
+    <div class="topic-card" onclick="showTopic('math')">➕<br>Math</div>
+    <div class="topic-card" onclick="showTopic('animals')">🦁<br>Animals</div>
+    <div class="topic-card" onclick="showTopic('symbols')">❓<br>Symbols</div>
+</div>
+
+<div id="learning-area">
+    <h2 id="section-title" style="text-align: center; color: var(--primary-blue);"></h2>
+    <div id="content-list"></div>
+    <button class="btn-test" onclick="alert('Great job! More questions coming soon!')">🎯 Test My Knowledge!</button>
+</div>
+
+<script>
+    const data = {
+        alphabet: [
+            { en: "A for Apple", pt: "A de Maçã", sentence: "The apple is red." },
+            { en: "B for Butterfly", pt: "B de Borboleta", sentence: "The butterfly flies high." },
+            { en: "C for Cat", pt: "C de Gato", sentence: "The cat says meow." }
+        ],
+        numbers: [
+            { en: "One", pt: "Um" }, { en: "Ten", pt: "Dez" }, 
+            { en: "Fifty", pt: "Cinquenta" }, { en: "One Hundred", pt: "Cem" }
+        ],
+        colors: [
+            { en: "Blue", pt: "Azul" }, { en: "Yellow", pt: "Amarelo" }, 
+            { en: "Green", pt: "Verde" }, { en: "Red", pt: "Vermelho" }
+        ],
+        animals: [
+            { en: "Dog", pt: "Cachorro" }, { en: "Lion", pt: "Leão" }, 
+            { en: "Bird", pt: "Pássaro" }, { en: "Elephant", pt: "Elefante" }
+        ],
+        math: [
+            { en: "Plus (+)", pt: "Mais" }, { en: "Minus (-)", pt: "Menos" },
+            { en: "Times (x)", pt: "Vezes" }, { en: "Divided by (÷)", pt: "Dividido por" }
+        ],
+        symbols: [
+            { en: "Comma", pt: "Vírgula" }, { en: "Full Stop", pt: "Ponto Final" },
+            { en: "Question Mark", pt: "Ponto de Interrogação" }
+        ]
+    };
+
+    function showTopic(topic) {
+        const area = document.getElementById('learning-area');
+        const list = document.getElementById('content-list');
+        const title = document.getElementById('section-title');
+        
+        area.style.display = 'block';
+        list.innerHTML = '';
+        title.innerText = topic.charAt(0).toUpperCase() + topic.slice(1);
+
+        data[topic].forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'item-row';
+            div.innerHTML = `
+                <div>
+                    <div style="font-size: 1.2rem; font-weight: bold;">${item.en}</div>
+                    <div class="translation">🇧🇷 ${item.pt}</div>
+                    ${item.sentence ? `<div class="example">" ${item.sentence} "</div>` : ''}
+                </div>
+                <button class="btn-audio" onclick="speak('${item.en}. ${item.sentence || ''}')">🔊</button>
+            `;
+            list.appendChild(div);
+        });
+        area.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function speak(text) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.75; // Even slower for easier listening
+        utterance.pitch = 1.2; // Slightly higher pitch to sound more kid-friendly
+        window.speechSynthesis.speak(utterance);
+    }
+</script>
+
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>English Kids - O Mundo em Suas Mãos</title>
+    <title>English Kids - Aprendizado Divertido</title>
     <style>
         :root {
             --primary: #004AAD;
@@ -59,7 +59,7 @@
             padding: 15px;
             gap: 12px;
             border-bottom: 5px solid var(--primary);
-            justify-content: flex-start;
+            justify-content: center;
             scrollbar-width: none;
         }
 
@@ -83,7 +83,7 @@
         .container { padding: 20px; max-width: 1400px; margin: auto; }
 
         .search-bar {
-            width: 90%;
+            width: 85%;
             padding: 18px;
             border-radius: 50px;
             border: 4px solid var(--primary);
@@ -94,7 +94,7 @@
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 25px;
         }
 
@@ -110,32 +110,26 @@
 
         .card:hover { transform: translateY(-10px); border-color: var(--accent); }
 
-        .art-box {
+        .art-display {
             width: 100%;
-            height: 120px;
-            background: #eee;
-            border-radius: 20px;
+            height: 100px;
+            border-radius: 15px;
             margin-bottom: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 4rem;
-            overflow: hidden;
-        }
-
-        .art-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
+            background: rgba(0,0,0,0.05);
         }
 
         .btn-audio {
             border: none;
-            padding: 10px 20px;
+            padding: 10px 15px;
             border-radius: 20px;
             cursor: pointer;
             font-weight: bold;
             margin: 5px;
+            font-size: 0.9rem;
         }
 
         .btn-en { background: var(--primary); color: var(--accent); }
@@ -148,28 +142,28 @@
 
         @media (max-width: 600px) {
             .grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
-            .art-box { height: 80px; font-size: 3rem; }
+            nav { justify-content: flex-start; }
         }
     </style>
 </head>
 <body data-theme="light">
 
 <header>
-    <h1>🚀 ENGLISH KIDS 🇧🇷</h1>
+    <h1>🌟 ENGLISH KIDS 🌟</h1>
     <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
 </header>
 
 <nav>
     <button class="nav-btn active" onclick="setCategory('alphabet', this)">A-Z</button>
     <button class="nav-btn" onclick="setCategory('numbers', this)">1-100</button>
-    <button class="nav-btn" onclick="setCategory('colors', this)">Colors</button>
+    <button class="nav-btn" onclick="setCategory('colors', this)">20 Colors</button>
     <button class="nav-btn" onclick="setCategory('animals', this)">Animals</button>
-    <button class="nav-btn" onclick="setCategory('countries', this)">Countries</button>
+    <button class="nav-btn" onclick="setCategory('countries', this)">Flags</button>
     <button class="nav-btn" onclick="setCategory('symbols', this)">Symbols</button>
 </nav>
 
 <div class="container">
-    <input type="text" class="search-bar" placeholder="Find something... / Encontre algo..." onkeyup="doSearch()">
+    <input type="text" class="search-bar" placeholder="Pesquisar... / Search..." onkeyup="doSearch()">
     <div class="grid" id="mainGrid"></div>
 </div>
 
@@ -182,33 +176,41 @@
             {en: "Yellow", pt: "Amarelo", hex: "#FFFF00"}, {en: "Green", pt: "Verde", hex: "#008000"},
             {en: "Orange", pt: "Laranja", hex: "#FFA500"}, {en: "Pink", pt: "Rosa", hex: "#FFC0CB"},
             {en: "Purple", pt: "Roxo", hex: "#800080"}, {en: "Brown", pt: "Marrom", hex: "#A52A2A"},
-            {en: "Black", pt: "Preto", hex: "#000000"}, {en: "White", pt: "Branco", hex: "#FFFFFF"}
+            {en: "Black", pt: "Preto", hex: "#000000"}, {en: "White", pt: "Branco", hex: "#FFFFFF"},
+            {en: "Gray", pt: "Cinza", hex: "#808080"}, {en: "Cyan", pt: "Ciano", hex: "#00FFFF"},
+            {en: "Magenta", pt: "Magenta", hex: "#FF00FF"}, {en: "Silver", pt: "Prata", hex: "#C0C0C0"},
+            {en: "Gold", pt: "Dourado", hex: "#FFD700"}, {en: "Beige", pt: "Bege", hex: "#F5F5DC"},
+            {en: "Navy", pt: "Azul Marinho", hex: "#000080"}, {en: "Olive", pt: "Oliva", hex: "#808000"},
+            {en: "Teal", pt: "Azul-petróleo", hex: "#008080"}, {en: "Maroon", pt: "Bordô", hex: "#800000"}
         ],
         animals: [
-            {en: "Lion", pt: "Leão"}, {en: "Tiger", pt: "Tigre"}, {en: "Elephant", pt: "Elefante"},
-            {en: "Monkey", pt: "Macaco"}, {en: "Giraffe", pt: "Girafa"}, {en: "Zebra", pt: "Zebra"},
-            {en: "Shark", pt: "Tubarão"}, {en: "Whale", pt: "Baleia"}, {en: "Dolphin", pt: "Golfinho"},
-            {en: "Snake", pt: "Cobra"}, {en: "Eagle", pt: "Águia"}, {en: "Parrot", pt: "Papagaio"},
-            {en: "Dog", pt: "Cachorro"}, {en: "Cat", pt: "Gato"}, {en: "Horse", pt: "Cavalo"},
-            {en: "Cow", pt: "Vaca"}, {en: "Pig", pt: "Porco"}, {en: "Rabbit", pt: "Coelho"},
-            {en: "Panda", pt: "Panda"}, {en: "Koala", pt: "Coala"}, {en: "Kangaroo", pt: "Canguru"},
-            {en: "Spider", pt: "Aranha"}, {en: "Butterfly", pt: "Borboleta"}, {en: "Bee", pt: "Abelha"}
-            // Add more here easily!
+            {en: "Lion", pt: "Leão", art: "🦁"}, {en: "Tiger", pt: "Tigre", art: "🐯"},
+            {en: "Elephant", pt: "Elefante", art: "🐘"}, {en: "Monkey", pt: "Macaco", art: "🐒"},
+            {en: "Giraffe", pt: "Girafa", art: "🦒"}, {en: "Zebra", pt: "Zebra", art: "🦓"},
+            {en: "Dog", pt: "Cachorro", art: "🐶"}, {en: "Cat", pt: "Gato", art: "🐱"},
+            {en: "Rabbit", pt: "Coelho", art: "🐰"}, {en: "Panda", pt: "Panda", art: "🐼"},
+            {en: "Koala", pt: "Coala", art: "🐨"}, {en: "Bear", pt: "Urso", art: "🐻"},
+            {en: "Pig", pt: "Porco", art: "🐷"}, {en: "Cow", pt: "Vaca", art: "🐮"},
+            {en: "Chicken", pt: "Galinha", art: "🐔"}, {en: "Snake", pt: "Cobra", art: "🐍"},
+            {en: "Turtle", pt: "Tartaruga", art: "🐢"}, {en: "Frog", pt: "Sapo", art: "🐸"},
+            {en: "Whale", pt: "Baleia", art: "🐳"}, {en: "Shark", pt: "Tubarão", art: "🦈"},
+            {en: "Octopus", pt: "Polvo", art: "🐙"}, {en: "Butterfly", pt: "Borboleta", art: "🦋"},
+            {en: "Bee", pt: "Abelha", art: "🐝"}, {en: "Ant", pt: "Formiga", art: "🐜"}
         ],
         countries: [
-            {en: "Brazil", pt: "Brasil", f: "🇧🇷"}, {en: "USA", pt: "EUA", f: "🇺🇸"},
-            {en: "UK", pt: "Reino Unido", f: "🇬🇧"}, {en: "Canada", pt: "Canadá", f: "🇨🇦"},
-            {en: "France", pt: "França", f: "🇫🇷"}, {en: "Germany", pt: "Alemanha", f: "🇩🇪"},
-            {en: "Italy", pt: "Itália", f: "🇮🇹"}, {en: "Japan", pt: "Japão", f: "🇯🇵"},
-            {en: "China", pt: "China", f: "🇨🇳"}, {en: "Mexico", pt: "México", f: "🇲🇽"},
-            {en: "Portugal", pt: "Portugal", f: "🇵🇹"}, {en: "Argentina", pt: "Argentina", f: "🇦🇷"},
-            {en: "Spain", pt: "Espanha", f: "🇪🇸"}, {en: "Australia", pt: "Austrália", f: "🇦🇺"}
+            {en: "Brazil", pt: "Brasil", flag: "🇧🇷"}, {en: "USA", pt: "EUA", flag: "🇺🇸"},
+            {en: "UK", pt: "Reino Unido", flag: "🇬🇧"}, {en: "Canada", pt: "Canadá", flag: "🇨🇦"},
+            {en: "France", pt: "França", flag: "🇫🇷"}, {en: "Germany", pt: "Alemanha", flag: "🇩🇪"},
+            {en: "Italy", pt: "Itália", flag: "🇮🇹"}, {en: "Japan", pt: "Japão", flag: "🇯🇵"},
+            {en: "China", pt: "China", flag: "🇨🇳"}, {en: "Mexico", pt: "México", flag: "🇲🇽"},
+            {en: "Portugal", pt: "Portugal", flag: "🇵🇹"}, {en: "Argentina", pt: "Argentina", flag: "🇦🇷"},
+            {en: "Australia", pt: "Austrália", flag: "🇦🇺"}, {en: "Spain", pt: "Espanha", flag: "🇪🇸"}
         ],
         symbols: [
             {en: "Comma", pt: "Vírgula", s: ","}, {en: "Full Stop", pt: "Ponto Final", s: "."},
             {en: "Question Mark", pt: "Interrogação", s: "?"}, {en: "Exclamation", pt: "Exclamação", s: "!"},
             {en: "Plus", pt: "Mais", s: "+"}, {en: "Minus", pt: "Menos", s: "-"},
-            {en: "Multiply", pt: "Vezes", s: "×"}, {en: "Divide", pt: "Dividir", s: "÷"}
+            {en: "Times", pt: "Vezes", s: "×"}, {en: "Divide", pt: "Dividir", s: "÷"}
         ]
     };
 
@@ -232,23 +234,21 @@
             const card = document.createElement('div');
             card.className = 'card';
             
-            let art = `<div class="art-box">${item.en}</div>`;
-            
-            if(currentCat === 'colors') art = `<div class="art-box" style="background:${item.hex}"></div>`;
-            if(currentCat === 'countries') art = `<div class="art-box">${item.f}</div>`;
-            if(currentCat === 'symbols') art = `<div class="art-box" style="color:var(--primary)">${item.s}</div>`;
-            if(currentCat === 'animals') {
-                // This uses a public placeholder for cute animal icons
-                art = `<div class="art-box"><img src="https://img.icons8.com/color/144/000000/${item.en.toLowerCase()}.png" alt="${item.en}" onerror="this.src='🐾'"></div>`;
-            }
+            let artContent = item.en;
+            let bgColor = "rgba(0,0,0,0.05)";
+
+            if(currentCat === 'colors') { artContent = ""; bgColor = item.hex; }
+            if(currentCat === 'animals') artContent = item.art;
+            if(currentCat === 'countries') artContent = item.flag;
+            if(currentCat === 'symbols') artContent = item.s;
 
             card.innerHTML = `
-                ${art}
-                <div style="font-size: 1.6rem; font-weight: bold;">${item.en}</div>
+                <div class="art-display" style="background:${bgColor}">${artContent}</div>
+                <div style="font-size: 1.5rem; font-weight: bold;">${item.en}</div>
                 <div style="opacity: 0.7;">🇧🇷 ${item.pt}</div>
                 <div style="margin-top: 15px;">
-                    <button class="btn-audio btn-en" onclick="speak('${item.en}', 'en-US')">🇺🇸 EN</button>
-                    <button class="btn-audio btn-pt" onclick="speak('${item.pt}', 'pt-BR')">🇧🇷 PT</button>
+                    <button class="btn-audio btn-en" onclick="speak('${item.en}', 'en-US')">🇺🇸 Speak</button>
+                    <button class="btn-audio btn-pt" onclick="speak('${item.pt}', 'pt-BR')">🇧🇷 Fala</button>
                 </div>
             `;
             grid.appendChild(card);
@@ -262,7 +262,7 @@
         
         // Random Child Voice Logic
         const isGirl = Math.random() > 0.5;
-        msg.pitch = isGirl ? 1.7 : 1.3;
+        msg.pitch = isGirl ? 1.8 : 1.3;
         msg.rate = 0.8;
         
         window.speechSynthesis.speak(msg);
@@ -277,6 +277,5 @@
 
     render();
 </script>
-
 </body>
 </html>

@@ -3,67 +3,176 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>English Kids - A to Z Master</title>
+    <title>English Kids - O Mundo Total!</title>
     <style>
-        :root { --primary: #004AAD; --accent: #FFDE59; --bg: #F0F7FF; --card-bg: #FFFFFF; --text: #004AAD; }
-        [data-theme="dark"] { --primary: #FFDE59; --accent: #004AAD; --bg: #121212; --card-bg: #1E1E1E; --text: #FFFFFF; }
-        body { font-family: 'Comic Sans MS', cursive, sans-serif; background-color: var(--bg); color: var(--text); margin: 0; transition: 0.3s; text-align: center; }
-        header { background: var(--primary); color: var(--accent); padding: 20px; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
-        .theme-toggle { position: absolute; right: 20px; top: 20px; background: var(--accent); border: none; padding: 10px; border-radius: 50%; cursor: pointer; font-size: 1.5rem; }
-        nav { display: flex; overflow-x: auto; background: var(--card-bg); padding: 15px; gap: 12px; border-bottom: 5px solid var(--primary); justify-content: center; scrollbar-width: none; }
-        .nav-btn { padding: 10px 20px; background: var(--bg); border: 3px solid var(--primary); border-radius: 50px; cursor: pointer; font-weight: bold; color: var(--primary); white-space: nowrap; }
-        .nav-btn.active { background: var(--primary); color: var(--accent); transform: scale(1.1); }
+        :root {
+            --primary: #004AAD;
+            --accent: #FFDE59;
+            --bg: #F0F7FF;
+            --card-bg: #FFFFFF;
+            --text: #004AAD;
+        }
+
+        [data-theme="dark"] {
+            --primary: #FFDE59;
+            --accent: #004AAD;
+            --bg: #121212;
+            --card-bg: #1E1E1E;
+            --text: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        header {
+            background: var(--primary);
+            color: var(--accent);
+            padding: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            background: var(--accent);
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        nav {
+            display: flex;
+            overflow-x: auto;
+            background: var(--card-bg);
+            padding: 15px;
+            gap: 12px;
+            border-bottom: 5px solid var(--primary);
+            justify-content: center;
+            scrollbar-width: none;
+        }
+
+        .nav-btn {
+            padding: 10px 20px;
+            background: var(--bg);
+            border: 3px solid var(--primary);
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            color: var(--primary);
+            white-space: nowrap;
+        }
+
+        .nav-btn.active {
+            background: var(--primary);
+            color: var(--accent);
+        }
+
         .container { padding: 20px; max-width: 1300px; margin: auto; }
-        .search-bar { width: 85%; padding: 15px; border-radius: 50px; border: 4px solid var(--primary); margin-bottom: 25px; font-size: 1.1rem; outline: none; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
-        .card { background: var(--card-bg); border-radius: 25px; padding: 20px; box-shadow: 0 8px 0 var(--primary); transition: 0.3s; border: 2px solid transparent; }
-        .card:hover { transform: translateY(-10px); border-color: var(--accent); }
-        .art-box { width: 100%; height: 110px; border-radius: 15px; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.03); overflow: hidden; font-size: 4rem; font-weight: bold; }
-        .art-box img { max-width: 85%; max-height: 85%; object-fit: contain; }
-        .example-text { font-size: 0.9rem; color: #008CFF; font-weight: bold; margin-top: 5px; }
-        .audio-btns { margin-top: 15px; display: flex; justify-content: center; gap: 10px; }
-        .btn-speak { border: none; padding: 10px 15px; border-radius: 20px; cursor: pointer; font-weight: bold; font-size: 0.9rem; }
+
+        .search-bar {
+            width: 80%;
+            padding: 15px;
+            border-radius: 50px;
+            border: 4px solid var(--primary);
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 25px;
+            padding: 15px;
+            box-shadow: 0 8px 0 var(--primary);
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .art-box {
+            width: 100%;
+            height: 110px;
+            border-radius: 15px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.03);
+            overflow: hidden;
+        }
+
+        .art-box img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+
+        .flag-img {
+            width: 80%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border: 1px solid #ddd;
+        }
+
+        .big-text { font-size: 4rem; font-weight: bold; }
+
+        .audio-btns { margin-top: 10px; display: flex; justify-content: center; gap: 8px; }
+        .btn-speak {
+            border: none; padding: 8px 12px; border-radius: 15px; cursor: pointer; font-weight: bold; font-size: 0.8rem;
+        }
         .btn-en { background: var(--primary); color: var(--accent); }
         .btn-pt { background: #28a745; color: white; }
-        @media (max-width: 600px) { .grid { grid-template-columns: repeat(2, 1fr); } nav { justify-content: flex-start; } }
+
+        @media (max-width: 600px) {
+            .grid { grid-template-columns: repeat(2, 1fr); }
+            nav { justify-content: flex-start; }
+        }
     </style>
 </head>
 <body data-theme="light">
 
 <header>
-    <h1>🚀 ENGLISH KIDS 🇧🇷</h1>
+    <h1>🌍 ENGLISH KIDS 🇧🇷</h1>
     <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
 </header>
 
 <nav>
-    <button class="nav-btn active" onclick="setCategory('alphabet', this)">ABC (A-Z)</button>
+    <button class="nav-btn active" onclick="setCategory('alphabet', this)">ABC</button>
     <button class="nav-btn" onclick="setCategory('numbers', this)">1-100</button>
-    <button class="nav-btn" onclick="setCategory('colors', this)">20 Colors</button>
+    <button class="nav-btn" onclick="setCategory('colors', this)">Colors</button>
     <button class="nav-btn" onclick="setCategory('animals', this)">Animals</button>
-    <button class="nav-btn" onclick="setCategory('countries', this)">Flags</button>
+    <button class="nav-btn" onclick="setCategory('countries', this)">100 Flags</button>
     <button class="nav-btn" onclick="setCategory('symbols', this)">Symbols</button>
 </nav>
 
 <div class="container">
-    <input type="text" class="search-bar" placeholder="Type to learn... / Digite para aprender..." onkeyup="doSearch()">
+    <input type="text" class="search-bar" placeholder="Find / Buscar..." onkeyup="doSearch()">
     <div class="grid" id="mainGrid"></div>
 </div>
 
 <script>
     const alphabetData = [
-        {l: "A", w: "Apple", pt: "Maçã"}, {l: "B", w: "Ball", pt: "Bola"}, {l: "C", w: "Cat", pt: "Gato"},
-        {l: "D", w: "Dog", pt: "Cachorro"}, {l: "E", w: "Elephant", pt: "Elefante"}, {l: "F", w: "Fish", pt: "Peixe"},
-        {l: "G", w: "Grape", pt: "Uva"}, {l: "H", w: "House", pt: "Casa"}, {l: "I", w: "Ice cream", pt: "Sorvete"},
-        {l: "J", w: "Juice", pt: "Suco"}, {l: "K", w: "Kite", pt: "Pipa"}, {l: "L", w: "Lion", pt: "Leão"},
-        {l: "M", w: "Monkey", pt: "Macaco"}, {l: "N", w: "Nose", pt: "Nariz"}, {l: "O", w: "Orange", pt: "Laranja"},
-        {l: "P", w: "Pig", pt: "Porco"}, {l: "Q", w: "Queen", pt: "Rainha"}, {l: "R", w: "Rabbit", pt: "Coelho"},
-        {l: "S", w: "Sun", pt: "Sol"}, {l: "T", w: "Tiger", pt: "Tigre"}, {l: "U", w: "Umbrella", pt: "Guarda-chuva"},
-        {l: "V", w: "Van", pt: "Van"}, {l: "W", w: "Water", pt: "Água"}, {l: "X", w: "Xylophone", pt: "Xilofone"},
-        {l: "Y", w: "Yo-yo", pt: "Ioiô"}, {l: "Z", w: "Zebra", pt: "Zebra"}
+        {l: "A", w: "Apple"}, {l: "B", w: "Ball"}, {l: "C", w: "Cat"}, {l: "D", w: "Dog"}, {l: "E", w: "Elephant"}, {l: "F", w: "Fish"}, {l: "G", w: "Grape"}, {l: "H", w: "House"}, {l: "I", w: "Icecream"}, {l: "J", w: "Juice"}, {l: "K", w: "Kite"}, {l: "L", w: "Lion"}, {l: "M", w: "Monkey"}, {l: "N", w: "Nose"}, {l: "O", w: "Orange"}, {l: "P", w: "Pig"}, {l: "Q", w: "Queen"}, {l: "R", w: "Rabbit"}, {l: "S", w: "Sun"}, {l: "T", w: "Tiger"}, {l: "U", w: "Umbrella"}, {l: "V", w: "Van"}, {l: "W", w: "Water"}, {l: "X", w: "Xylophone"}, {l: "Y", w: "Yo-yo"}, {l: "Z", w: "Zebra"}
     ];
 
     const database = {
-        alphabet: alphabetData.map(item => ({ en: item.l, pt: item.l, ex: `${item.l} is for ${item.w}`, exPt: `${item.w} (${item.pt})` })),
+        alphabet: alphabetData.map(l => ({ en: l.l, pt: l.l, ex: `${l.l} is for ${l.w}` })),
         numbers: Array.from({length: 100}, (_, i) => ({ en: (i+1).toString(), pt: (i+1).toString() })),
         colors: [
             {en: "Red", pt: "Vermelho", hex: "#FF0000"}, {en: "Blue", pt: "Azul", hex: "#0000FF"},
@@ -71,34 +180,36 @@
             {en: "Pink", pt: "Rosa", hex: "#FFC0CB"}, {en: "Orange", pt: "Laranja", hex: "#FFA500"},
             {en: "Purple", pt: "Roxo", hex: "#800080"}, {en: "Brown", pt: "Marrom", hex: "#A52A2A"},
             {en: "Black", pt: "Preto", hex: "#000000"}, {en: "White", pt: "Branco", hex: "#FFFFFF"},
-            {en: "Gray", pt: "Cinza", hex: "#808080"}, {en: "Gold", pt: "Dourado", hex: "#FFD700"},
-            {en: "Silver", pt: "Prata", hex: "#C0C0C0"}, {en: "Beige", pt: "Bege", hex: "#F5F5DC"},
-            {en: "Navy", pt: "Azul Marinho", hex: "#000080"}, {en: "Teal", pt: "Azul-petróleo", hex: "#008080"},
-            {en: "Sky Blue", pt: "Azul Céu", hex: "#87CEEB"}, {en: "Lime", pt: "Lima", hex: "#00FF00"},
-            {en: "Coral", pt: "Coral", hex: "#FF7F50"}, {en: "Maroon", pt: "Bordô", hex: "#800000"}
+            {en: "Gray", pt: "Cinza", hex: "#808080"}, {en: "Cyan", pt: "Ciano", hex: "#00FFFF"},
+            {en: "Magenta", pt: "Magenta", hex: "#FF00FF"}, {en: "Silver", pt: "Prata", hex: "#C0C0C0"},
+            {en: "Gold", pt: "Dourado", hex: "#FFD700"}, {en: "Beige", pt: "Bege", hex: "#F5F5DC"},
+            {en: "Navy", pt: "Azul Marinho", hex: "#000080"}, {en: "Olive", pt: "Oliva", hex: "#808000"},
+            {en: "Teal", pt: "Azul-petróleo", hex: "#008080"}, {en: "Maroon", pt: "Bordô", hex: "#800000"}
         ],
         animals: [
             {en: "Lion", pt: "Leão", icon: "lion"}, {en: "Tiger", pt: "Tigre", icon: "tiger"},
             {en: "Elephant", pt: "Elefante", icon: "elephant"}, {en: "Monkey", pt: "Macaco", icon: "monkey"},
             {en: "Dog", pt: "Cachorro", icon: "dog"}, {en: "Cat", pt: "Gato", icon: "cat"},
-            {en: "Rabbit", pt: "Coelho", icon: "rabbit"}, {en: "Panda", pt: "Panda", icon: "panda"},
-            {en: "Horse", pt: "Cavalo", icon: "horse"}, {en: "Cow", pt: "Vaca", icon: "cow"}
+            {en: "Rabbit", pt: "Coelho", icon: "rabbit"}, {en: "Giraffe", pt: "Girafa", icon: "giraffe"},
+            {en: "Shark", pt: "Tubarão", icon: "shark"}, {en: "Snake", pt: "Cobra", icon: "snake"},
+            {en: "Turtle", pt: "Tartaruga", icon: "turtle"}, {en: "Frog", pt: "Sapo", icon: "frog"},
+            {en: "Cow", pt: "Vaca", icon: "cow"}, {en: "Pig", pt: "Porco", icon: "pig"},
+            {en: "Horse", pt: "Cavalo", icon: "horse"}, {en: "Butterfly", pt: "Borboleta", icon: "butterfly"},
+            {en: "Bee", pt: "Abelha", icon: "bee"}, {en: "Dolphin", pt: "Golfinho", icon: "dolphin"}
         ],
         countries: [
-            {en: "Brazil", pt: "Brasil", code: "br"}, {en: "USA", pt: "EUA", code: "us"},
-            {en: "UK", pt: "Reino Unido", code: "gb"}, {en: "Japan", pt: "Japão", code: "jp"},
-            {en: "France", pt: "França", code: "fr"}, {en: "Germany", pt: "Alemanha", code: "de"},
-            {en: "Italy", pt: "Itália", code: "it"}, {en: "Canada", pt: "Canadá", code: "ca"}
+            {en: "Brazil", pt: "Brasil", code: "br"}, {en: "USA", pt: "EUA", code: "us"}, {en: "UK", pt: "Reino Unido", code: "gb"}, {en: "Canada", pt: "Canadá", code: "ca"}, {en: "France", pt: "França", code: "fr"}, {en: "Germany", pt: "Alemanha", code: "de"}, {en: "Italy", pt: "Itália", code: "it"}, {en: "Japan", pt: "Japão", code: "jp"}, {en: "China", pt: "China", code: "cn"}, {en: "Mexico", pt: "México", code: "mx"}, {en: "Argentina", pt: "Argentina", code: "ar"}, {en: "Portugal", pt: "Portugal", code: "pt"}, {en: "Spain", pt: "Espanha", code: "es"}, {en: "Australia", pt: "Austrália", code: "au"}, {en: "Russia", pt: "Rússia", code: "ru"}, {en: "India", pt: "Índia", code: "in"}, {en: "Canada", pt: "Canadá", code: "ca"}, {en: "Chile", pt: "Chile", code: "cl"}, {en: "Colombia", pt: "Colômbia", code: "co"}, {en: "Peru", pt: "Peru", code: "pe"}, {en: "Egypt", pt: "Egito", code: "eg"}, {en: "South Korea", pt: "Coreia do Sul", code: "kr"}, {en: "Turkey", pt: "Turquia", code: "tr"}, {en: "Thailand", pt: "Tailândia", code: "th"}, {en: "Nigeria", pt: "Nigéria", code: "ng"}, {en: "South Africa", pt: "África do Sul", code: "za"}, {en: "Netherlands", pt: "Holanda", code: "nl"}, {en: "Belgium", pt: "Bélgica", code: "be"}, {en: "Switzerland", pt: "Suíça", code: "ch"}, {en: "Sweden", pt: "Suécia", code: "se"}, {en: "Norway", pt: "Noruega", code: "no"}, {en: "Finland", pt: "Finlândia", code: "fi"}, {en: "Denmark", pt: "Dinamarca", code: "dk"}, {en: "Ireland", pt: "Irlanda", code: "ie"}, {en: "Scotland", pt: "Escócia", code: "gb-sct"}, {en: "New Zealand", pt: "Nova Zelândia", code: "nz"}, {en: "Israel", pt: "Israel", code: "il"}, {en: "Greece", pt: "Grécia", code: "gr"}, {en: "Poland", pt: "Polônia", code: "pl"}, {en: "Ukraine", pt: "Ucrânia", code: "ua"}, {en: "Austria", pt: "Áustria", code: "at"}, {en: "Czech Republic", pt: "Tchéquia", code: "cz"}, {en: "Hungary", pt: "Hungria", code: "hu"}, {en: "Romania", pt: "Romênia", code: "ro"}, {en: "Bulgaria", pt: "Bulgária", code: "bg"}, {en: "Philippines", pt: "Filipinas", code: "ph"}, {en: "Malaysia", pt: "Malásia", code: "my"}, {en: "Singapore", pt: "Singapura", code: "sg"}, {en: "Vietnam", pt: "Vietnã", code: "vn"}, {en: "Indonesia", pt: "Indonésia", code: "id"}, {en: "Saudi Arabia", pt: "Arábia Saudita", code: "sa"}, {en: "UAE", pt: "Emirados Árabes", code: "ae"}, {en: "Iraq", pt: "Iraque", code: "iq"}, {en: "Iran", pt: "Irã", code: "ir"}, {en: "Pakistan", pt: "Paquistão", code: "pk"}, {en: "Bangladesh", pt: "Bangladesh", code: "bd"}, {en: "Ukraine", pt: "Ucrânia", code: "ua"}, {en: "Morocco", pt: "Marrocos", code: "ma"}, {en: "Kenya", pt: "Quênia", code: "ke"}, {en: "Venezuela", pt: "Venezuela", code: "ve"}, {en: "Ecuador", pt: "Equador", code: "ec"}, {en: "Guatemala", pt: "Guatemala", code: "gt"}, {en: "Cuba", pt: "Cuba", code: "cu"}, {en: "Jamaica", pt: "Jamaica", code: "jm"}, {en: "Haiti", pt: "Haiti", code: "ht"}, {en: "Bolivia", pt: "Bolívia", code: "bo"}, {en: "Paraguay", pt: "Paraguai", code: "py"}, {en: "Uruguay", pt: "Uruguai", code: "uy"}, {en: "Costa Rica", pt: "Costa Rica", code: "cr"}, {en: "Panama", pt: "Panamá", code: "pa"}, {en: "Dominican Republic", pt: "República Dominicana", code: "do"}, {en: "Honduras", pt: "Honduras", code: "hn"}, {en: "El Salvador", pt: "El Salvador", code: "sv"}, {en: "Nicaragua", pt: "Nicarágua", code: "ni"}, {en: "Croatia", pt: "Croácia", code: "hr"}, {en: "Serbia", pt: "Sérvia", code: "rs"}, {en: "Slovenia", pt: "Eslovênia", code: "si"}, {en: "Bosnia", pt: "Bósnia", code: "ba"}, {en: "Macedonia", pt: "Macedônia", code: "mk"}, {en: "Albania", pt: "Albânia", code: "al"}, {en: "Iceland", pt: "Islândia", code: "is"}, {en: "Malta", pt: "Malta", code: "mt"}, {en: "Cyprus", pt: "Chipre", code: "cy"}, {en: "Estonia", pt: "Estônia", code: "ee"}, {en: "Latvia", pt: "Letônia", code: "lv"}, {en: "Lithuania", pt: "Lituânia", code: "lt"}, {en: "Belarus", pt: "Bielo-Rússia", code: "by"}, {en: "Kazakhstan", pt: "Cazaquistão", code: "kz"}, {en: "Uzbekistan", pt: "Uzbequistão", code: "uz"}, {en: "Azerbaijan", pt: "Azerbaijão", code: "az"}, {en: "Georgia", pt: "Geórgia", code: "ge"}, {en: "Armenia", pt: "Armênia", code: "am"}, {en: "Syria", pt: "Síria", code: "sy"}, {en: "Lebanon", pt: "Líbano", code: "lb"}, {en: "Jordan", pt: "Jordânia", code: "jo"}
         ],
         symbols: [
-            {en: "Question Mark", pt: "Interrogação", s: "?"}, {en: "Exclamation", pt: "Exclamação", s: "!"},
-            {en: "Comma", pt: "Vírgula", s: ","}, {en: "Plus", pt: "Mais", s: "+"}
+            {en: "Question Mark", pt: "Interrogação", s: "?"}, {en: "Exclamation", pt: "Exclamação", s: "!"}, {en: "Comma", pt: "Vírgula", s: ","}, {en: "Full Stop", pt: "Ponto Final", s: "."}
         ]
     };
 
     let activeCat = 'alphabet';
 
-    function toggleTheme() { document.body.dataset.theme = document.body.dataset.theme === 'dark' ? 'light' : 'dark'; }
+    function toggleTheme() {
+        document.body.dataset.theme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
+    }
 
     function setCategory(cat, btn) {
         activeCat = cat;
@@ -113,17 +224,18 @@
         database[activeCat].forEach(item => {
             const card = document.createElement('div');
             card.className = 'card';
-            let art = `<div class="art-box">${item.en}</div>`;
+            
+            let art = `<div class="big-text">${item.en}</div>`;
+            if(activeCat === 'alphabet' && item.ex) art = `<div class="big-text">${item.en}</div><div style="font-size:0.9rem; color:#008CFF; font-weight:bold">${item.ex}</div>`;
             if(activeCat === 'colors') art = `<div class="art-box" style="background:${item.hex}"></div>`;
-            if(activeCat === 'countries') art = `<div class="art-box"><img src="https://flagcdn.com/w160/${item.code}.png"></div>`;
-            if(activeCat === 'animals') art = `<div class="art-box"><img src="https://img.icons8.com/color/144/000000/${item.icon}.png" onerror="this.src='🐾'"></div>`;
-            if(activeCat === 'symbols') art = `<div class="art-box">${item.s}</div>`;
+            if(activeCat === 'symbols') art = `<div class="big-text">${item.s}</div>`;
+            if(activeCat === 'countries') art = `<div class="art-box"><img src="https://flagcdn.com/w160/${item.code}.png" class="flag-img" alt="${item.en}"></div>`;
+            if(activeCat === 'animals') art = `<div class="art-box"><img src="https://img.icons8.com/color/144/000000/${item.icon}.png" onerror="this.src='🐾'" alt="${item.en}"></div>`;
 
             card.innerHTML = `
                 ${art}
-                <div style="font-size: 1.5rem; font-weight: bold;">${item.en}</div>
-                ${item.ex ? `<div class="example-text">${item.ex}</div>` : ''}
-                <div style="opacity: 0.7; font-size: 0.9rem;">🇧🇷 ${item.exPt || item.pt}</div>
+                <div style="font-size: 1.4rem; font-weight: bold;">${item.en}</div>
+                <div style="opacity: 0.7;">🇧🇷 ${item.pt}</div>
                 <div class="audio-btns">
                     <button class="btn-speak btn-en" onclick="speak('${item.en}', 'en-US')">🇺🇸 Speak</button>
                     <button class="btn-speak btn-pt" onclick="speak('${item.pt}', 'pt-BR')">🇧🇷 Fala</button>
@@ -137,7 +249,7 @@
         window.speechSynthesis.cancel();
         const msg = new SpeechSynthesisUtterance(text);
         msg.lang = lang;
-        msg.pitch = Math.random() > 0.5 ? 1.8 : 1.3; // Boy/Girl child voice
+        msg.pitch = Math.random() > 0.5 ? 1.7 : 1.3; // Boy/Girl child voice
         msg.rate = 0.8;
         window.speechSynthesis.speak(msg);
     }

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>English Kids - Full Learning Hub</title>
+    <title>English Kids - Aprendizado Total</title>
     <style>
         :root {
             --primary: #004AAD;
@@ -11,138 +11,151 @@
             --bg: #F0F7FF;
             --card-bg: #FFFFFF;
             --text: #004AAD;
-            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
         [data-theme="dark"] {
             --primary: #FFDE59;
             --accent: #004AAD;
-            --bg: #1A1A2E;
-            --card-bg: #16213E;
+            --bg: #121212;
+            --card-bg: #1E1E1E;
             --text: #FFFFFF;
         }
 
         body {
-            font-family: 'Comic Sans MS', sans-serif;
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
             background-color: var(--bg);
             color: var(--text);
             margin: 0;
-            transition: var(--transition);
+            transition: 0.3s;
             overflow-x: hidden;
         }
 
-        /* --- Header & Theme Toggle --- */
         header {
             background: var(--primary);
             color: var(--accent);
-            padding: 20px;
+            padding: 30px;
             text-align: center;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
-        .theme-btn {
+        .theme-toggle {
             position: absolute;
             right: 20px;
-            top: 25px;
+            top: 30px;
             background: var(--accent);
             border: none;
-            padding: 10px;
+            padding: 12px;
             border-radius: 50%;
             cursor: pointer;
             font-size: 1.2rem;
+            box-shadow: 0 4px 0 var(--text);
         }
 
-        /* --- Navigation Tabs --- */
         nav {
             display: flex;
             overflow-x: auto;
             background: var(--card-bg);
-            padding: 10px;
-            gap: 10px;
-            border-bottom: 4px solid var(--primary);
+            padding: 15px;
+            gap: 12px;
+            border-bottom: 5px solid var(--primary);
+            scrollbar-width: none;
+            justify-content: center;
         }
 
-        .nav-link {
-            padding: 10px 20px;
+        .nav-btn {
+            padding: 12px 25px;
             background: var(--bg);
-            border: 2px solid var(--primary);
-            border-radius: 20px;
+            border: 3px solid var(--primary);
+            border-radius: 30px;
             white-space: nowrap;
             cursor: pointer;
             font-weight: bold;
+            color: var(--primary);
+            transition: 0.2s;
         }
 
-        .nav-link.active {
+        .nav-btn.active {
             background: var(--primary);
             color: var(--accent);
+            transform: scale(1.1);
         }
 
-        /* --- Content Grid --- */
-        .container {
-            padding: 20px;
-            max-width: 1200px;
-            margin: auto;
-        }
+        .container { padding: 25px; max-width: 1300px; margin: auto; }
 
-        .search-box {
+        .search-bar {
             width: 100%;
-            padding: 15px;
-            border-radius: 25px;
-            border: 3px solid var(--primary);
-            margin-bottom: 20px;
-            font-size: 1.1rem;
+            padding: 18px;
+            border-radius: 50px;
+            border: 4px solid var(--primary);
+            margin-bottom: 30px;
+            font-size: 1.2rem;
+            outline: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 25px;
         }
 
         .card {
             background: var(--card-bg);
-            border-radius: 20px;
-            padding: 20px;
+            border-radius: 30px;
+            padding: 25px;
             text-align: center;
-            box-shadow: 0 8px 0 var(--primary);
-            transition: var(--transition);
-            animation: popIn 0.5s ease-out;
+            box-shadow: 0 10px 0 var(--primary);
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid transparent;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
-        .card:hover { transform: scale(1.05) rotate(2deg); }
+        .card:hover { transform: translateY(-12px); border-color: var(--accent); }
 
-        .card h3 { margin: 10px 0 5px 0; font-size: 1.4rem; }
-        .card p { margin: 0; font-size: 0.9rem; opacity: 0.8; }
-        .card .example { font-size: 0.8rem; font-weight: bold; color: #008CFF; margin-top: 10px; }
+        .big-icon { font-size: 4rem; margin-bottom: 15px; }
+        .card h2 { margin: 5px 0; font-size: 1.8rem; color: var(--primary); }
+        .card .translation { font-weight: bold; color: #555; margin-bottom: 10px; }
+        .card .sentence { font-size: 0.9rem; color: #008CFF; font-weight: bold; min-height: 40px; }
 
-        .audio-btns {
+        .audio-row {
             display: flex;
             justify-content: center;
-            gap: 10px;
+            gap: 15px;
             margin-top: 15px;
         }
 
-        .btn-speak {
-            background: var(--primary);
-            color: var(--accent);
+        .speak-btn {
             border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+            padding: 10px 15px;
+            border-radius: 20px;
             cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
-        @keyframes popIn {
-            0% { opacity: 0; transform: scale(0.5); }
-            100% { opacity: 1; transform: scale(1); }
+        .btn-en { background: var(--primary); color: var(--accent); }
+        .btn-pt { background: #28a745; color: white; }
+
+        /* Color Section Special Styles */
+        .color-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            border: 4px solid white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        /* Responsive Mobile */
         @media (max-width: 600px) {
-            .grid { grid-template-columns: repeat(2, 1fr); }
+            nav { justify-content: flex-start; }
+            .grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
             h1 { font-size: 1.5rem; }
         }
     </style>
@@ -150,80 +163,102 @@
 <body data-theme="light">
 
 <header>
-    <h1>🚀 ENGLISH KIDS</h1>
-    <button class="theme-btn" onclick="toggleTheme()">🌓</button>
+    <h1>🚀 ENGLISH KIDS 🇧🇷</h1>
+    <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
 </header>
 
-<nav id="topNav">
-    <div class="nav-link active" onclick="loadTab('alphabet')">A-Z</div>
-    <div class="nav-link" onclick="loadTab('numbers')">1-100</div>
-    <div class="nav-link" onclick="loadTab('animals')">Animals (300)</div>
-    <div class="nav-link" onclick="loadTab('flags')">Flags</div>
-    <div class="nav-link" onclick="loadTab('colors')">Colors</div>
-    <div class="nav-link" onclick="loadTab('math')">Math & Symbols</div>
+<nav id="cats">
+    <button class="nav-btn active" onclick="setCat('alphabet', this)">🔤 ABC</button>
+    <button class="nav-btn" onclick="setCat('numbers', this)">🔢 1-100</button>
+    <button class="nav-btn" onclick="setCat('colors', this)">🎨 Colors</button>
+    <button class="nav-btn" onclick="setCat('animals', this)">🦁 Animals</button>
+    <button class="nav-btn" onclick="setCat('flags', this)">🚩 Flags</button>
+    <button class="nav-btn" onclick="setCat('symbols', this)">❓ Symbols</button>
 </nav>
 
 <div class="container">
-    <input type="text" class="search-box" id="search" placeholder="Search for a word... (Procurar...)" onkeyup="filterCards()">
-    <div class="grid" id="mainGrid">
-        </div>
+    <input type="text" class="search-bar" id="search" placeholder="Search word or translation... / Pesquisar..." onkeyup="search()">
+    <div class="grid" id="grid"></div>
 </div>
 
 <script>
-    // --- DATABASE GENERATORS ---
-    const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map(l => ({
-        title: l,
-        sub: "Letter " + l,
-        example: `${l} is for ...`, // You can fill these specifically
-        pt: "Letra " + l
-    }));
+    const db = {
+        alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map(l => {
+            const examples = {
+                A: {w: "Apple", s: "The apple is sweet."}, B: {w: "Ball", s: "The ball is big."},
+                C: {w: "Cat", s: "The cat says meow."}, D: {w: "Dog", s: "The dog is happy."},
+                E: {w: "Elephant", s: "The elephant is grey."}, F: {w: "Fish", s: "The fish swims."},
+                G: {w: "Grape", s: "I like grapes."}, H: {w: "House", s: "My house is blue."}
+            };
+            return { 
+                en: l, pt: l, 
+                word: examples[l]?.w || "Word", 
+                sentence: examples[l]?.s || `${l} is a great letter!` 
+            };
+        }),
+        numbers: Array.from({length: 100}, (_, i) => ({ en: (i+1).toString(), pt: (i+1).toString() })),
+        colors: [
+            {en: "Red", pt: "Vermelho", hex: "#FF0000"}, {en: "Blue", pt: "Azul", hex: "#004AAD"},
+            {en: "Yellow", pt: "Amarelo", hex: "#FFDE59"}, {en: "Green", pt: "Verde", hex: "#28A745"},
+            {en: "Orange", pt: "Laranja", hex: "#FF8C00"}, {en: "Pink", pt: "Rosa", hex: "#FFC0CB"},
+            {en: "Purple", pt: "Roxo", hex: "#800080"}, {en: "Brown", pt: "Marrom", hex: "#8B4513"},
+            {en: "Black", pt: "Preto", hex: "#000000"}, {en: "White", pt: "Branco", hex: "#FFFFFF"}
+        ],
+        animals: [
+            {en: "Lion", pt: "Leão"}, {en: "Tiger", pt: "Tigre"}, {en: "Elephant", pt: "Elefante"},
+            {en: "Giraffe", pt: "Girafa"}, {en: "Zebra", pt: "Zebra"}, {en: "Monkey", pt: "Macaco"},
+            {en: "Shark", pt: "Tubarão"}, {en: "Whale", pt: "Baleia"}, {en: "Dolphin", pt: "Golfinho"},
+            {en: "Snake", pt: "Cobra"}, {en: "Eagle", pt: "Águia"}, {en: "Parrot", pt: "Papagaio"},
+            {en: "Dog", pt: "Cachorro"}, {en: "Cat", pt: "Gato"}, {en: "Cow", pt: "Vaca"}
+        ],
+        flags: [
+            {en: "Brazil", pt: "Brasil", f: "🇧🇷"}, {en: "USA", pt: "EUA", f: "🇺🇸"},
+            {en: "UK", pt: "Reino Unido", f: "🇬🇧"}, {en: "Canada", pt: "Canadá", f: "🇨🇦"},
+            {en: "Japan", pt: "Japão", f: "🇯🇵"}, {en: "France", pt: "França", f: "🇫🇷"},
+            {en: "Portugal", pt: "Portugal", f: "🇵🇹"}, {en: "Argentina", pt: "Argentina", f: "🇦🇷"}
+        ],
+        symbols: [
+            {en: "Comma", pt: "Vírgula", icon: ","}, {en: "Full Stop", pt: "Ponto Final", icon: "."},
+            {en: "Question Mark", pt: "Interrogação", icon: "?"}, {en: "Exclamation", pt: "Exclamação", icon: "!"},
+            {en: "Brackets", pt: "Parênteses", icon: "( )"}, {en: "Plus", pt: "Mais", icon: "+"},
+            {en: "Minus", pt: "Menos", icon: "-"}, {en: "Equals", pt: "Igual", icon: "="}
+        ]
+    };
 
-    const numbers = Array.from({length: 100}, (_, i) => ({
-        title: (i + 1).toString(),
-        sub: "Number " + (i + 1),
-        pt: "Número " + (i + 1)
-    }));
+    let activeCat = 'alphabet';
 
-    // Example Animals (Simulating a large list)
-    const animalNames = ["Lion", "Tiger", "Bear", "Elephant", "Zebra", "Monkey", "Giraffe", "Shark", "Ant", "Bee", "Whale", "Dolphin", "Dog", "Cat", "Horse"];
-    const animals = animalNames.map(a => ({ title: a, sub: "Animal", pt: "Animal" })); 
-
-    const colors = [
-        {title: "Red", pt: "Vermelho"}, {title: "Blue", pt: "Azul"}, {title: "Yellow", pt: "Amarelo"},
-        {title: "Green", pt: "Verde"}, {title: "Purple", pt: "Roxo"}, {title: "Orange", pt: "Laranja"}
-    ];
-
-    const currentData = { alphabet, numbers, animals, colors };
-    let activeTab = 'alphabet';
-
-    // --- LOGIC ---
     function toggleTheme() {
-        const body = document.body;
-        body.dataset.theme = body.dataset.theme === "light" ? "dark" : "light";
+        document.body.dataset.theme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
     }
 
-    function loadTab(tab) {
-        activeTab = tab;
-        document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
-        event.target.classList.add('active');
+    function setCat(cat, btn) {
+        activeCat = cat;
+        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
         render();
     }
 
     function render() {
-        const grid = document.getElementById('mainGrid');
+        const grid = document.getElementById('grid');
         grid.innerHTML = "";
-        const items = currentData[activeTab] || [];
-
-        items.forEach(item => {
+        db[activeCat].forEach(item => {
             const card = document.createElement('div');
             card.className = 'card';
+            
+            let visual = "";
+            if(activeCat === 'colors') visual = `<div class="color-circle" style="background:${item.hex}"></div>`;
+            if(activeCat === 'flags') visual = `<div class="big-icon">${item.f}</div>`;
+            if(activeCat === 'symbols') visual = `<div class="big-icon" style="color:var(--primary)">${item.icon}</div>`;
+            if(activeCat === 'alphabet') visual = `<div class="big-icon">${item.en}</div>`;
+
             card.innerHTML = `
-                <h3>${item.title}</h3>
-                <p>🇧🇷 ${item.pt}</p>
-                ${item.example ? `<div class="example">${item.example}</div>` : ''}
-                <div class="audio-btns">
-                    <button class="btn-speak" onclick="speak('${item.title}', 'en-US')">🇺🇸</button>
-                    <button class="btn-speak" style="background:#28a745" onclick="speak('${item.pt}', 'pt-BR')">🇧🇷</button>
+                ${visual}
+                <h2>${item.en}</h2>
+                <div class="translation">🇧🇷 ${item.pt}</div>
+                ${item.word ? `<div class="sentence">${item.word} <br> <small>${item.sentence}</small></div>` : ''}
+                <div class="audio-row">
+                    <button class="speak-btn btn-en" onclick="speak('${item.en}', 'en-US')">🇺🇸 EN</button>
+                    <button class="speak-btn btn-pt" onclick="speak('${item.pt}', 'pt-BR')">🇧🇷 PT</button>
                 </div>
             `;
             grid.appendChild(card);
@@ -231,25 +266,21 @@
     }
 
     function speak(text, lang) {
-        window.speechSynthesis.cancel(); // Stop previous audio
+        window.speechSynthesis.cancel();
         const msg = new SpeechSynthesisUtterance(text);
         msg.lang = lang;
-        msg.rate = 0.8;
+        msg.rate = 0.75;
         window.speechSynthesis.speak(msg);
     }
 
-    function filterCards() {
-        const query = document.getElementById('search').value.toLowerCase();
-        const cards = document.querySelectorAll('.card');
-        cards.forEach(card => {
-            const text = card.innerText.toLowerCase();
-            card.style.display = text.includes(query) ? "block" : "none";
+    function search() {
+        const q = document.getElementById('search').value.toLowerCase();
+        document.querySelectorAll('.card').forEach(c => {
+            c.style.display = c.innerText.toLowerCase().includes(q) ? "block" : "none";
         });
     }
 
-    // Initial Load
     render();
 </script>
-
 </body>
 </html>

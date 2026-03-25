@@ -4,7 +4,7 @@
     <meta name="robots" content="noindex, nofollow">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>English Kids</title>
+    <title>English Kids by Teacher Rush</title>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root { --primary: #004AAD; --accent: #FFDE59; --bg: #F0F7FF; --card-bg: #FFFFFF; --text: #004AAD; }
@@ -18,11 +18,12 @@
         .container { padding: 20px; max-width: 1300px; margin: auto; }
         .search-bar { font-family: 'Fredoka', sans-serif; width: 85%; padding: 15px; border-radius: 50px; border: 4px solid var(--primary); margin-bottom: 25px; outline: none; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; }
-        .card { background: var(--card-bg); border-radius: 20px; padding: 12px; box-shadow: 0 6px 0 var(--primary); display: flex; flex-direction: column; height: 240px; }
-        .art-box { width: 100%; height: 100px; border-radius: 12px; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.03); font-size: 4.5rem; }
+        .card { background: var(--card-bg); border-radius: 20px; padding: 12px; box-shadow: 0 6px 0 var(--primary); display: flex; flex-direction: column; height: 260px; transition: transform 0.2s; }
+        .card:active { transform: scale(0.95); }
+        .art-box { width: 100%; height: 110px; border-radius: 12px; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.03); font-size: 4.5rem; }
         .flag-img { width: 75%; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border: 1px solid #eee; }
         .audio-btns { margin-top: auto; display: flex; justify-content: center; gap: 8px; }
-        .btn-speak { font-family: 'Fredoka', sans-serif; border: none; padding: 10px; border-radius: 10px; cursor: pointer; font-weight: 600; flex: 1; }
+        .btn-speak { font-family: 'Fredoka', sans-serif; border: none; padding: 12px; border-radius: 12px; cursor: pointer; font-weight: 600; flex: 1; font-size: 1rem; }
         .btn-en { background: var(--primary); color: var(--accent); }
         .btn-pt { background: #28a745; color: white; }
         footer { background: var(--primary); color: var(--accent); padding: 20px; margin-top: 40px; font-weight: 600; }
@@ -40,7 +41,7 @@
 <nav>
     <button class="nav-btn active" onclick="setCategory('alphabet', this)">ABC</button>
     <button class="nav-btn" onclick="setCategory('numbers', this)">1-100</button>
-    <button class="nav-btn" onclick="setCategory('colors', this)">Colors</button>
+    <button class="nav-btn" onclick="setCategory('colors', this)">100 Colors</button>
     <button class="nav-btn" onclick="setCategory('animals', this)">Animals</button>
     <button class="nav-btn" onclick="setCategory('countries', this)">Flags</button>
 </nav>
@@ -51,7 +52,7 @@
 </div>
 
 <footer>
-    Made by <strong>Englishteacherrush</strong> | 
+    Made by <strong>English Teacher Rush</strong> | 
     <a href="https://ntro077.github.io/my-teaching-site/" target="_blank">Visit my Website</a>
 </footer>
 
@@ -60,18 +61,32 @@
         alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map(l => ({ en: l, pt: l })),
         numbers: Array.from({length: 100}, (_, i) => ({ en: (i+1).toString(), pt: (i+1).toString() })),
         colors: [
-            {en: "Red", pt: "Vermelho", hex: "#FF0000"}, {en: "Blue", pt: "Azul", hex: "#0000FF"}, {en: "Yellow", pt: "Amarelo", hex: "#FFFF00"}, {en: "Green", pt: "Verde", hex: "#008000"}, {en: "Pink", pt: "Rosa", hex: "#FFC0CB"}, {en: "Orange", pt: "Laranja", hex: "#FFA500"}, {en: "Purple", pt: "Roxo", hex: "#800080"}, {en: "Brown", pt: "Marrom", hex: "#A52A2A"}, {en: "Black", pt: "Preto", hex: "#000000"}, {en: "White", pt: "Branco", hex: "#FFFFFF"}
+            // BASICS
+            {en: "Red", pt: "Vermelho", hex: "#FF0000"}, {en: "Blue", pt: "Azul", hex: "#0000FF"}, {en: "Yellow", pt: "Amarelo", hex: "#FFFF00"}, {en: "Green", pt: "Verde", hex: "#008000"}, {en: "Pink", pt: "Rosa", hex: "#FFC0CB"}, {en: "Orange", pt: "Laranja", hex: "#FFA500"}, {en: "Purple", pt: "Roxo", hex: "#800080"}, {en: "Brown", pt: "Marrom", hex: "#A52A2A"}, {en: "Black", pt: "Preto", hex: "#000000"}, {en: "White", pt: "Branco", hex: "#FFFFFF"},
+            // NATURE
+            {en: "Sky Blue", pt: "Azul Celeste", hex: "#87CEEB"}, {en: "Lime Green", pt: "Verde Limão", hex: "#32CD32"}, {en: "Forest Green", pt: "Verde Floresta", hex: "#228B22"}, {en: "Ocean Blue", pt: "Azul Oceano", hex: "#0077BE"}, {en: "Sand", pt: "Areia", hex: "#C2B280"}, {en: "Sunset Orange", pt: "Laranja Pôr do Sol", hex: "#FF4E50"}, {en: "Grass Green", pt: "Verde Grama", hex: "#7CFC00"}, {en: "Cloud White", pt: "Branco Nuvem", hex: "#F8F8FF"}, {en: "Midnight Blue", hex: "#191970", pt: "Azul Meia-noite"}, {en: "Olive", hex: "#808000", pt: "Oliva"},
+            // SWEETS & FRUITS
+            {en: "Chocolate", hex: "#D2691E", pt: "Chocolate"}, {en: "Caramel", hex: "#AF6E4D", pt: "Caramelo"}, {en: "Peach", hex: "#FFDAB9", pt: "Pêssego"}, {en: "Strawberry", hex: "#E12C2C", pt: "Morango"}, {en: "Grape", hex: "#6F2DA8", pt: "Uva"}, {en: "Banana Yellow", hex: "#FFE135", pt: "Amarelo Banana"}, {en: "Mint", hex: "#98FF98", pt: "Menta"}, {en: "Bubblegum", hex: "#FFC1CC", pt: "Chiclete"}, {en: "Cherry Red", hex: "#D2042D", pt: "Cereja"}, {en: "Honey", hex: "#EB9605", pt: "Mel"},
+            // SHINY & LUXURY
+            {en: "Gold", hex: "#FFD700", pt: "Ouro"}, {en: "Silver", hex: "#C0C0C0", pt: "Prata"}, {en: "Bronze", hex: "#CD7F32", pt: "Bronze"}, {en: "Pearl", hex: "#F0EAD6", pt: "Pérola"}, {en: "Diamond Blue", hex: "#B9F2FF", pt: "Azul Diamante"}, {en: "Ruby Red", hex: "#E0115F", pt: "Rubi"}, {en: "Emerald Green", hex: "#50C878", pt: "Esmeralda"}, {en: "Indigo", hex: "#4B0082", pt: "Índigo"}, {en: "Platinum", hex: "#E5E4E2", pt: "Platina"}, {en: "Ivory", hex: "#FFFFF0", pt: "Marfim"},
+            // MODERN VIBES
+            {en: "Turquoise", hex: "#40E0D0", pt: "Turquesa"}, {en: "Teal", hex: "#008080", pt: "Teal"}, {en: "Cyan", hex: "#00FFFF", pt: "Ciano"}, {en: "Magenta", hex: "#FF00FF", pt: "Magenta"}, {en: "Violet", hex: "#EE82EE", pt: "Violeta"}, {en: "Lavender", hex: "#E6E6FA", pt: "Lavanda"}, {en: "Beige", hex: "#F5F5DC", pt: "Bege"}, {en: "Khaki", hex: "#F0E68C", pt: "Caqui"}, {en: "Coral", hex: "#FF7F50", pt: "Coral"}, {en: "Salmon", hex: "#FA8072", pt: "Salmão"},
+            // MORE SHADES
+            {en: "Crimson", hex: "#DC143C", pt: "Carmesim"}, {en: "Maroon", hex: "#800000", pt: "Castanho"}, {en: "Navy", hex: "#000080", pt: "Marinha"}, {en: "Aquamarine", hex: "#7FFFD4", pt: "Água-marinha"}, {en: "Tan", hex: "#D2B48C", pt: "Tan"}, {en: "Slate", hex: "#708090", pt: "Ardósia"}, {en: "Chartreuse", hex: "#7FFF00", pt: "Chartreuse"}, {en: "Plum", hex: "#DDA0DD", pt: "Ameixa"}, {en: "Orchid", hex: "#DA70D6", pt: "Orquídea"}, {en: "Firebrick", hex: "#B22222", pt: "Tijolo"},
+            {en: "Hot Pink", hex: "#FF69B4", pt: "Rosa Choque"}, {en: "Deep Sky Blue", hex: "#00BFFF", pt: "Azul Profundo"}, {en: "Seashell", hex: "#FFF5EE", pt: "Concha"}, {en: "Wheat", hex: "#F5DEB3", pt: "Trigo"}, {en: "Azure", hex: "#F0FFFF", pt: "Azure"}, {en: "Lemon Chiffon", hex: "#FFFACD", pt: "Limão Suave"}, {en: "Papaya Whip", hex: "#FFEFD5", pt: "Mamão"}, {en: "Moccasin", hex: "#FFE4B5", pt: "Mocassim"}, {en: "Old Lace", hex: "#FDF5E6", pt: "Renda Antiga"}, {en: "Snow", hex: "#FFFAFA", pt: "Neve"},
+            {en: "Thistle", hex: "#D8BFD8", pt: "Cardo"}, {en: "Gainsboro", hex: "#DCDCDC", pt: "Gainsboro"}, {en: "Steel Blue", hex: "#4682B4", pt: "Azul Aço"}, {en: "Saddle Brown", hex: "#8B4513", pt: "Marrom Sela"}, {en: "Rosy Brown", hex: "#BC8F8F", pt: "Marrom Rosado"}, {en: "Peru", hex: "#CD853F", pt: "Peru"}, {en: "Royal Blue", hex: "#4169E1", pt: "Azul Royal"}, {en: "Slate Blue", hex: "#6A5ACD", pt: "Azul Ardósia"}, {en: "Spring Green", hex: "#00FF7F", pt: "Verde Primavera"}, {en: "Cornflower Blue", hex: "#6495ED", pt: "Azul Milho"},
+            {en: "Dark Orange", hex: "#FF8C00", pt: "Laranja Escuro"}, {en: "Dark Orchid", hex: "#9932CC", pt: "Orquídea Escura"}, {en: "Dark Red", hex: "#8B0000", pt: "Vermelho Escuro"}, {en: "Dark Salmon", hex: "#E9967A", pt: "Salmão Escuro"}, {en: "Dark Sea Green", hex: "#8FBC8F", pt: "Verde Mar Escuro"}, {en: "Dark Slate Blue", hex: "#483D8B", pt: "Azul Ardósia Escuro"}, {en: "Dark Turquoise", hex: "#00CED1", pt: "Turquesa Escura"}, {en: "Dark Violet", hex: "#9400D3", pt: "Violeta Escuro"}, {en: "Deep Pink", hex: "#FF1493", pt: "Rosa Profundo"}, {en: "Dodger Blue", hex: "#1E90FF", pt: "Azul Dodger"}
         ],
         animals: [
             {en: "Lion", pt: "Leão", a: "🦁"}, {en: "Tiger", pt: "Tigre", a: "🐯"}, {en: "Elephant", pt: "Elefante", a: "🐘"}, {en: "Monkey", pt: "Macaco", a: "🐒"}, {en: "Dog", pt: "Cachorro", a: "🐶"}, {en: "Cat", pt: "Gato", a: "🐱"}, {en: "Rabbit", pt: "Coelho", a: "🐰"}, {en: "Giraffe", pt: "Girafa", a: "🦒"}, {en: "Zebra", pt: "Zebra", a: "🦓"}, {en: "Panda", pt: "Panda", a: "🐼"},
-            {en: "Bear", pt: "Urso", a: "🐻"}, {en: "Pig", pt: "Porco", a: "🐷"}, {en: "Cow", pt: "Vaca", a: "🐮"}, {en: "Horse", pt: "Cavalo", a: "🐴"}, {en: "Sheep", pt: "Ovelha", a: "🐑"}, {en: "Goat", pt: "Cabra", a: "🐐"}, {en: "Camel", pt: "Camelo", a: "🐪"}, {en: "Llama", pt: "Lhama", a: "🦙"}, {en: "Kangaroo", pt: "Canguru", a: "🦘"}, {en: "Koala", pt: "Coala", a: "🐨"},
+            {en: "Bear", pt: "Urso", a: "🐻"}, {en: "Pig", pt: "Porco", a: "🐷"}, {en: "Cow", pt: "Vaca", a: "🐮"}, {en: "Horse", pt: "Cavalo", a: "🐴"}, {en: "Sheep", pt: "Ovelha", a: "🐑"}, {en: "Goat", pt: "Cabra", a: "🐐"}, {en: "Camel", pt: "Camelo", a: "🐪"}, {en: "Llama", pt: "Lhama", a: "🦙"}, {en: "Kangaroo", pt: "Canguru", a: "🦘"}, {en: "Koala", pt: "Koala", a: "🐨"},
             {en: "Wolf", pt: "Lobo", a: "🐺"}, {en: "Fox", pt: "Raposa", a: "🦊"}, {en: "Deer", pt: "Veado", a: "🦌"}, {en: "Rhinoceros", pt: "Rinoceronte", a: "🦏"}, {en: "Hippopotamus", pt: "Hipopótamo", a: "🦛"}, {en: "Crocodile", pt: "Jacaré", a: "🐊"}, {en: "Snake", pt: "Cobra", a: "🐍"}, {en: "Lizard", pt: "Lagarto", a: "🦎"}, {en: "Turtle", pt: "Tartaruga", a: "🐢"}, {en: "Frog", pt: "Sapo", a: "🐸"},
             {en: "Shark", pt: "Tubarão", a: "🦈"}, {en: "Whale", pt: "Baleia", a: "🐳"}, {en: "Dolphin", pt: "Golfinho", a: "🐬"}, {en: "Octopus", pt: "Polvo", a: "🐙"}, {en: "Crab", pt: "Caranguejo", a: "🦀"}, {en: "Lobster", pt: "Lagosta", a: "🦞"}, {en: "Shrimp", pt: "Camarão", a: "🦐"}, {en: "Squid", pt: "Lula", a: "🦑"}, {en: "Fish", pt: "Peixe", a: "🐟"}, {en: "Tropical Fish", pt: "Peixe Tropical", a: "🐠"},
             {en: "Blowfish", pt: "Baiacu", a: "🐡"}, {en: "Eagle", pt: "Águia", a: "🦅"}, {en: "Owl", pt: "Coruja", a: "🦉"}, {en: "Parrot", pt: "Papagaio", a: "🦜"}, {en: "Penguin", pt: "Pinguim", a: "🐧"}, {en: "Duck", pt: "Pato", a: "🦆"}, {en: "Swan", pt: "Cisne", a: "🦢"}, {en: "Chicken", pt: "Galinha", a: "🐔"}, {en: "Rooster", pt: "Galo", a: "🐓"}, {en: "Turkey", pt: "Peru", a: "🦃"},
             {en: "Flamingo", pt: "Flamingo", a: "🦩"}, {en: "Peacock", pt: "Pavão", a: "🦚"}, {en: "Dove", pt: "Pomba", a: "🕊️"}, {en: "Bat", pt: "Morcego", a: "🦇"}, {en: "Bee", pt: "Abelha", a: "🐝"}, {en: "Butterfly", pt: "Borboleta", a: "🦋"}, {en: "Ladybug", pt: "Joaninha", a: "🐞"}, {en: "Ant", pt: "Formiga", a: "🐜"}, {en: "Spider", pt: "Aranha", a: "🕷️"}, {en: "Scorpion", pt: "Escorpião", a: "🦂"},
             {en: "Snail", pt: "Caracol", a: "🐌"}, {en: "Caterpillar", pt: "Lagarta", a: "🐛"}, {en: "Cricket", pt: "Grilo", a: "🦗"}, {en: "Gorilla", pt: "Gorila", a: "🦍"}, {en: "Sloth", pt: "Preguiça", a: "🦥"}, {en: "Otter", pt: "Lontra", a: "🦦"}, {en: "Beaver", pt: "Castor", a: "🦫"}, {en: "Hedgehog", pt: "Ouriço", a: "🦔"}, {en: "Mouse", pt: "Camundongo", a: "🐭"}, {en: "Rat", pt: "Rato", a: "🐀"},
             {en: "Hamster", pt: "Hamster", a: "🐹"}, {en: "Squirrel", pt: "Esquilo", a: "🐿️"}, {en: "Skunk", pt: "Gambá", a: "🦨"}, {en: "Raccoon", pt: "Guaxinim", a: "🦝"}, {en: "Ox", pt: "Boi", a: "🐂"}, {en: "Buffalo", pt: "Búfalo", a: "🐃"}, {en: "Ram", pt: "Carneiro", a: "🐏"}, {en: "Donkey", pt: "Burro", a: "🫏"}, {en: "Seal", pt: "Foca", a: "🦭"}, {en: "Walrus", pt: "Morsa", a: "🦣"},
-            {en: "Seahorse", pt: "Cavalo-marinho", a: "🧜"}, {en: "Jellyfish", pt: "Água-viva", a: "🪼"}, {en: "Mosquito", pt: "Mosquito", a: "🦟"}, {en: "Worm", pt: "Minhoca", a: "🪱"}, {en: "Fly", pt: "Mosca", a: "🪰"}, {en: "Beetle", pt: "Besouro", a: "🪲"}, {en: "Cockroach", pt: "Barata", a: "🪳"}, {en: "Grasshopper", pt: "Gafanhoto", a: "🦗"}, {en: "Dinosaur", pt: "Dinossauro", a: "🦖"}, {en: "Dragon", pt: "Dragão", a: "🐲"},
+            {en: "Seahorse", pt: "Cavalo-marinho", a: "🧜"}, {en: "Jellyfish", pt: "Água-viva", a: "🪼"}, {en: "Mosquito", pt: "Mosquito", a: "🦟"}, {en: "Worm", pt: "Minhoca", a: "🪱"}, {en: "Fly", pt: "Mosca", a: "🪰"}, {en: "Beetle", pt: "Besouro", a: "🪲"}, {en: "Cockroach", pt: "Barata", a: "🪳"}, {en: "Grasshopper", pt: "Gafanhoto", a: "🦗"}, {en: "Dinosaur", pt: "Dinossauro", a: "Rex"}, {en: "Dragon", pt: "Dragão", a: "🐲"},
             {en: "Leopard", pt: "Leopardo", a: "🐆"}, {en: "Whale", pt: "Baleia", a: "🐋"}, {en: "Chick", pt: "Pinho", a: "🐥"}, {en: "Peacock", pt: "Pavão", a: "🦚"}, {en: "Parrot", pt: "Papagaio", a: "🦜"}, {en: "Dove", pt: "Pomba", a: "🕊️"}, {en: "Bat", pt: "Morcego", a: "🦇"}, {en: "Owl", pt: "Coruja", a: "🦉"}, {en: "Eagle", pt: "Águia", a: "🦅"}, {en: "Duck", pt: "Pato", a: "🦆"}
         ],
         countries: [
@@ -116,11 +131,19 @@
 
     function speak(text, lang) {
         window.speechSynthesis.cancel();
-        // FORCE TEXT TO LOWERCASE TO PREVENT "CAPITAL" ANNOUNCEMENT
-        const msg = new SpeechSynthesisUtterance(text.toLowerCase());
+        
+        // BETTER AUDIO LOGIC FOR TEACHER RUSH 2.0
+        let textToSpeak = text.toLowerCase();
+        
+        // If it's the alphabet category, we add a tiny pause to make the letter longer
+        if(activeCat === 'alphabet') {
+            textToSpeak = textToSpeak + "...";
+        }
+
+        const msg = new SpeechSynthesisUtterance(textToSpeak);
         msg.lang = lang;
-        msg.pitch = 1.2;
-        msg.rate = 0.9;
+        msg.pitch = 1.1; // Friendly child-like pitch
+        msg.rate = 0.7;  // SLOWER for better clarity
         window.speechSynthesis.speak(msg);
     }
 

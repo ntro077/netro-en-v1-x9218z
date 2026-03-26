@@ -518,6 +518,79 @@
         {en: "Squid", pt: "Lula", emoji: "🦑"}
     ];
 
+    // FULL 100 COLORS DATABASE
+    const colorsDB = [
+        // BASIC COLORS (10)
+        {en: "Red", pt: "Vermelho", hex: "#FF0000"}, {en: "Blue", pt: "Azul", hex: "#0000FF"}, 
+        {en: "Yellow", pt: "Amarelo", hex: "#FFFF00"}, {en: "Green", pt: "Verde", hex: "#008000"}, 
+        {en: "Pink", pt: "Rosa", hex: "#FFC0CB"}, {en: "Orange", pt: "Laranja", hex: "#FFA500"}, 
+        {en: "Purple", pt: "Roxo", hex: "#800080"}, {en: "Brown", pt: "Marrom", hex: "#A52A2A"}, 
+        {en: "Black", pt: "Preto", hex: "#000000"}, {en: "White", pt: "Branco", hex: "#FFFFFF"},
+        
+        // NATURE COLORS (10)
+        {en: "Sky Blue", pt: "Azul Celeste", hex: "#87CEEB"}, {en: "Lime Green", pt: "Verde Limão", hex: "#32CD32"}, 
+        {en: "Forest Green", pt: "Verde Floresta", hex: "#228B22"}, {en: "Ocean Blue", pt: "Azul Oceano", hex: "#0077BE"}, 
+        {en: "Sand", pt: "Areia", hex: "#C2B280"}, {en: "Sunset Orange", pt: "Laranja Pôr do Sol", hex: "#FF4E50"}, 
+        {en: "Grass Green", pt: "Verde Grama", hex: "#7CFC00"}, {en: "Cloud White", pt: "Branco Nuvem", hex: "#F8F8FF"}, 
+        {en: "Midnight Blue", hex: "#191970", pt: "Azul Meia-noite"}, {en: "Olive", hex: "#808000", pt: "Oliva"},
+        
+        // FRUITS & SWEETS (10)
+        {en: "Chocolate", hex: "#D2691E", pt: "Chocolate"}, {en: "Caramel", hex: "#AF6E4D", pt: "Caramelo"}, 
+        {en: "Peach", hex: "#FFDAB9", pt: "Pêssego"}, {en: "Strawberry", hex: "#E12C2C", pt: "Morango"}, 
+        {en: "Grape", hex: "#6F2DA8", pt: "Uva"}, {en: "Banana Yellow", hex: "#FFE135", pt: "Amarelo Banana"}, 
+        {en: "Mint", hex: "#98FF98", pt: "Menta"}, {en: "Bubblegum", hex: "#FFC1CC", pt: "Chiclete"}, 
+        {en: "Cherry Red", hex: "#D2042D", pt: "Cereja"}, {en: "Honey", hex: "#EB9605", pt: "Mel"},
+        
+        // METALLIC & LUXURY (10)
+        {en: "Gold", hex: "#FFD700", pt: "Ouro"}, {en: "Silver", hex: "#C0C0C0", pt: "Prata"}, 
+        {en: "Bronze", hex: "#CD7F32", pt: "Bronze"}, {en: "Pearl", hex: "#F0EAD6", pt: "Pérola"}, 
+        {en: "Diamond Blue", hex: "#B9F2FF", pt: "Azul Diamante"}, {en: "Ruby Red", hex: "#E0115F", pt: "Rubi"}, 
+        {en: "Emerald Green", hex: "#50C878", pt: "Esmeralda"}, {en: "Indigo", hex: "#4B0082", pt: "Índigo"}, 
+        {en: "Platinum", hex: "#E5E4E2", pt: "Platina"}, {en: "Ivory", hex: "#FFFFF0", pt: "Marfim"},
+        
+        // VIBRANT COLORS (10)
+        {en: "Turquoise", hex: "#40E0D0", pt: "Turquesa"}, {en: "Teal", hex: "#008080", pt: "Teal"}, 
+        {en: "Cyan", hex: "#00FFFF", pt: "Ciano"}, {en: "Magenta", hex: "#FF00FF", pt: "Magenta"}, 
+        {en: "Violet", hex: "#EE82EE", pt: "Violeta"}, {en: "Lavender", hex: "#E6E6FA", pt: "Lavanda"}, 
+        {en: "Beige", hex: "#F5F5DC", pt: "Bege"}, {en: "Khaki", hex: "#F0E68C", pt: "Caqui"}, 
+        {en: "Coral", hex: "#FF7F50", pt: "Coral"}, {en: "Salmon", hex: "#FA8072", pt: "Salmão"},
+        
+        // DEEP SHADES (10)
+        {en: "Crimson", hex: "#DC143C", pt: "Carmesim"}, {en: "Maroon", hex: "#800000", pt: "Castanho"}, 
+        {en: "Navy", hex: "#000080", pt: "Marinha"}, {en: "Aquamarine", hex: "#7FFFD4", pt: "Água-marinha"}, 
+        {en: "Tan", hex: "#D2B48C", pt: "Tan"}, {en: "Slate", hex: "#708090", pt: "Ardósia"}, 
+        {en: "Chartreuse", hex: "#7FFF00", pt: "Chartreuse"}, {en: "Plum", hex: "#DDA0DD", pt: "Ameixa"}, 
+        {en: "Orchid", hex: "#DA70D6", pt: "Orquídea"}, {en: "Firebrick", hex: "#B22222", pt: "Tijolo"},
+        
+        // BRIGHT & FUN (10)
+        {en: "Hot Pink", hex: "#FF69B4", pt: "Rosa Choque"}, {en: "Deep Sky Blue", hex: "#00BFFF", pt: "Azul Profundo"}, 
+        {en: "Seashell", hex: "#FFF5EE", pt: "Concha"}, {en: "Wheat", hex: "#F5DEB3", pt: "Trigo"}, 
+        {en: "Azure", hex: "#F0FFFF", pt: "Azure"}, {en: "Lemon Chiffon", hex: "#FFFACD", pt: "Limão Suave"}, 
+        {en: "Papaya Whip", hex: "#FFEFD5", pt: "Mamão"}, {en: "Moccasin", hex: "#FFE4B5", pt: "Mocassim"}, 
+        {en: "Old Lace", hex: "#FDF5E6", pt: "Renda Antiga"}, {en: "Snow", hex: "#FFFAFA", pt: "Neve"},
+        
+        // PASTEL & SOFT (10)
+        {en: "Thistle", hex: "#D8BFD8", pt: "Cardo"}, {en: "Gainsboro", hex: "#DCDCDC", pt: "Gainsboro"}, 
+        {en: "Steel Blue", hex: "#4682B4", pt: "Azul Aço"}, {en: "Saddle Brown", hex: "#8B4513", pt: "Marrom Sela"}, 
+        {en: "Rosy Brown", hex: "#BC8F8F", pt: "Marrom Rosado"}, {en: "Peru", hex: "#CD853F", pt: "Peru"}, 
+        {en: "Royal Blue", hex: "#4169E1", pt: "Azul Royal"}, {en: "Slate Blue", hex: "#6A5ACD", pt: "Azul Ardósia"}, 
+        {en: "Spring Green", hex: "#00FF7F", pt: "Verde Primavera"}, {en: "Cornflower Blue", hex: "#6495ED", pt: "Azul Milho"},
+        
+        // DARK & RICH (10)
+        {en: "Dark Orange", hex: "#FF8C00", pt: "Laranja Escuro"}, {en: "Dark Orchid", hex: "#9932CC", pt: "Orquídea Escura"}, 
+        {en: "Dark Red", hex: "#8B0000", pt: "Vermelho Escuro"}, {en: "Dark Salmon", hex: "#E9967A", pt: "Salmão Escuro"}, 
+        {en: "Dark Sea Green", hex: "#8FBC8F", pt: "Verde Mar Escuro"}, {en: "Dark Slate Blue", hex: "#483D8B", pt: "Azul Ardósia Escuro"}, 
+        {en: "Dark Turquoise", hex: "#00CED1", pt: "Turquesa Escura"}, {en: "Dark Violet", hex: "#9400D3", pt: "Violeta Escuro"}, 
+        {en: "Deep Pink", hex: "#FF1493", pt: "Rosa Profundo"}, {en: "Dodger Blue", hex: "#1E90FF", pt: "Azul Dodger"},
+        
+        // LIGHT SHADES (10)
+        {en: "Light Blue", hex: "#ADD8E6", pt: "Azul Claro"}, {en: "Light Coral", hex: "#F08080", pt: "Coral Claro"}, 
+        {en: "Light Cyan", hex: "#E0FFFF", pt: "Ciano Claro"}, {en: "Light Goldenrod", hex: "#FAFAD2", pt: "Dourado Claro"}, 
+        {en: "Light Pink", hex: "#FFB6C1", pt: "Rosa Claro"}, {en: "Light Salmon", hex: "#FFA07A", pt: "Salmão Claro"}, 
+        {en: "Light Sea Green", hex: "#20B2AA", pt: "Verde Mar Claro"}, {en: "Light Sky Blue", hex: "#87CEFA", pt: "Azul Celeste Claro"}, 
+        {en: "Light Slate Gray", hex: "#778899", pt: "Cinza Ardósia Claro"}, {en: "Light Steel Blue", hex: "#B0C4DE", pt: "Azul Aço Claro"}
+    ];
+
     // 176 COUNTRIES DATABASE (without Israel)
     const countriesDB = [
         {en: "Afghanistan", pt: "Afeganistão", code: "af"}, {en: "Albania", pt: "Albânia", code: "al"}, {en: "Algeria", pt: "Argélia", code: "dz"}, {en: "Andorra", pt: "Andorra", code: "ad"}, {en: "Angola", pt: "Angola", code: "ao"}, {en: "Argentina", pt: "Argentina", code: "ar"}, {en: "Armenia", pt: "Armênia", code: "am"}, {en: "Australia", pt: "Austrália", code: "au"}, {en: "Austria", pt: "Áustria", code: "at"}, {en: "Azerbaijan", pt: "Azerbaijão", code: "az"},
@@ -542,18 +615,7 @@
     const database = {
         alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map(l => ({ en: l, pt: l })),
         numbers: Array.from({length: 100}, (_, i) => ({ en: (i+1).toString(), pt: (i+1).toString() })),
-        colors: [
-            {en: "Red", pt: "Vermelho", hex: "#FF0000"}, {en: "Blue", pt: "Azul", hex: "#0000FF"}, 
-            {en: "Yellow", pt: "Amarelo", hex: "#FFFF00"}, {en: "Green", pt: "Verde", hex: "#008000"}, 
-            {en: "Pink", pt: "Rosa", hex: "#FFC0CB"}, {en: "Orange", pt: "Laranja", hex: "#FFA500"}, 
-            {en: "Purple", pt: "Roxo", hex: "#800080"}, {en: "Brown", pt: "Marrom", hex: "#A52A2A"}, 
-            {en: "Black", pt: "Preto", hex: "#000000"}, {en: "White", pt: "Branco", hex: "#FFFFFF"},
-            {en: "Sky Blue", pt: "Azul Celeste", hex: "#87CEEB"}, {en: "Lime Green", pt: "Verde Limão", hex: "#32CD32"}, 
-            {en: "Gold", hex: "#FFD700", pt: "Ouro"}, {en: "Silver", hex: "#C0C0C0", pt: "Prata"}, 
-            {en: "Turquoise", hex: "#40E0D0", pt: "Turquesa"}, {en: "Magenta", hex: "#FF00FF", pt: "Magenta"},
-            {en: "Coral", hex: "#FF7F50", pt: "Coral"}, {en: "Indigo", hex: "#4B0082", pt: "Índigo"},
-            {en: "Lavender", hex: "#E6E6FA", pt: "Lavanda"}, {en: "Teal", hex: "#008080", pt: "Teal"}
-        ],
+        colors: colorsDB,
         animals: animalsDB,
         countries: countriesDB
     };

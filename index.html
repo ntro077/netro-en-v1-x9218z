@@ -3,169 +3,746 @@
 <head>
     <meta name="robots" content="noindex, nofollow">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>English Kids by Teacher Rush</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>English Kids by Teacher Rush | Fun Animal Learning</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        :root { --primary: #004AAD; --accent: #FFDE59; --bg: #F0F7FF; --card-bg: #FFFFFF; --text: #004AAD; }
-        [data-theme="dark"] { --primary: #FFDE59; --accent: #004AAD; --bg: #121212; --card-bg: #1E1E1E; --text: #FFFFFF; }
-        body { font-family: 'Fredoka', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; transition: 0.3s; text-align: center; }
-        header { background: var(--primary); color: var(--accent); padding: 20px; position: sticky; top: 0; z-index: 1000; }
-        .theme-toggle { position: absolute; right: 20px; top: 20px; background: var(--accent); border: none; padding: 10px; border-radius: 50%; cursor: pointer; }
-        nav { display: flex; overflow-x: auto; background: var(--card-bg); padding: 15px; gap: 12px; border-bottom: 5px solid var(--primary); justify-content: center; scrollbar-width: none; }
-        .nav-btn { font-family: 'Fredoka', sans-serif; padding: 10px 20px; background: var(--bg); border: 3px solid var(--primary); border-radius: 50px; cursor: pointer; font-weight: 600; color: var(--primary); white-space: nowrap; }
-        .nav-btn.active { background: var(--primary); color: var(--accent); }
-        .container { padding: 20px; max-width: 1300px; margin: auto; }
-        .search-bar { font-family: 'Fredoka', sans-serif; width: 85%; padding: 15px; border-radius: 50px; border: 4px solid var(--primary); margin-bottom: 25px; outline: none; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; }
-        .card { background: var(--card-bg); border-radius: 20px; padding: 12px; box-shadow: 0 6px 0 var(--primary); display: flex; flex-direction: column; height: 260px; transition: transform 0.2s; }
-        .card:active { transform: scale(0.95); }
-        .art-box { width: 100%; height: 110px; border-radius: 12px; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.03); font-size: 4.5rem; }
-        .flag-img { width: 75%; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border: 1px solid #eee; }
-        .audio-btns { margin-top: auto; display: flex; justify-content: center; gap: 8px; }
-        .btn-speak { font-family: 'Fredoka', sans-serif; border: none; padding: 12px; border-radius: 12px; cursor: pointer; font-weight: 600; flex: 1; font-size: 1rem; }
-        .btn-en { background: var(--primary); color: var(--accent); }
-        .btn-pt { background: #28a745; color: white; }
-        footer { background: var(--primary); color: var(--accent); padding: 20px; margin-top: 40px; font-weight: 600; }
-        footer a { color: #FFFFFF; text-decoration: none; border-bottom: 2px solid var(--accent); }
-        @media (max-width: 600px) { .grid { grid-template-columns: repeat(2, 1fr); } nav { justify-content: flex-start; } }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #004AAD;
+            --primary-dark: #00317a;
+            --accent: #FFDE59;
+            --accent-dark: #e6c200;
+            --bg: #F0F7FF;
+            --card-bg: #FFFFFF;
+            --text: #004AAD;
+            --text-light: #6b8cae;
+            --shadow: 0 10px 20px rgba(0,0,0,0.05), 0 6px 6px rgba(0,0,0,0.05);
+            --card-radius: 28px;
+            --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="dark"] {
+            --primary: #FFDE59;
+            --primary-dark: #ffd700;
+            --accent: #004AAD;
+            --accent-dark: #00317a;
+            --bg: #121212;
+            --card-bg: #1E2A2E;
+            --text: #FFDE59;
+            --text-light: #b0bec5;
+            --shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        body {
+            font-family: 'Fredoka', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            margin: 0;
+            transition: var(--transition);
+            overflow-x: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--accent);
+            padding: 20px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+            font-weight: 700;
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+        }
+
+        .theme-toggle {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            background: var(--accent);
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.3rem;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05);
+        }
+
+        nav {
+            display: flex;
+            overflow-x: auto;
+            background: var(--card-bg);
+            padding: 12px 20px;
+            gap: 12px;
+            border-bottom: 4px solid var(--primary);
+            justify-content: center;
+            scrollbar-width: thin;
+            flex-wrap: wrap;
+            backdrop-filter: blur(2px);
+        }
+
+        .nav-btn {
+            font-family: 'Fredoka', sans-serif;
+            padding: 10px 24px;
+            background: var(--bg);
+            border: 3px solid var(--primary);
+            border-radius: 60px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--primary);
+            white-space: nowrap;
+            transition: var(--transition);
+            letter-spacing: 0.5px;
+        }
+
+        .nav-btn.active {
+            background: var(--primary);
+            color: var(--accent);
+            transform: scale(0.98);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .nav-btn:hover:not(.active) {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .container {
+            padding: 20px;
+            max-width: 1400px;
+            margin: auto;
+        }
+
+        .search-bar {
+            font-family: 'Fredoka', sans-serif;
+            width: 100%;
+            max-width: 500px;
+            padding: 14px 20px;
+            border-radius: 60px;
+            border: 3px solid var(--primary);
+            background: var(--card-bg);
+            color: var(--text);
+            font-size: 1rem;
+            outline: none;
+            margin: 0 auto 30px auto;
+            display: block;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .search-bar:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(255,222,89,0.3);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+            gap: 22px;
+            animation: fadeInUp 0.4s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--card-radius);
+            padding: 16px 12px 14px;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            height: 290px;
+            transition: transform 0.25s ease, box-shadow 0.2s;
+            cursor: pointer;
+            border: 2px solid transparent;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -12px rgba(0,0,0,0.2);
+            border-color: var(--accent);
+        }
+
+        .art-box {
+            width: 100%;
+            height: 130px;
+            border-radius: 24px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,74,173,0.05);
+            font-size: 4.8rem;
+            transition: transform 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .animal-art {
+            font-size: 5rem;
+            filter: drop-shadow(2px 4px 12px rgba(0,0,0,0.15));
+            transition: all 0.2s;
+        }
+
+        .card:hover .animal-art {
+            transform: scale(1.05);
+        }
+
+        /* Custom Jellyfish CSS */
+        .jellyfish-custom {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .jellyfish-body {
+            width: 60px;
+            height: 70px;
+            background: radial-gradient(circle at 30% 30%, #ff9fcf, #ff6bb5);
+            border-radius: 50%;
+            position: relative;
+            margin: 0 auto;
+            box-shadow: 0 5px 15px rgba(255, 107, 181, 0.4);
+        }
+
+        .jellyfish-tentacle {
+            position: absolute;
+            width: 8px;
+            height: 30px;
+            background: linear-gradient(135deg, #ff9fcf, #ff6bb5);
+            border-radius: 20px;
+            bottom: -25px;
+            animation: sway 2s ease-in-out infinite;
+        }
+
+        .jellyfish-tentacle:nth-child(1) { left: 15px; animation-delay: 0s; }
+        .jellyfish-tentacle:nth-child(2) { left: 28px; animation-delay: 0.3s; }
+        .jellyfish-tentacle:nth-child(3) { left: 41px; animation-delay: 0.6s; }
+        .jellyfish-tentacle:nth-child(4) { left: 54px; animation-delay: 0.9s; }
+
+        .jellyfish-eyes {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            padding-top: 20px;
+        }
+
+        .jellyfish-eye {
+            width: 12px;
+            height: 12px;
+            background: white;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .jellyfish-eye::after {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: #2c3e50;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 3px;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        @keyframes sway {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(8deg); }
+        }
+
+        .color-swatch {
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            box-shadow: inset 0 0 0 3px rgba(255,255,255,0.5), 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .flag-img {
+            width: 85%;
+            max-width: 100px;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            border: 2px solid white;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-top: 6px;
+            letter-spacing: -0.3px;
+            line-height: 1.2;
+        }
+
+        .card-sub {
+            opacity: 0.7;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .audio-btns {
+            margin-top: auto;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .btn-speak {
+            font-family: 'Fredoka', sans-serif;
+            border: none;
+            padding: 10px 0;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            flex: 1;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-en {
+            background: var(--primary);
+            color: var(--accent);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .btn-pt {
+            background: #2c7a4d;
+            color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .btn-speak:active {
+            transform: scale(0.96);
+        }
+
+        .btn-speak i {
+            font-size: 0.9rem;
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--accent);
+            padding: 24px;
+            margin-top: 50px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        footer a {
+            color: #FFFFFF;
+            text-decoration: none;
+            border-bottom: 2px solid var(--accent);
+            font-weight: 700;
+            transition: 0.2s;
+        }
+
+        footer a:hover {
+            color: var(--accent);
+        }
+
+        @media (max-width: 600px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            .card {
+                height: 270px;
+                padding: 12px 8px;
+            }
+            .art-box {
+                height: 100px;
+                font-size: 3.8rem;
+            }
+            .card-title {
+                font-size: 1.1rem;
+            }
+            .btn-speak {
+                font-size: 0.75rem;
+                padding: 8px 0;
+            }
+            .nav-btn {
+                padding: 6px 18px;
+                font-size: 0.85rem;
+            }
+            header h1 {
+                font-size: 1.4rem;
+            }
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            font-size: 1.3rem;
+            grid-column: 1 / -1;
+            background: var(--card-bg);
+            border-radius: 40px;
+        }
     </style>
 </head>
 <body data-theme="light">
 
 <header>
-    <h1 style="margin:0; letter-spacing: 2px;">ENGLISH KIDS</h1>
-    <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+    <h1>🐾 ENGLISH KIDS 🎓</h1>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">🌓</button>
 </header>
 
 <nav>
-    <button class="nav-btn active" onclick="setCategory('alphabet', this)">ABC</button>
-    <button class="nav-btn" onclick="setCategory('numbers', this)">1-100</button>
-    <button class="nav-btn" onclick="setCategory('colors', this)">100 Colors</button>
-    <button class="nav-btn" onclick="setCategory('animals', this)">Animals</button>
-    <button class="nav-btn" onclick="setCategory('countries', this)">Flags</button>
+    <button class="nav-btn" data-cat="alphabet">🔤 ABC</button>
+    <button class="nav-btn" data-cat="numbers">🔢 1-100</button>
+    <button class="nav-btn" data-cat="colors">🎨 100 Colors</button>
+    <button class="nav-btn active" data-cat="animals">🐘 Animals</button>
+    <button class="nav-btn" data-cat="countries">🏳️ Flags</button>
 </nav>
 
 <div class="container">
-    <input type="text" class="search-bar" placeholder="Search... / Buscar..." onkeyup="doSearch()">
+    <input type="text" class="search-bar" placeholder="🔍 Search animals, colors, letters... / Buscar..." id="searchInput">
     <div class="grid" id="mainGrid"></div>
 </div>
 
 <footer>
-    Made by <strong>English Teacher Rush</strong> | 
-    <a href="https://ntro077.github.io/my-teaching-site/" target="_blank">Visit my Website</a>
+    Made with 💙 by <strong>English Teacher Rush</strong> | 
+    <a href="https://ntro077.github.io/my-teaching-site/" target="_blank">Visit my Website</a> | 🌟 Learn & Play
 </footer>
 
 <script>
+    // ANIMALS DATABASE
+    const animalsDB = [
+        {en: "Lion", pt: "Leão", emoji: "🦁"}, 
+        {en: "Tiger", pt: "Tigre", emoji: "🐯"}, 
+        {en: "Elephant", pt: "Elefante", emoji: "🐘"}, 
+        {en: "Monkey", pt: "Macaco", emoji: "🐒"}, 
+        {en: "Giraffe", pt: "Girafa", emoji: "🦒"}, 
+        {en: "Zebra", pt: "Zebra", emoji: "🦓"}, 
+        {en: "Panda", pt: "Panda", emoji: "🐼"}, 
+        {en: "Bear", pt: "Urso", emoji: "🐻"}, 
+        {en: "Dog", pt: "Cachorro", emoji: "🐕"}, 
+        {en: "Cat", pt: "Gato", emoji: "🐈"}, 
+        {en: "Rabbit", pt: "Coelho", emoji: "🐇"}, 
+        {en: "Fox", pt: "Raposa", emoji: "🦊"}, 
+        {en: "Wolf", pt: "Lobo", emoji: "🐺"}, 
+        {en: "Deer", pt: "Veado", emoji: "🦌"}, 
+        {en: "Kangaroo", pt: "Canguru", emoji: "🦘"}, 
+        {en: "Koala", pt: "Coala", emoji: "🐨"}, 
+        {en: "Rhinoceros", pt: "Rinoceronte", emoji: "🦏"}, 
+        {en: "Hippopotamus", pt: "Hipopótamo", emoji: "🦛"}, 
+        {en: "Crocodile", pt: "Jacaré", emoji: "🐊"}, 
+        {en: "Snake", pt: "Cobra", emoji: "🐍"}, 
+        {en: "Frog", pt: "Sapo", emoji: "🐸"}, 
+        {en: "Turtle", pt: "Tartaruga", emoji: "🐢"}, 
+        {en: "Shark", pt: "Tubarão", emoji: "🦈"}, 
+        {en: "Whale", pt: "Baleia", emoji: "🐋"}, 
+        {en: "Dolphin", pt: "Golfinho", emoji: "🐬"}, 
+        {en: "Octopus", pt: "Polvo", emoji: "🐙"}, 
+        {en: "Crab", pt: "Caranguejo", emoji: "🦀"}, 
+        {en: "Lobster", pt: "Lagosta", emoji: "🦞"},
+        {en: "Fish", pt: "Peixe", emoji: "🐟"}, 
+        {en: "Jellyfish", pt: "Água-viva", emoji: "", custom: true, type: "jellyfish"},
+        {en: "Starfish", pt: "Estrela-do-mar", emoji: "⭐"}, 
+        {en: "Eagle", pt: "Águia", emoji: "🦅"}, 
+        {en: "Owl", pt: "Coruja", emoji: "🦉"}, 
+        {en: "Parrot", pt: "Papagaio", emoji: "🦜"}, 
+        {en: "Penguin", pt: "Pinguim", emoji: "🐧"}, 
+        {en: "Flamingo", pt: "Flamingo", emoji: "🦩"}, 
+        {en: "Peacock", pt: "Pavão", emoji: "🦚"}, 
+        {en: "Butterfly", pt: "Borboleta", emoji: "🦋"}, 
+        {en: "Bee", pt: "Abelha", emoji: "🐝"}, 
+        {en: "Ladybug", pt: "Joaninha", emoji: "🐞"}, 
+        {en: "Spider", pt: "Aranha", emoji: "🕷️"}, 
+        {en: "Snail", pt: "Caracol", emoji: "🐌"}, 
+        {en: "Gorilla", pt: "Gorila", emoji: "🦍"}, 
+        {en: "Sloth", pt: "Preguiça", emoji: "🦥"}, 
+        {en: "Hedgehog", pt: "Ouriço", emoji: "🦔"}, 
+        {en: "Squirrel", pt: "Esquilo", emoji: "🐿️"}, 
+        {en: "Raccoon", pt: "Guaxinim", emoji: "🦝"}, 
+        {en: "Horse", pt: "Cavalo", emoji: "🐎"}, 
+        {en: "Cow", pt: "Vaca", emoji: "🐄"}, 
+        {en: "Pig", pt: "Porco", emoji: "🐖"}, 
+        {en: "Sheep", pt: "Ovelha", emoji: "🐑"}, 
+        {en: "Goat", pt: "Cabra", emoji: "🐐"}, 
+        {en: "Chicken", pt: "Galinha", emoji: "🐔"}, 
+        {en: "Rooster", pt: "Galo", emoji: "🐓"}, 
+        {en: "Duck", pt: "Pato", emoji: "🦆"}, 
+        {en: "Swan", pt: "Cisne", emoji: "🦢"}, 
+        {en: "Turkey", pt: "Peru", emoji: "🦃"}, 
+        {en: "Dragon", pt: "Dragão", emoji: "🐉"}, 
+        {en: "Unicorn", pt: "Unicórnio", emoji: "🦄"}, 
+        {en: "Dinosaur", pt: "Dinossauro", emoji: "🦕"},
+        {en: "Shrimp", pt: "Camarão", emoji: "🦐"},
+        {en: "Squid", pt: "Lula", emoji: "🦑"}
+    ];
+
+    // 176 COUNTRIES DATABASE (without Israel)
+    const countriesDB = [
+        {en: "Afghanistan", pt: "Afeganistão", code: "af"}, {en: "Albania", pt: "Albânia", code: "al"}, {en: "Algeria", pt: "Argélia", code: "dz"}, {en: "Andorra", pt: "Andorra", code: "ad"}, {en: "Angola", pt: "Angola", code: "ao"}, {en: "Argentina", pt: "Argentina", code: "ar"}, {en: "Armenia", pt: "Armênia", code: "am"}, {en: "Australia", pt: "Austrália", code: "au"}, {en: "Austria", pt: "Áustria", code: "at"}, {en: "Azerbaijan", pt: "Azerbaijão", code: "az"},
+        {en: "Bahamas", pt: "Bahamas", code: "bs"}, {en: "Bahrain", pt: "Bahrein", code: "bh"}, {en: "Bangladesh", pt: "Bangladesh", code: "bd"}, {en: "Barbados", pt: "Barbados", code: "bb"}, {en: "Belarus", pt: "Bielorrússia", code: "by"}, {en: "Belgium", pt: "Bélgica", code: "be"}, {en: "Belize", pt: "Belize", code: "bz"}, {en: "Benin", pt: "Benin", code: "bj"}, {en: "Bhutan", pt: "Butão", code: "bt"}, {en: "Bolivia", pt: "Bolívia", code: "bo"},
+        {en: "Bosnia", pt: "Bósnia", code: "ba"}, {en: "Botswana", pt: "Botsuana", code: "bw"}, {en: "Brazil", pt: "Brasil", code: "br"}, {en: "Brunei", pt: "Brunei", code: "bn"}, {en: "Bulgaria", pt: "Bulgária", code: "bg"}, {en: "Burkina Faso", pt: "Burkina Faso", code: "bf"}, {en: "Burundi", pt: "Burundi", code: "bi"}, {en: "Cambodia", pt: "Camboja", code: "kh"}, {en: "Cameroon", pt: "Camarões", code: "cm"}, {en: "Canada", pt: "Canadá", code: "ca"},
+        {en: "Cape Verde", pt: "Cabo Verde", code: "cv"}, {en: "Chad", pt: "Chade", code: "td"}, {en: "Chile", pt: "Chile", code: "cl"}, {en: "China", pt: "China", code: "cn"}, {en: "Colombia", pt: "Colômbia", code: "co"}, {en: "Comoros", pt: "Comores", code: "km"}, {en: "Congo", pt: "Congo", code: "cg"}, {en: "Costa Rica", pt: "Costa Rica", code: "cr"}, {en: "Croatia", pt: "Croácia", code: "hr"}, {en: "Cuba", pt: "Cuba", code: "cu"},
+        {en: "Cyprus", pt: "Chipre", code: "cy"}, {en: "Czech Republic", pt: "República Tcheca", code: "cz"}, {en: "Denmark", pt: "Dinamarca", code: "dk"}, {en: "Djibouti", pt: "Djibuti", code: "dj"}, {en: "Dominica", pt: "Dominica", code: "dm"}, {en: "Dominican Republic", pt: "República Dominicana", code: "do"}, {en: "Ecuador", pt: "Equador", code: "ec"}, {en: "Egypt", pt: "Egito", code: "eg"}, {en: "El Salvador", pt: "El Salvador", code: "sv"}, {en: "Equatorial Guinea", pt: "Guiné Equatorial", code: "gq"},
+        {en: "Eritrea", pt: "Eritreia", code: "er"}, {en: "Estonia", pt: "Estônia", code: "ee"}, {en: "Eswatini", pt: "Essuatíni", code: "sz"}, {en: "Ethiopia", pt: "Etiópia", code: "et"}, {en: "Fiji", pt: "Fiji", code: "fj"}, {en: "Finland", pt: "Finlândia", code: "fi"}, {en: "France", pt: "França", code: "fr"}, {en: "Gabon", pt: "Gabão", code: "ga"}, {en: "Gambia", pt: "Gâmbia", code: "gm"}, {en: "Georgia", pt: "Geórgia", code: "ge"},
+        {en: "Germany", pt: "Alemanha", code: "de"}, {en: "Ghana", pt: "Gana", code: "gh"}, {en: "Greece", pt: "Grécia", code: "gr"}, {en: "Grenada", pt: "Granada", code: "gd"}, {en: "Guatemala", pt: "Guatemala", code: "gt"}, {en: "Guinea", pt: "Guiné", code: "gn"}, {en: "Guinea-Bissau", pt: "Guiné-Bissau", code: "gw"}, {en: "Guyana", pt: "Guiana", code: "gy"}, {en: "Haiti", pt: "Haiti", code: "ht"}, {en: "Honduras", pt: "Honduras", code: "hn"},
+        {en: "Hungary", pt: "Hungria", code: "hu"}, {en: "Iceland", pt: "Islândia", code: "is"}, {en: "India", pt: "Índia", code: "in"}, {en: "Indonesia", pt: "Indonésia", code: "id"}, {en: "Iran", pt: "Irã", code: "ir"}, {en: "Iraq", pt: "Iraque", code: "iq"}, {en: "Ireland", pt: "Irlanda", code: "ie"}, {en: "Italy", pt: "Itália", code: "it"}, {en: "Jamaica", pt: "Jamaica", code: "jm"}, {en: "Japan", pt: "Japão", code: "jp"},
+        {en: "Jordan", pt: "Jordânia", code: "jo"}, {en: "Kazakhstan", pt: "Cazaquistão", code: "kz"}, {en: "Kenya", pt: "Quênia", code: "ke"}, {en: "Kiribati", pt: "Kiribati", code: "ki"}, {en: "Kuwait", pt: "Kuwait", code: "kw"}, {en: "Kyrgyzstan", pt: "Quirguistão", code: "kg"}, {en: "Laos", pt: "Laos", code: "la"}, {en: "Latvia", pt: "Letônia", code: "lv"}, {en: "Lebanon", pt: "Líbano", code: "lb"}, {en: "Lesotho", pt: "Lesoto", code: "ls"},
+        {en: "Liberia", pt: "Libéria", code: "lr"}, {en: "Libya", pt: "Líbia", code: "ly"}, {en: "Liechtenstein", pt: "Liechtenstein", code: "li"}, {en: "Lithuania", pt: "Lituânia", code: "lt"}, {en: "Luxembourg", pt: "Luxemburgo", code: "lu"}, {en: "Madagascar", pt: "Madagascar", code: "mg"}, {en: "Malawi", pt: "Malawi", code: "mw"}, {en: "Malaysia", pt: "Malásia", code: "my"}, {en: "Maldives", pt: "Maldivas", code: "mv"}, {en: "Mali", pt: "Mali", code: "ml"},
+        {en: "Malta", pt: "Malta", code: "mt"}, {en: "Mauritania", pt: "Mauritânia", code: "mr"}, {en: "Mauritius", pt: "Maurício", code: "mu"}, {en: "Mexico", pt: "México", code: "mx"}, {en: "Monaco", pt: "Mônaco", code: "mc"}, {en: "Mongolia", pt: "Mongólia", code: "mn"}, {en: "Montenegro", pt: "Montenegro", code: "me"}, {en: "Morocco", pt: "Marrocos", code: "ma"}, {en: "Mozambique", pt: "Moçambique", code: "mz"}, {en: "Myanmar", pt: "Mianmar", code: "mm"},
+        {en: "Namibia", pt: "Namíbia", code: "na"}, {en: "Nepal", pt: "Nepal", code: "np"}, {en: "Netherlands", pt: "Holanda", code: "nl"}, {en: "New Zealand", pt: "Nova Zelândia", code: "nz"}, {en: "Nicaragua", pt: "Nicarágua", code: "ni"}, {en: "Niger", pt: "Níger", code: "ne"}, {en: "Nigeria", pt: "Nigéria", code: "ng"}, {en: "North Korea", pt: "Coreia do Norte", code: "kp"}, {en: "North Macedonia", pt: "Macedônia do Norte", code: "mk"}, {en: "Norway", pt: "Noruega", code: "no"},
+        {en: "Oman", pt: "Omã", code: "om"}, {en: "Pakistan", pt: "Paquistão", code: "pk"}, {en: "Panama", pt: "Panamá", code: "pa"}, {en: "Papua New Guinea", pt: "Papua Nova Guiné", code: "pg"}, {en: "Paraguay", pt: "Paraguai", code: "py"}, {en: "Peru", pt: "Peru", code: "pe"}, {en: "Philippines", pt: "Filipinas", code: "ph"}, {en: "Poland", pt: "Polônia", code: "pl"}, {en: "Portugal", pt: "Portugal", code: "pt"}, {en: "Qatar", pt: "Catar", code: "qa"},
+        {en: "Romania", pt: "Romênia", code: "ro"}, {en: "Russia", pt: "Rússia", code: "ru"}, {en: "Rwanda", pt: "Ruanda", code: "rw"}, {en: "Saudi Arabia", pt: "Arábia Saudita", code: "sa"}, {en: "Senegal", pt: "Senegal", code: "sn"}, {en: "Serbia", pt: "Sérvia", code: "rs"}, {en: "Singapore", pt: "Cingapura", code: "sg"}, {en: "Slovakia", pt: "Eslováquia", code: "sk"}, {en: "Slovenia", pt: "Eslovênia", code: "si"}, {en: "South Africa", pt: "África do Sul", code: "za"},
+        {en: "South Korea", pt: "Coreia do Sul", code: "kr"}, {en: "Spain", pt: "Espanha", code: "es"}, {en: "Sri Lanka", pt: "Sri Lanka", code: "lk"}, {en: "Sudan", pt: "Sudão", code: "sd"}, {en: "Sweden", pt: "Suécia", code: "se"}, {en: "Switzerland", pt: "Suíça", code: "ch"}, {en: "Syria", pt: "Síria", code: "sy"}, {en: "Taiwan", pt: "Taiwan", code: "tw"}, {en: "Tajikistan", pt: "Tajiquistão", code: "tj"}, {en: "Tanzania", pt: "Tanzânia", code: "tz"},
+        {en: "Thailand", pt: "Tailândia", code: "th"}, {en: "Timor-Leste", pt: "Timor-Leste", code: "tl"}, {en: "Togo", pt: "Togo", code: "tg"}, {en: "Tunisia", pt: "Tunísia", code: "tn"}, {en: "Turkey", pt: "Turquia", code: "tr"}, {en: "Turkmenistan", pt: "Turcomenistão", code: "tm"}, {en: "Uganda", pt: "Uganda", code: "ug"}, {en: "Ukraine", pt: "Ucrânia", code: "ua"}, {en: "United Arab Emirates", pt: "Emirados Árabes", code: "ae"}, {en: "United Kingdom", pt: "Reino Unido", code: "gb"},
+        {en: "United States", pt: "Estados Unidos", code: "us"}, {en: "Uruguay", pt: "Uruguai", code: "uy"}, {en: "Uzbekistan", pt: "Uzbequistão", code: "uz"}, {en: "Vanuatu", pt: "Vanuatu", code: "vu"}, {en: "Vatican City", pt: "Vaticano", code: "va"}, {en: "Venezuela", pt: "Venezuela", code: "ve"}, {en: "Vietnam", pt: "Vietnã", code: "vn"}, {en: "Yemen", pt: "Iêmen", code: "ye"}, {en: "Zambia", pt: "Zâmbia", code: "zm"}, {en: "Zimbabwe", pt: "Zimbábue", code: "zw"}
+    ];
+
     const database = {
         alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map(l => ({ en: l, pt: l })),
         numbers: Array.from({length: 100}, (_, i) => ({ en: (i+1).toString(), pt: (i+1).toString() })),
         colors: [
-            // BASIC COLORS
-            {en: "Red", pt: "Vermelho", hex: "#FF0000"}, {en: "Blue", pt: "Azul", hex: "#0000FF"}, {en: "Yellow", pt: "Amarelo", hex: "#FFFF00"}, {en: "Green", pt: "Verde", hex: "#008000"}, {en: "Pink", pt: "Rosa", hex: "#FFC0CB"}, {en: "Orange", pt: "Laranja", hex: "#FFA500"}, {en: "Purple", pt: "Roxo", hex: "#800080"}, {en: "Brown", pt: "Marrom", hex: "#A52A2A"}, {en: "Black", pt: "Preto", hex: "#000000"}, {en: "White", pt: "Branco", hex: "#FFFFFF"},
-            // NATURE COLORS
-            {en: "Sky Blue", pt: "Azul Celeste", hex: "#87CEEB"}, {en: "Lime Green", pt: "Verde Limão", hex: "#32CD32"}, {en: "Forest Green", pt: "Verde Floresta", hex: "#228B22"}, {en: "Ocean Blue", pt: "Azul Oceano", hex: "#0077BE"}, {en: "Sand", pt: "Areia", hex: "#C2B280"}, {en: "Sunset Orange", pt: "Laranja Pôr do Sol", hex: "#FF4E50"}, {en: "Grass Green", pt: "Verde Grama", hex: "#7CFC00"}, {en: "Cloud White", pt: "Branco Nuvem", hex: "#F8F8FF"}, {en: "Midnight Blue", hex: "#191970", pt: "Azul Meia-noite"}, {en: "Olive", hex: "#808000", pt: "Oliva"},
-            // FRUITS & SWEETS
-            {en: "Chocolate", hex: "#D2691E", pt: "Chocolate"}, {en: "Caramel", hex: "#AF6E4D", pt: "Caramelo"}, {en: "Peach", hex: "#FFDAB9", pt: "Pêssego"}, {en: "Strawberry", hex: "#E12C2C", pt: "Morango"}, {en: "Grape", hex: "#6F2DA8", pt: "Uva"}, {en: "Banana Yellow", hex: "#FFE135", pt: "Amarelo Banana"}, {en: "Mint", hex: "#98FF98", pt: "Menta"}, {en: "Bubblegum", hex: "#FFC1CC", pt: "Chiclete"}, {en: "Cherry Red", hex: "#D2042D", pt: "Cereja"}, {en: "Honey", hex: "#EB9605", pt: "Mel"},
-            // METALLIC & LUXURY
-            {en: "Gold", hex: "#FFD700", pt: "Ouro"}, {en: "Silver", hex: "#C0C0C0", pt: "Prata"}, {en: "Bronze", hex: "#CD7F32", pt: "Bronze"}, {en: "Pearl", hex: "#F0EAD6", pt: "Pérola"}, {en: "Diamond Blue", hex: "#B9F2FF", pt: "Azul Diamante"}, {en: "Ruby Red", hex: "#E0115F", pt: "Rubi"}, {en: "Emerald Green", hex: "#50C878", pt: "Esmeralda"}, {en: "Indigo", hex: "#4B0082", pt: "Índigo"}, {en: "Platinum", hex: "#E5E4E2", pt: "Platina"}, {en: "Ivory", hex: "#FFFFF0", pt: "Marfim"},
-            // VIBRANT COLORS
-            {en: "Turquoise", hex: "#40E0D0", pt: "Turquesa"}, {en: "Teal", hex: "#008080", pt: "Teal"}, {en: "Cyan", hex: "#00FFFF", pt: "Ciano"}, {en: "Magenta", hex: "#FF00FF", pt: "Magenta"}, {en: "Violet", hex: "#EE82EE", pt: "Violeta"}, {en: "Lavender", hex: "#E6E6FA", pt: "Lavanda"}, {en: "Beige", hex: "#F5F5DC", pt: "Bege"}, {en: "Khaki", hex: "#F0E68C", pt: "Caqui"}, {en: "Coral", hex: "#FF7F50", pt: "Coral"}, {en: "Salmon", hex: "#FA8072", pt: "Salmão"},
-            // DEEP SHADES
-            {en: "Crimson", hex: "#DC143C", pt: "Carmesim"}, {en: "Maroon", hex: "#800000", pt: "Castanho"}, {en: "Navy", hex: "#000080", pt: "Marinha"}, {en: "Aquamarine", hex: "#7FFFD4", pt: "Água-marinha"}, {en: "Tan", hex: "#D2B48C", pt: "Tan"}, {en: "Slate", hex: "#708090", pt: "Ardósia"}, {en: "Chartreuse", hex: "#7FFF00", pt: "Chartreuse"}, {en: "Plum", hex: "#DDA0DD", pt: "Ameixa"}, {en: "Orchid", hex: "#DA70D6", pt: "Orquídea"}, {en: "Firebrick", hex: "#B22222", pt: "Tijolo"},
-            {en: "Hot Pink", hex: "#FF69B4", pt: "Rosa Choque"}, {en: "Deep Sky Blue", hex: "#00BFFF", pt: "Azul Profundo"}, {en: "Seashell", hex: "#FFF5EE", pt: "Concha"}, {en: "Wheat", hex: "#F5DEB3", pt: "Trigo"}, {en: "Azure", hex: "#F0FFFF", pt: "Azure"}, {en: "Lemon Chiffon", hex: "#FFFACD", pt: "Limão Suave"}, {en: "Papaya Whip", hex: "#FFEFD5", pt: "Mamão"}, {en: "Moccasin", hex: "#FFE4B5", pt: "Mocassim"}, {en: "Old Lace", hex: "#FDF5E6", pt: "Renda Antiga"}, {en: "Snow", hex: "#FFFAFA", pt: "Neve"},
-            {en: "Thistle", hex: "#D8BFD8", pt: "Cardo"}, {en: "Gainsboro", hex: "#DCDCDC", pt: "Gainsboro"}, {en: "Steel Blue", hex: "#4682B4", pt: "Azul Aço"}, {en: "Saddle Brown", hex: "#8B4513", pt: "Marrom Sela"}, {en: "Rosy Brown", hex: "#BC8F8F", pt: "Marrom Rosado"}, {en: "Peru", hex: "#CD853F", pt: "Peru"}, {en: "Royal Blue", hex: "#4169E1", pt: "Azul Royal"}, {en: "Slate Blue", hex: "#6A5ACD", pt: "Azul Ardósia"}, {en: "Spring Green", hex: "#00FF7F", pt: "Verde Primavera"}, {en: "Cornflower Blue", hex: "#6495ED", pt: "Azul Milho"},
-            {en: "Dark Orange", hex: "#FF8C00", pt: "Laranja Escuro"}, {en: "Dark Orchid", hex: "#9932CC", pt: "Orquídea Escura"}, {en: "Dark Red", hex: "#8B0000", pt: "Vermelho Escuro"}, {en: "Dark Salmon", hex: "#E9967A", pt: "Salmão Escuro"}, {en: "Dark Sea Green", hex: "#8FBC8F", pt: "Verde Mar Escuro"}, {en: "Dark Slate Blue", hex: "#483D8B", pt: "Azul Ardósia Escuro"}, {en: "Dark Turquoise", hex: "#00CED1", pt: "Turquesa Escura"}, {en: "Dark Violet", hex: "#9400D3", pt: "Violeta Escuro"}, {en: "Deep Pink", hex: "#FF1493", pt: "Rosa Profundo"}, {en: "Dodger Blue", hex: "#1E90FF", pt: "Azul Dodger"},
-            // FINAL SHADES
-            {en: "Light Blue", hex: "#ADD8E6", pt: "Azul Claro"}, {en: "Light Coral", hex: "#F08080", pt: "Coral Claro"}, {en: "Light Cyan", hex: "#E0FFFF", pt: "Ciano Claro"}, {en: "Light Goldenrod", hex: "#FAFAD2", pt: "Dourado Claro"}, {en: "Light Pink", hex: "#FFB6C1", pt: "Rosa Claro"}, {en: "Light Salmon", hex: "#FFA07A", pt: "Salmão Claro"}, {en: "Light Sea Green", hex: "#20B2AA", pt: "Verde Mar Claro"}, {en: "Light Sky Blue", hex: "#87CEFA", pt: "Azul Celeste Claro"}, {en: "Light Slate Gray", hex: "#778899", pt: "Cinza Ardósia Claro"}, {en: "Light Steel Blue", hex: "#B0C4DE", pt: "Azul Aço Claro"}
+            {en: "Red", pt: "Vermelho", hex: "#FF0000"}, {en: "Blue", pt: "Azul", hex: "#0000FF"}, 
+            {en: "Yellow", pt: "Amarelo", hex: "#FFFF00"}, {en: "Green", pt: "Verde", hex: "#008000"}, 
+            {en: "Pink", pt: "Rosa", hex: "#FFC0CB"}, {en: "Orange", pt: "Laranja", hex: "#FFA500"}, 
+            {en: "Purple", pt: "Roxo", hex: "#800080"}, {en: "Brown", pt: "Marrom", hex: "#A52A2A"}, 
+            {en: "Black", pt: "Preto", hex: "#000000"}, {en: "White", pt: "Branco", hex: "#FFFFFF"},
+            {en: "Sky Blue", pt: "Azul Celeste", hex: "#87CEEB"}, {en: "Lime Green", pt: "Verde Limão", hex: "#32CD32"}, 
+            {en: "Gold", hex: "#FFD700", pt: "Ouro"}, {en: "Silver", hex: "#C0C0C0", pt: "Prata"}, 
+            {en: "Turquoise", hex: "#40E0D0", pt: "Turquesa"}, {en: "Magenta", hex: "#FF00FF", pt: "Magenta"},
+            {en: "Coral", hex: "#FF7F50", pt: "Coral"}, {en: "Indigo", hex: "#4B0082", pt: "Índigo"},
+            {en: "Lavender", hex: "#E6E6FA", pt: "Lavanda"}, {en: "Teal", hex: "#008080", pt: "Teal"}
         ],
-        animals: [
-            {en: "Lion", pt: "Leão", a: "🦁"}, {en: "Tiger", pt: "Tigre", a: "🐯"}, {en: "Elephant", pt: "Elefante", a: "🐘"}, {en: "Monkey", pt: "Macaco", a: "🐒"}, {en: "Dog", pt: "Cachorro", a: "🐶"}, {en: "Cat", pt: "Gato", a: "🐱"}, {en: "Rabbit", pt: "Coelho", a: "🐰"}, {en: "Giraffe", pt: "Girafa", a: "🦒"}, {en: "Zebra", pt: "Zebra", a: "🦓"}, {en: "Panda", pt: "Panda", a: "🐼"},
-            {en: "Bear", pt: "Urso", a: "🐻"}, {en: "Pig", pt: "Porco", a: "🐷"}, {en: "Cow", pt: "Vaca", a: "🐮"}, {en: "Horse", pt: "Cavalo", a: "🐴"}, {en: "Sheep", pt: "Ovelha", a: "🐑"}, {en: "Goat", pt: "Cabra", a: "🐐"}, {en: "Camel", pt: "Camelo", a: "🐪"}, {en: "Llama", pt: "Lhama", a: "🦙"}, {en: "Kangaroo", pt: "Canguru", a: "🦘"}, {en: "Koala", pt: "Koala", a: "🐨"},
-            {en: "Wolf", pt: "Lobo", a: "🐺"}, {en: "Fox", pt: "Raposa", a: "🦊"}, {en: "Deer", pt: "Veado", a: "🦌"}, {en: "Rhinoceros", pt: "Rinoceronte", a: "🦏"}, {en: "Hippopotamus", pt: "Hipopótamo", a: "🦛"}, {en: "Crocodile", pt: "Jacaré", a: "🐊"}, {en: "Snake", pt: "Cobra", a: "🐍"}, {en: "Lizard", pt: "Lagarto", a: "🦎"}, {en: "Turtle", pt: "Tartaruga", a: "🐢"}, {en: "Frog", pt: "Sapo", a: "🐸"},
-            {en: "Shark", pt: "Tubarão", a: "🦈"}, {en: "Whale", pt: "Baleia", a: "🐳"}, {en: "Dolphin", pt: "Golfinho", a: "🐬"}, {en: "Octopus", pt: "Polvo", a: "🐙"}, {en: "Crab", pt: "Caranguejo", a: "🦀"}, {en: "Lobster", pt: "Lagosta", a: "🦞"}, {en: "Shrimp", pt: "Camarão", a: "🦐"}, {en: "Squid", pt: "Lula", a: "🦑"}, {en: "Fish", pt: "Peixe", a: "🐟"}, {en: "Tropical Fish", pt: "Peixe Tropical", a: "🐠"},
-            {en: "Blowfish", pt: "Baiacu", a: "🐡"}, {en: "Eagle", pt: "Águia", a: "🦅"}, {en: "Owl", pt: "Coruja", a: "🦉"}, {en: "Parrot", pt: "Papagaio", a: "🦜"}, {en: "Penguin", pt: "Pinguim", a: "🐧"}, {en: "Duck", pt: "Pato", a: "🦆"}, {en: "Swan", pt: "Cisne", a: "🦢"}, {en: "Chicken", pt: "Galinha", a: "🐔"}, {en: "Rooster", pt: "Galo", a: "🐓"}, {en: "Turkey", pt: "Peru", a: "🦃"},
-            {en: "Flamingo", pt: "Flamingo", a: "🦩"}, {en: "Peacock", pt: "Pavão", a: "🦚"}, {en: "Dove", pt: "Pomba", a: "🕊️"}, {en: "Bat", pt: "Morcego", a: "🦇"}, {en: "Bee", pt: "Abelha", a: "🐝"}, {en: "Butterfly", pt: "Borboleta", a: "🦋"}, {en: "Ladybug", pt: "Joaninha", a: "🐞"}, {en: "Ant", pt: "Formiga", a: "🐜"}, {en: "Spider", pt: "Aranha", a: "🕷️"}, {en: "Scorpion", pt: "Escorpião", a: "🦂"},
-            {en: "Snail", pt: "Caracol", a: "🐌"}, {en: "Caterpillar", pt: "Lagarta", a: "🐛"}, {en: "Cricket", pt: "Grilo", a: "🦗"}, {en: "Gorilla", pt: "Gorila", a: "🦍"}, {en: "Sloth", pt: "Preguiça", a: "🦥"}, {en: "Otter", pt: "Lontra", a: "🦦"}, {en: "Beaver", pt: "Castor", a: "🦫"}, {en: "Hedgehog", pt: "Ouriço", a: "🦔"}, {en: "Mouse", pt: "Camundongo", a: "🐭"}, {en: "Rat", pt: "Rato", a: "🐀"},
-            {en: "Hamster", pt: "Hamster", a: "🐹"}, {en: "Squirrel", pt: "Esquilo", a: "🐿️"}, {en: "Skunk", pt: "Gambá", a: "🦨"}, {en: "Raccoon", pt: "Guaxinim", a: "🦝"}, {en: "Ox", pt: "Boi", a: "🐂"}, {en: "Buffalo", pt: "Búfalo", a: "🐃"}, {en: "Ram", pt: "Carneiro", a: "🐏"}, {en: "Donkey", pt: "Burro", a: "🫏"}, {en: "Seal", pt: "Foca", a: "🦭"}, {en: "Walrus", pt: "Morsa", a: "🦣"},
-            {en: "Seahorse", pt: "Cavalo-marinho", a: "🧜"}, {en: "Jellyfish", pt: "Água-viva", a: "🪼"}, {en: "Mosquito", pt: "Mosquito", a: "🦟"}, {en: "Worm", pt: "Minhoca", a: "🪱"}, {en: "Fly", pt: "Mosca", a: "🪰"}, {en: "Beetle", pt: "Besouro", a: "🪲"}, {en: "Cockroach", pt: "Barata", a: "🪳"}, {en: "Grasshopper", pt: "Gafanhoto", a: "🦗"}, {en: "Dinosaur", pt: "Dinossauro", a: "🦖"}, {en: "Dragon", pt: "Dragão", a: "🐲"},
-            {en: "Leopard", pt: "Leopardo", a: "🐆"}, {en: "Whale", pt: "Baleia", a: "🐋"}, {en: "Chick", pt: "Pinho", a: "🐥"}, {en: "Peacock", pt: "Pavão", a: "🦚"}, {en: "Parrot", pt: "Papagaio", a: "🦜"}, {en: "Dove", pt: "Pomba", a: "🕊️"}, {en: "Bat", pt: "Morcego", a: "🦇"}, {en: "Owl", pt: "Coruja", a: "🦉"}, {en: "Eagle", pt: "Águia", a: "🦅"}, {en: "Duck", pt: "Pato", a: "🦆"}
-        ],
-        countries: [
-            {en: "Brazil", pt: "Brasil", c: "br"}, {en: "Bangladesh", pt: "Bangladesh", c: "bd"}, {en: "Palestine", pt: "Palestina", c: "ps"}, {en: "USA", pt: "EUA", c: "us"}, {en: "UK", pt: "Reino Unido", c: "gb"}, {en: "Canada", pt: "Canadá", c: "ca"}, {en: "France", pt: "França", c: "fr"}, {en: "Germany", pt: "Alemanha", c: "de"}, {en: "Italy", pt: "Itália", c: "it"}, {en: "Japan", pt: "Japão", c: "jp"}, {en: "China", pt: "China", c: "cn"}, {en: "Mexico", pt: "México", c: "mx"}, {en: "Argentina", pt: "Argentina", c: "ar"}, {en: "Portugal", pt: "Portugal", c: "pt"}, {en: "Australia", pt: "Austrália", c: "au"}, {en: "Russia", pt: "Rússia", c: "ru"}, {en: "India", pt: "Índia", c: "in"}, {en: "Chile", pt: "Chile", c: "cl"}, {en: "Colombia", pt: "Colômbia", c: "co"}, {en: "Peru", pt: "Peru", c: "pe"}, {en: "South Korea", pt: "Coreia do Sul", c: "kr"}, {en: "Turkey", pt: "Turquia", c: "tr"}, {en: "Egypt", pt: "Egito", c: "eg"}, {en: "Netherlands", pt: "Holanda", c: "nl"}, {en: "Switzerland", pt: "Suíça", c: "ch"}, {en: "Norway", pt: "Noruega", c: "no"}, {en: "Sweden", pt: "Suécia", c: "se"}, {en: "Ireland", pt: "Irlanda", c: "ie"}, {en: "Denmark", pt: "Dinamarca", c: "dk"}, {en: "Finland", pt: "Finlândia", c: "fi"}, {en: "Austria", pt: "Áustria", c: "at"}, {en: "Greece", pt: "Grécia", c: "gr"}, {en: "Poland", pt: "Polônia", c: "pl"}, {en: "Vietnam", pt: "Vietnã", c: "vn"}, {en: "Thailand", pt: "Tailândia", c: "th"}, {en: "Philippines", pt: "Filipinas", c: "ph"}, {en: "Indonesia", pt: "Indonésia", c: "id"}, {en: "Malaysia", pt: "Malásia", c: "my"}, {en: "Singapore", pt: "Singapura", c: "sg"}, {en: "Uruguay", pt: "Uruguai", c: "uy"}, {en: "Paraguay", pt: "Paraguai", c: "py"}, {en: "Bolivia", pt: "Bolívia", c: "bo"}, {en: "Ecuador", pt: "Equador", c: "ec"}, {en: "Venezuela", pt: "Venezuela", c: "ve"}, {en: "Panama", pt: "Panamá", c: "pa"}, {en: "Costa Rica", pt: "Costa Rica", c: "cr"}, {en: "Jamaica", pt: "Jamaica", c: "jm"}, {en: "Cuba", pt: "Cuba", c: "cu"}, {en: "Morocco", pt: "Marrocos", c: "ma"}, {en: "South Africa", pt: "África do Sul", c: "za"},
-            {en: "Nigeria", pt: "Nigéria", c: "ng"}, {en: "Kenya", pt: "Quênia", c: "ke"}, {en: "Ghana", pt: "Gana", c: "gh"}, {en: "Ethiopia", pt: "Etiópia", c: "et"}, {en: "Algeria", pt: "Argélia", c: "dz"}, {en: "Saudi Arabia", pt: "Arábia Saudita", c: "sa"}, {en: "UAE", pt: "Emirados Árabes", c: "ae"}, {en: "Qatar", pt: "Catar", c: "qa"}, {en: "Kuwait", pt: "Kuwait", c: "kw"}, {en: "Iran", pt: "Irã", c: "ir"}, {en: "Iraq", pt: "Iraque", c: "iq"}, {en: "Pakistan", pt: "Paquistão", c: "pk"}, {en: "Ukraine", pt: "Ucrânia", c: "ua"}, {en: "Czech Rep", pt: "Tchéquia", c: "cz"}, {en: "Hungary", pt: "Hungria", c: "hu"}, {en: "Romania", pt: "Romênia", c: "ro"}, {en: "Bulgaria", pt: "Bulgária", c: "bg"}, {en: "Croatia", pt: "Croácia", c: "hr"}, {en: "Serbia", pt: "Sérvia", c: "rs"}, {en: "Belgium", pt: "Bélgica", c: "be"}, 
-            {en: "Luxembourg", pt: "Luxemburgo", c: "lu"}, {en: "Monaco", pt: "Mônaco", c: "mc"}, {en: "Iceland", pt: "Islândia", c: "is"}, {en: "New Zealand", pt: "Nova Zelândia", c: "nz"}, {en: "Fiji", pt: "Fiji", c: "fj"}, {en: "Guatemala", pt: "Guatemala", c: "gt"}, {en: "Honduras", pt: "Honduras", c: "hn"}, {en: "El Salvador", pt: "El Salvador", c: "sv"}, {en: "Nicaragua", pt: "Nicarágua", c: "ni"}, {en: "Dominican Rep", pt: "Rep. Dominicana", c: "do"}, {en: "Haiti", pt: "Haiti", c: "ht"}, {en: "Angola", pt: "Angola", c: "ao"}, {en: "Mozambique", pt: "Moçambique", c: "mz"}, {en: "Cape Verde", pt: "Cabo Verde", c: "cv"}, {en: "Guiné-Bissau", pt: "Guiné-Bissau", c: "gw"}, {en: "East Timor", pt: "Timor-Leste", c: "tl"}, {en: "Malta", pt: "Malta", c: "mt"}, {en: "Cyprus", pt: "Chipre", c: "cy"}, {en: "Lebanon", pt: "Líbano", c: "lb"}, {en: "Jordan", pt: "Jordânia", c: "jo"},
-            {en: "Oman", pt: "Omã", c: "om"}, {en: "Yemen", pt: "Iêmen", c: "ye"}, {en: "Tunisia", pt: "Tunísia", c: "tn"}, {en: "Libya", pt: "Líbia", c: "ly"}, {en: "Sudan", pt: "Sudão", c: "sd"}, {en: "Cameroon", pt: "Camarões", c: "cm"}, {en: "Senegal", pt: "Senegal", c: "sn"}, {en: "Tanzania", pt: "Tanzânia", c: "tz"}, {en: "Uganda", pt: "Uganda", c: "ug"}, {en: "Zambia", pt: "Zâmbia", c: "zm"}
-        ]
+        animals: animalsDB,
+        countries: countriesDB
     };
 
-    let activeCat = 'alphabet';
-    function toggleTheme() { document.body.dataset.theme = document.body.dataset.theme === 'dark' ? 'light' : 'dark'; }
+    let activeCat = 'animals';
+    let currentFilter = '';
 
-    function setCategory(cat, btn) {
+    function toggleTheme() {
+        const newTheme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
+        document.body.dataset.theme = newTheme;
+    }
+
+    function setCategory(cat, btnElement) {
         activeCat = cat;
-        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
+        document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+        if (btnElement) btnElement.classList.add('active');
+        else {
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                if(btn.getAttribute('data-cat') === cat) btn.classList.add('active');
+            });
+        }
         render();
+    }
+
+    function speak(text, lang) {
+        if (!text) return;
+        window.speechSynthesis.cancel();
+        let utteranceText = text;
+        let rate = 0.75;
+        let pitch = 1.05;
+        
+        if (activeCat === 'alphabet') {
+            utteranceText = text;
+            rate = 0.7;
+            pitch = 1.1;
+        }
+        if (activeCat === 'animals') {
+            rate = 0.7;
+            pitch = 1.1;
+        }
+        
+        const utterance = new SpeechSynthesisUtterance(utteranceText);
+        utterance.lang = lang;
+        utterance.rate = rate;
+        utterance.pitch = pitch;
+        utterance.volume = 0.9;
+        setTimeout(() => {
+            window.speechSynthesis.speak(utterance);
+        }, 50);
+    }
+
+    function getCustomAnimalArt(item) {
+        if (item.type === 'jellyfish') {
+            return `
+                <div class="jellyfish-custom">
+                    <div class="jellyfish-body">
+                        <div class="jellyfish-eyes">
+                            <div class="jellyfish-eye"></div>
+                            <div class="jellyfish-eye"></div>
+                        </div>
+                        <div class="jellyfish-tentacle"></div>
+                        <div class="jellyfish-tentacle"></div>
+                        <div class="jellyfish-tentacle"></div>
+                        <div class="jellyfish-tentacle"></div>
+                    </div>
+                </div>
+            `;
+        }
+        return `<span class="animal-art">${item.emoji}</span>`;
     }
 
     function render() {
         const grid = document.getElementById('mainGrid');
+        if (!grid) return;
         grid.innerHTML = "";
-        database[activeCat].forEach(item => {
+        let items = database[activeCat] || [];
+        
+        if (currentFilter) {
+            items = items.filter(item => {
+                const enMatch = item.en?.toLowerCase().includes(currentFilter);
+                const ptMatch = item.pt?.toLowerCase().includes(currentFilter);
+                return enMatch || ptMatch;
+            });
+        }
+        
+        if (items.length === 0) {
+            grid.innerHTML = `<div class="no-results">🐣 No results found! Try another word. 🌟</div>`;
+            return;
+        }
+        
+        items.forEach(item => {
             const card = document.createElement('div');
             card.className = 'card';
-            let art = `<div class="art-box">${item.en}</div>`;
-            if(activeCat === 'colors') art = `<div class="art-box" style="background:${item.hex}"></div>`;
-            if(activeCat === 'countries') art = `<div class="art-box"><img src="https://flagcdn.com/w160/${item.c}.png" class="flag-img" alt="Flag"></div>`;
-            if(activeCat === 'animals') art = `<div class="art-box">${item.a}</div>`;
-
-            card.innerHTML = `${art}
-                <div style="font-size: 1.2rem; font-weight: bold; margin-top:5px;">${item.en}</div>
-                <div style="opacity: 0.6; font-size: 0.9rem;">${item.pt}</div>
+            
+            let artHtml = '';
+            if (activeCat === 'colors') {
+                artHtml = `<div class="art-box"><div class="color-swatch" style="background:${item.hex}; width:80%; height:80%; border-radius: 20px;"></div></div>`;
+            } 
+            else if (activeCat === 'countries') {
+                const flagCode = item.code || 'un';
+                artHtml = `<div class="art-box"><img src="https://flagcdn.com/w160/${flagCode}.png" class="flag-img" alt="flag of ${item.en}" loading="lazy"></div>`;
+            }
+            else if (activeCat === 'animals') {
+                if (item.custom) {
+                    artHtml = `<div class="art-box">${getCustomAnimalArt(item)}</div>`;
+                } else {
+                    const animalEmoji = item.emoji || "🐾";
+                    artHtml = `<div class="art-box"><span class="animal-art">${animalEmoji}</span></div>`;
+                }
+            }
+            else {
+                artHtml = `<div class="art-box" style="font-size:3rem; font-weight:bold;">${item.en}</div>`;
+            }
+            
+            card.innerHTML = `
+                ${artHtml}
+                <div class="card-title">${escapeHtml(item.en)}</div>
+                <div class="card-sub">${escapeHtml(item.pt)}</div>
                 <div class="audio-btns">
-                    <button class="btn-speak btn-en" onclick="speak('${item.en}', 'en-US')">EN</button>
-                    <button class="btn-speak btn-pt" onclick="speak('${item.pt}', 'pt-BR')">PT</button>
-                </div>`;
+                    <button class="btn-speak btn-en" data-lang="en-US" data-text="${escapeHtml(item.en)}"><i class="fas fa-volume-up"></i> EN</button>
+                    <button class="btn-speak btn-pt" data-lang="pt-BR" data-text="${escapeHtml(item.pt)}"><i class="fas fa-microphone-alt"></i> PT</button>
+                </div>
+            `;
             grid.appendChild(card);
         });
-    }
-
-    function speak(text, lang) {
-        window.speechSynthesis.cancel();
         
-        let textToSpeak = text.toLowerCase();
-        let rate = 0.7; // Slow and clear
-        let pitch = 1.1; // Friendly tone
-
-        // SUPER CLARITY FOR THE ALPHABET
-        if(activeCat === 'alphabet') {
-            // We force a comma and phonetic spacing to stop the "robotic rush"
-            textToSpeak = textToSpeak + ", "; 
-            rate = 0.45; // Very slow to hear every detail
-            pitch = 1.2; // Slightly higher for child-friendly focus
-        }
-
-        const msg = new SpeechSynthesisUtterance(textToSpeak);
-        msg.lang = lang;
-        msg.pitch = pitch;
-        msg.rate = rate;
-        msg.volume = 1.0;
-
-        // Delay helps audio engines on mobile start smoothly
-        setTimeout(() => {
-            window.speechSynthesis.speak(msg);
-        }, 60);
-    }
-
-    function doSearch() {
-        const q = document.querySelector('.search-bar').value.toLowerCase();
-        document.querySelectorAll('.card').forEach(c => {
-            c.style.display = c.innerText.toLowerCase().includes(q) ? "flex" : "none";
+        document.querySelectorAll('.btn-speak').forEach(btn => {
+            btn.removeEventListener('click', handleSpeakClick);
+            btn.addEventListener('click', handleSpeakClick);
         });
     }
-
-    render();
+    
+    function handleSpeakClick(e) {
+        e.stopPropagation();
+        const btn = e.currentTarget;
+        const text = btn.getAttribute('data-text');
+        const lang = btn.getAttribute('data-lang');
+        if (text) speak(text, lang);
+    }
+    
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        });
+    }
+    
+    function doSearch() {
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput) {
+            currentFilter = searchInput.value.trim().toLowerCase();
+            render();
+        }
+    }
+    
+    function initNav() {
+        const navBtns = document.querySelectorAll('.nav-btn');
+        navBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const cat = btn.getAttribute('data-cat');
+                if (cat) {
+                    setCategory(cat, btn);
+                }
+            });
+        });
+    }
+    
+    let debounceTimeout;
+    document.addEventListener('DOMContentLoaded', () => {
+        initNav();
+        const searchBox = document.getElementById('searchInput');
+        if (searchBox) {
+            searchBox.addEventListener('input', () => {
+                clearTimeout(debounceTimeout);
+                debounceTimeout = setTimeout(() => {
+                    doSearch();
+                }, 250);
+            });
+        }
+        render();
+    });
+    
+    window.toggleTheme = toggleTheme;
+    window.setCategory = setCategory;
+    window.speak = speak;
+    window.doSearch = doSearch;
 </script>
 </body>
 </html>

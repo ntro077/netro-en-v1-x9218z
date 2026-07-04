@@ -4,7 +4,7 @@
     <meta name="robots" content="noindex, nofollow">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>English Kids by Teacher Rush | Multi-Language Learning</title>
+    <title>English Kids by Teacher Rush</title>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -75,18 +75,6 @@
             align-items: center;
         }
 
-        .lang-selector {
-            font-family: 'Fredoka', sans-serif;
-            padding: 8px 12px;
-            border-radius: 50px;
-            border: none;
-            background: var(--accent);
-            color: var(--primary);
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 0.9rem;
-        }
-
         .theme-toggle {
             background: var(--accent);
             border: none;
@@ -98,7 +86,7 @@
             transition: transform 0.2s;
         }
 
-        .theme-toggle:hover, .lang-selector:hover {
+        .theme-toggle:hover {
             transform: scale(1.05);
         }
 
@@ -364,7 +352,7 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        .btn-second-lang {
+        .btn-pt {
             background: #2c7a4d;
             color: white;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -441,45 +429,13 @@
             background: var(--card-bg);
             border-radius: 40px;
         }
-
-        .language-badge {
-            display: inline-block;
-            margin-left: 10px;
-            font-size: 0.8rem;
-            background: var(--accent);
-            color: var(--primary);
-            padding: 2px 8px;
-            border-radius: 20px;
-        }
-
-        .voice-warning {
-            background: #fff3cd;
-            border: 2px solid #ffc107;
-            color: #856404;
-            padding: 10px 15px;
-            border-radius: 10px;
-            margin: 10px auto;
-            max-width: 500px;
-            text-align: center;
-            font-size: 0.85rem;
-            display: none;
-        }
-
-        .voice-warning.show {
-            display: block;
-        }
     </style>
 </head>
 <body data-theme="light">
 
 <header>
-    <h1>🌍 ENGLISH KIDS 🎓 <span id="currentLangBadge" class="language-badge">🇺🇸 EN → 🇵🇹 PT</span></h1>
+    <h1>🐾 ENGLISH KIDS 🎓</h1>
     <div class="top-controls">
-        <select id="languageSelect" class="lang-selector" onchange="changeLanguage()">
-            <option value="pt">🇵🇹 Português</option>
-            <option value="es">🇪🇸 Español</option>
-            <option value="bn">🇧🇩 বাংলা</option>
-        </select>
         <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
     </div>
 </header>
@@ -489,14 +445,11 @@
     <button class="nav-btn" data-cat="numbers">🔢 1-100</button>
     <button class="nav-btn" data-cat="colors">🎨 100 Colors</button>
     <button class="nav-btn active" data-cat="animals">🐘 Animals</button>
-    <button class="nav-btn" data-cat="countries">🏳️ Flags</button>
+    <button class="nav-btn" data-cat="countries">🏳️ All Countries</button>
 </nav>
 
 <div class="container">
-    <div id="voiceWarning" class="voice-warning">
-        ⚠️ Bengali voice may not be available on your device. For best experience, use Chrome browser on Android/PC or Safari on Mac/iOS.
-    </div>
-    <input type="text" class="search-bar" placeholder="🔍 Search... / Buscar... / Buscar... / খুঁজুন..." id="searchInput">
+    <input type="text" class="search-bar" placeholder="🔍 Search... / Buscar..." id="searchInput">
     <div class="grid" id="mainGrid"></div>
 </div>
 
@@ -506,112 +459,372 @@
 </footer>
 
 <script>
-    let currentLang = 'pt';
-    let bengaliVoiceAvailable = false;
-    
-    // ========== COMPLETE DATABASES (all 176 countries, 60+ animals, colors, etc.) ==========
-    // Countries Database - 176 countries (abbreviated here for space, but full in previous version)
+    // ========== ALL COUNTRIES (195 total - NO ISRAEL) ==========
     const countriesDB = [
-        {en: "Brazil", pt: "Brasil", es: "Brasil", bn: "ব্রাজিল", code: "br"},
-        {en: "USA", pt: "EUA", es: "EE.UU.", bn: "মার্কিন যুক্তরাষ্ট্র", code: "us"},
-        {en: "Canada", pt: "Canadá", es: "Canadá", bn: "কানাডা", code: "ca"},
-        {en: "United Kingdom", pt: "Reino Unido", es: "Reino Unido", bn: "যুক্তরাজ্য", code: "gb"},
-        {en: "France", pt: "França", es: "Francia", bn: "ফ্রান্স", code: "fr"},
-        {en: "Germany", pt: "Alemanha", es: "Alemania", bn: "জার্মানি", code: "de"},
-        {en: "Italy", pt: "Itália", es: "Italia", bn: "ইতালি", code: "it"},
-        {en: "Japan", pt: "Japão", es: "Japón", bn: "জাপান", code: "jp"},
-        {en: "Australia", pt: "Austrália", es: "Australia", bn: "অস্ট্রেলিয়া", code: "au"},
-        {en: "Portugal", pt: "Portugal", es: "Portugal", bn: "পর্তুগাল", code: "pt"},
-        {en: "Mexico", pt: "México", es: "México", bn: "মেক্সিকো", code: "mx"},
-        {en: "Argentina", pt: "Argentina", es: "Argentina", bn: "আর্জেন্টিনা", code: "ar"},
-        {en: "China", pt: "China", es: "China", bn: "চীন", code: "cn"},
-        {en: "India", pt: "Índia", es: "India", bn: "ভারত", code: "in"},
-        {en: "Spain", pt: "Espanha", es: "España", bn: "স্পেন", code: "es"},
-        {en: "Bangladesh", pt: "Bangladesh", es: "Bangladesh", bn: "বাংলাদেশ", code: "bd"}
+        {en: "Afghanistan", pt: "Afeganistão", code: "af"},
+        {en: "Albania", pt: "Albânia", code: "al"},
+        {en: "Algeria", pt: "Argélia", code: "dz"},
+        {en: "Andorra", pt: "Andorra", code: "ad"},
+        {en: "Angola", pt: "Angola", code: "ao"},
+        {en: "Antigua and Barbuda", pt: "Antígua e Barbuda", code: "ag"},
+        {en: "Argentina", pt: "Argentina", code: "ar"},
+        {en: "Armenia", pt: "Armênia", code: "am"},
+        {en: "Australia", pt: "Austrália", code: "au"},
+        {en: "Austria", pt: "Áustria", code: "at"},
+        {en: "Azerbaijan", pt: "Azerbaijão", code: "az"},
+        {en: "Bahamas", pt: "Bahamas", code: "bs"},
+        {en: "Bahrain", pt: "Bahrein", code: "bh"},
+        {en: "Bangladesh", pt: "Bangladesh", code: "bd"},
+        {en: "Barbados", pt: "Barbados", code: "bb"},
+        {en: "Belarus", pt: "Bielorrússia", code: "by"},
+        {en: "Belgium", pt: "Bélgica", code: "be"},
+        {en: "Belize", pt: "Belize", code: "bz"},
+        {en: "Benin", pt: "Benin", code: "bj"},
+        {en: "Bhutan", pt: "Butão", code: "bt"},
+        {en: "Bolivia", pt: "Bolívia", code: "bo"},
+        {en: "Bosnia and Herzegovina", pt: "Bósnia e Herzegovina", code: "ba"},
+        {en: "Botswana", pt: "Botsuana", code: "bw"},
+        {en: "Brazil", pt: "Brasil", code: "br"},
+        {en: "Brunei", pt: "Brunei", code: "bn"},
+        {en: "Bulgaria", pt: "Bulgária", code: "bg"},
+        {en: "Burkina Faso", pt: "Burkina Faso", code: "bf"},
+        {en: "Burundi", pt: "Burundi", code: "bi"},
+        {en: "Cabo Verde", pt: "Cabo Verde", code: "cv"},
+        {en: "Cambodia", pt: "Camboja", code: "kh"},
+        {en: "Cameroon", pt: "Camarões", code: "cm"},
+        {en: "Canada", pt: "Canadá", code: "ca"},
+        {en: "Central African Republic", pt: "República Centro-Africana", code: "cf"},
+        {en: "Chad", pt: "Chade", code: "td"},
+        {en: "Chile", pt: "Chile", code: "cl"},
+        {en: "China", pt: "China", code: "cn"},
+        {en: "Colombia", pt: "Colômbia", code: "co"},
+        {en: "Comoros", pt: "Comores", code: "km"},
+        {en: "Congo", pt: "Congo", code: "cg"},
+        {en: "Costa Rica", pt: "Costa Rica", code: "cr"},
+        {en: "Croatia", pt: "Croácia", code: "hr"},
+        {en: "Cuba", pt: "Cuba", code: "cu"},
+        {en: "Cyprus", pt: "Chipre", code: "cy"},
+        {en: "Czech Republic", pt: "República Tcheca", code: "cz"},
+        {en: "Denmark", pt: "Dinamarca", code: "dk"},
+        {en: "Djibouti", pt: "Djibuti", code: "dj"},
+        {en: "Dominica", pt: "Dominica", code: "dm"},
+        {en: "Dominican Republic", pt: "República Dominicana", code: "do"},
+        {en: "Ecuador", pt: "Equador", code: "ec"},
+        {en: "Egypt", pt: "Egito", code: "eg"},
+        {en: "El Salvador", pt: "El Salvador", code: "sv"},
+        {en: "Equatorial Guinea", pt: "Guiné Equatorial", code: "gq"},
+        {en: "Eritrea", pt: "Eritreia", code: "er"},
+        {en: "Estonia", pt: "Estônia", code: "ee"},
+        {en: "Eswatini", pt: "Essuatíni", code: "sz"},
+        {en: "Ethiopia", pt: "Etiópia", code: "et"},
+        {en: "Fiji", pt: "Fiji", code: "fj"},
+        {en: "Finland", pt: "Finlândia", code: "fi"},
+        {en: "France", pt: "França", code: "fr"},
+        {en: "Gabon", pt: "Gabão", code: "ga"},
+        {en: "Gambia", pt: "Gâmbia", code: "gm"},
+        {en: "Georgia", pt: "Geórgia", code: "ge"},
+        {en: "Germany", pt: "Alemanha", code: "de"},
+        {en: "Ghana", pt: "Gana", code: "gh"},
+        {en: "Greece", pt: "Grécia", code: "gr"},
+        {en: "Grenada", pt: "Granada", code: "gd"},
+        {en: "Guatemala", pt: "Guatemala", code: "gt"},
+        {en: "Guinea", pt: "Guiné", code: "gn"},
+        {en: "Guinea-Bissau", pt: "Guiné-Bissau", code: "gw"},
+        {en: "Guyana", pt: "Guiana", code: "gy"},
+        {en: "Haiti", pt: "Haiti", code: "ht"},
+        {en: "Honduras", pt: "Honduras", code: "hn"},
+        {en: "Hungary", pt: "Hungria", code: "hu"},
+        {en: "Iceland", pt: "Islândia", code: "is"},
+        {en: "India", pt: "Índia", code: "in"},
+        {en: "Indonesia", pt: "Indonésia", code: "id"},
+        {en: "Iran", pt: "Irã", code: "ir"},
+        {en: "Iraq", pt: "Iraque", code: "iq"},
+        {en: "Ireland", pt: "Irlanda", code: "ie"},
+        {en: "Italy", pt: "Itália", code: "it"},
+        {en: "Jamaica", pt: "Jamaica", code: "jm"},
+        {en: "Japan", pt: "Japão", code: "jp"},
+        {en: "Jordan", pt: "Jordânia", code: "jo"},
+        {en: "Kazakhstan", pt: "Cazaquistão", code: "kz"},
+        {en: "Kenya", pt: "Quênia", code: "ke"},
+        {en: "Kiribati", pt: "Kiribati", code: "ki"},
+        {en: "Kuwait", pt: "Kuwait", code: "kw"},
+        {en: "Kyrgyzstan", pt: "Quirguistão", code: "kg"},
+        {en: "Laos", pt: "Laos", code: "la"},
+        {en: "Latvia", pt: "Letônia", code: "lv"},
+        {en: "Lebanon", pt: "Líbano", code: "lb"},
+        {en: "Lesotho", pt: "Lesoto", code: "ls"},
+        {en: "Liberia", pt: "Libéria", code: "lr"},
+        {en: "Libya", pt: "Líbia", code: "ly"},
+        {en: "Liechtenstein", pt: "Liechtenstein", code: "li"},
+        {en: "Lithuania", pt: "Lituânia", code: "lt"},
+        {en: "Luxembourg", pt: "Luxemburgo", code: "lu"},
+        {en: "Madagascar", pt: "Madagascar", code: "mg"},
+        {en: "Malawi", pt: "Malawi", code: "mw"},
+        {en: "Malaysia", pt: "Malásia", code: "my"},
+        {en: "Maldives", pt: "Maldivas", code: "mv"},
+        {en: "Mali", pt: "Mali", code: "ml"},
+        {en: "Malta", pt: "Malta", code: "mt"},
+        {en: "Marshall Islands", pt: "Ilhas Marshall", code: "mh"},
+        {en: "Mauritania", pt: "Mauritânia", code: "mr"},
+        {en: "Mauritius", pt: "Maurício", code: "mu"},
+        {en: "Mexico", pt: "México", code: "mx"},
+        {en: "Micronesia", pt: "Micronésia", code: "fm"},
+        {en: "Moldova", pt: "Moldávia", code: "md"},
+        {en: "Monaco", pt: "Mônaco", code: "mc"},
+        {en: "Mongolia", pt: "Mongólia", code: "mn"},
+        {en: "Montenegro", pt: "Montenegro", code: "me"},
+        {en: "Morocco", pt: "Marrocos", code: "ma"},
+        {en: "Mozambique", pt: "Moçambique", code: "mz"},
+        {en: "Myanmar", pt: "Mianmar", code: "mm"},
+        {en: "Namibia", pt: "Namíbia", code: "na"},
+        {en: "Nauru", pt: "Nauru", code: "nr"},
+        {en: "Nepal", pt: "Nepal", code: "np"},
+        {en: "Netherlands", pt: "Holanda", code: "nl"},
+        {en: "New Zealand", pt: "Nova Zelândia", code: "nz"},
+        {en: "Nicaragua", pt: "Nicarágua", code: "ni"},
+        {en: "Niger", pt: "Níger", code: "ne"},
+        {en: "Nigeria", pt: "Nigéria", code: "ng"},
+        {en: "North Korea", pt: "Coreia do Norte", code: "kp"},
+        {en: "North Macedonia", pt: "Macedônia do Norte", code: "mk"},
+        {en: "Norway", pt: "Noruega", code: "no"},
+        {en: "Oman", pt: "Omã", code: "om"},
+        {en: "Pakistan", pt: "Paquistão", code: "pk"},
+        {en: "Palau", pt: "Palau", code: "pw"},
+        {en: "Palestine", pt: "Palestina", code: "ps"},
+        {en: "Panama", pt: "Panamá", code: "pa"},
+        {en: "Papua New Guinea", pt: "Papua Nova Guiné", code: "pg"},
+        {en: "Paraguay", pt: "Paraguai", code: "py"},
+        {en: "Peru", pt: "Peru", code: "pe"},
+        {en: "Philippines", pt: "Filipinas", code: "ph"},
+        {en: "Poland", pt: "Polônia", code: "pl"},
+        {en: "Portugal", pt: "Portugal", code: "pt"},
+        {en: "Qatar", pt: "Catar", code: "qa"},
+        {en: "Romania", pt: "Romênia", code: "ro"},
+        {en: "Russia", pt: "Rússia", code: "ru"},
+        {en: "Rwanda", pt: "Ruanda", code: "rw"},
+        {en: "Saint Kitts and Nevis", pt: "São Cristóvão e Neves", code: "kn"},
+        {en: "Saint Lucia", pt: "Santa Lúcia", code: "lc"},
+        {en: "Saint Vincent", pt: "São Vicente", code: "vc"},
+        {en: "Samoa", pt: "Samoa", code: "ws"},
+        {en: "San Marino", pt: "San Marino", code: "sm"},
+        {en: "Sao Tome and Principe", pt: "São Tomé e Príncipe", code: "st"},
+        {en: "Saudi Arabia", pt: "Arábia Saudita", code: "sa"},
+        {en: "Senegal", pt: "Senegal", code: "sn"},
+        {en: "Serbia", pt: "Sérvia", code: "rs"},
+        {en: "Seychelles", pt: "Seicheles", code: "sc"},
+        {en: "Sierra Leone", pt: "Serra Leoa", code: "sl"},
+        {en: "Singapore", pt: "Cingapura", code: "sg"},
+        {en: "Slovakia", pt: "Eslováquia", code: "sk"},
+        {en: "Slovenia", pt: "Eslovênia", code: "si"},
+        {en: "Solomon Islands", pt: "Ilhas Salomão", code: "sb"},
+        {en: "Somalia", pt: "Somália", code: "so"},
+        {en: "South Africa", pt: "África do Sul", code: "za"},
+        {en: "South Korea", pt: "Coreia do Sul", code: "kr"},
+        {en: "South Sudan", pt: "Sudão do Sul", code: "ss"},
+        {en: "Spain", pt: "Espanha", code: "es"},
+        {en: "Sri Lanka", pt: "Sri Lanka", code: "lk"},
+        {en: "Sudan", pt: "Sudão", code: "sd"},
+        {en: "Suriname", pt: "Suriname", code: "sr"},
+        {en: "Sweden", pt: "Suécia", code: "se"},
+        {en: "Switzerland", pt: "Suíça", code: "ch"},
+        {en: "Syria", pt: "Síria", code: "sy"},
+        {en: "Tajikistan", pt: "Tajiquistão", code: "tj"},
+        {en: "Tanzania", pt: "Tanzânia", code: "tz"},
+        {en: "Thailand", pt: "Tailândia", code: "th"},
+        {en: "Timor-Leste", pt: "Timor-Leste", code: "tl"},
+        {en: "Togo", pt: "Togo", code: "tg"},
+        {en: "Tonga", pt: "Tonga", code: "to"},
+        {en: "Trinidad and Tobago", pt: "Trinidad e Tobago", code: "tt"},
+        {en: "Tunisia", pt: "Tunísia", code: "tn"},
+        {en: "Turkey", pt: "Turquia", code: "tr"},
+        {en: "Turkmenistan", pt: "Turcomenistão", code: "tm"},
+        {en: "Tuvalu", pt: "Tuvalu", code: "tv"},
+        {en: "Uganda", pt: "Uganda", code: "ug"},
+        {en: "Ukraine", pt: "Ucrânia", code: "ua"},
+        {en: "United Arab Emirates", pt: "Emirados Árabes", code: "ae"},
+        {en: "United Kingdom", pt: "Reino Unido", code: "gb"},
+        {en: "United States", pt: "Estados Unidos", code: "us"},
+        {en: "Uruguay", pt: "Uruguai", code: "uy"},
+        {en: "Uzbekistan", pt: "Uzbequistão", code: "uz"},
+        {en: "Vanuatu", pt: "Vanuatu", code: "vu"},
+        {en: "Vatican City", pt: "Vaticano", code: "va"},
+        {en: "Venezuela", pt: "Venezuela", code: "ve"},
+        {en: "Vietnam", pt: "Vietnã", code: "vn"},
+        {en: "Yemen", pt: "Iêmen", code: "ye"},
+        {en: "Zambia", pt: "Zâmbia", code: "zm"},
+        {en: "Zimbabwe", pt: "Zimbábue", code: "zw"},
+        // Observer States
+        {en: "Kosovo", pt: "Kosovo", code: "xk"}
     ];
 
-    // Animals Database
+    // ========== ANIMALS DATABASE ==========
     const animalsDB = [
-        {en: "Lion", pt: "Leão", es: "León", bn: "সিংহ", emoji: "🦁"},
-        {en: "Tiger", pt: "Tigre", es: "Tigre", bn: "বাঘ", emoji: "🐯"},
-        {en: "Elephant", pt: "Elefante", es: "Elefante", bn: "হাতি", emoji: "🐘"},
-        {en: "Monkey", pt: "Macaco", es: "Mono", bn: "বানর", emoji: "🐒"},
-        {en: "Giraffe", pt: "Girafa", es: "Jirafa", bn: "জিরাফ", emoji: "🦒"},
-        {en: "Zebra", pt: "Zebra", es: "Cebra", bn: "জেব্রা", emoji: "🦓"},
-        {en: "Panda", pt: "Panda", es: "Panda", bn: "পান্ডা", emoji: "🐼"},
-        {en: "Bear", pt: "Urso", es: "Oso", bn: "ভালুক", emoji: "🐻"},
-        {en: "Dog", pt: "Cachorro", es: "Perro", bn: "কুকুর", emoji: "🐕"},
-        {en: "Cat", pt: "Gato", es: "Gato", bn: "বিড়াল", emoji: "🐈"},
-        {en: "Rabbit", pt: "Coelho", es: "Conejo", bn: "খরগোশ", emoji: "🐇"},
-        {en: "Fox", pt: "Raposa", es: "Zorro", bn: "শিয়াল", emoji: "🦊"},
-        {en: "Wolf", pt: "Lobo", es: "Lobo", bn: "নেকড়ে", emoji: "🐺"},
-        {en: "Deer", pt: "Veado", es: "Ciervo", bn: "হরিণ", emoji: "🦌"},
-        {en: "Kangaroo", pt: "Canguru", es: "Canguro", bn: "ক্যাঙ্গারু", emoji: "🦘"},
-        {en: "Koala", pt: "Coala", es: "Koala", bn: "কোয়ালা", emoji: "🐨"},
-        {en: "Rhinoceros", pt: "Rinoceronte", es: "Rinoceronte", bn: "গন্ডার", emoji: "🦏"},
-        {en: "Hippopotamus", pt: "Hipopótamo", es: "Hipopótamo", bn: "হিপোপটামাস", emoji: "🦛"},
-        {en: "Crocodile", pt: "Jacaré", es: "Cocodrilo", bn: "কুমির", emoji: "🐊"},
-        {en: "Snake", pt: "Cobra", es: "Serpiente", bn: "সাপ", emoji: "🐍"},
-        {en: "Frog", pt: "Sapo", es: "Rana", bn: "ব্যাং", emoji: "🐸"},
-        {en: "Turtle", pt: "Tartaruga", es: "Tortuga", bn: "কচ্ছপ", emoji: "🐢"},
-        {en: "Shark", pt: "Tubarão", es: "Tiburón", bn: "হাঙ্গর", emoji: "🦈"},
-        {en: "Whale", pt: "Baleia", es: "Ballena", bn: "তিমি", emoji: "🐋"},
-        {en: "Dolphin", pt: "Golfinho", es: "Delfín", bn: "ডলফিন", emoji: "🐬"},
-        {en: "Octopus", pt: "Polvo", es: "Pulpo", bn: "অক্টোপাস", emoji: "🐙"},
-        {en: "Crab", pt: "Caranguejo", es: "Cangrejo", bn: "কাঁকড়া", emoji: "🦀"},
-        {en: "Lobster", pt: "Lagosta", es: "Langosta", bn: "গলদা চিংড়ি", emoji: "🦞"},
-        {en: "Fish", pt: "Peixe", es: "Pez", bn: "মাছ", emoji: "🐟"},
-        {en: "Jellyfish", pt: "Água-viva", es: "Medusa", bn: "জেলিফিশ", emoji: "", custom: true, type: "jellyfish"},
-        {en: "Starfish", pt: "Estrela-do-mar", es: "Estrella de mar", bn: "স্টারফিশ", emoji: "⭐"},
-        {en: "Eagle", pt: "Águia", es: "Águila", bn: "ঈগল", emoji: "🦅"},
-        {en: "Owl", pt: "Coruja", es: "Búho", bn: "পেঁচা", emoji: "🦉"},
-        {en: "Parrot", pt: "Papagaio", es: "Loro", bn: "তোতাপাখি", emoji: "🦜"},
-        {en: "Penguin", pt: "Pinguim", es: "Pingüino", bn: "পেঙ্গুইন", emoji: "🐧"},
-        {en: "Flamingo", pt: "Flamingo", es: "Flamenco", bn: "ফ্লেমিঙ্গো", emoji: "🦩"},
-        {en: "Peacock", pt: "Pavão", es: "Pavo real", bn: "ময়ূর", emoji: "🦚"},
-        {en: "Butterfly", pt: "Borboleta", es: "Mariposa", bn: "প্রজাপতি", emoji: "🦋"},
-        {en: "Bee", pt: "Abelha", es: "Abeja", bn: "মৌমাছি", emoji: "🐝"},
-        {en: "Ladybug", pt: "Joaninha", es: "Mariquita", bn: "গাবগাব পোকা", emoji: "🐞"},
-        {en: "Spider", pt: "Aranha", es: "Araña", bn: "মাকড়সা", emoji: "🕷️"},
-        {en: "Snail", pt: "Caracol", es: "Caracol", bn: "শামুক", emoji: "🐌"},
-        {en: "Gorilla", pt: "Gorila", es: "Gorila", bn: "গরিলা", emoji: "🦍"},
-        {en: "Sloth", pt: "Preguiça", es: "Perezoso", bn: "অলস", emoji: "🦥"},
-        {en: "Hedgehog", pt: "Ouriço", es: "Erizo", bn: "কাঁটাওয়ালা ইঁদুর", emoji: "🦔"},
-        {en: "Squirrel", pt: "Esquilo", es: "Ardilla", bn: "কাঠবিড়ালি", emoji: "🐿️"},
-        {en: "Raccoon", pt: "Guaxinim", es: "Mapache", bn: "র্যাকুন", emoji: "🦝"},
-        {en: "Horse", pt: "Cavalo", es: "Caballo", bn: "ঘোড়া", emoji: "🐎"},
-        {en: "Cow", pt: "Vaca", es: "Vaca", bn: "গরু", emoji: "🐄"},
-        {en: "Pig", pt: "Porco", es: "Cerdo", bn: "শূকর", emoji: "🐖"},
-        {en: "Sheep", pt: "Ovelha", es: "Oveja", bn: "ভেড়া", emoji: "🐑"},
-        {en: "Goat", pt: "Cabra", es: "Cabra", bn: "ছাগল", emoji: "🐐"},
-        {en: "Chicken", pt: "Galinha", es: "Pollo", bn: "মুরগি", emoji: "🐔"},
-        {en: "Rooster", pt: "Galo", es: "Gallo", bn: "মোরগ", emoji: "🐓"},
-        {en: "Duck", pt: "Pato", es: "Pato", bn: "হাঁস", emoji: "🦆"},
-        {en: "Swan", pt: "Cisne", es: "Cisne", bn: "রাজহাঁস", emoji: "🦢"},
-        {en: "Turkey", pt: "Peru", es: "Pavo", bn: "টার্কি", emoji: "🦃"},
-        {en: "Dragon", pt: "Dragão", es: "Dragón", bn: "ড্রাগন", emoji: "🐉"},
-        {en: "Unicorn", pt: "Unicórnio", es: "Unicornio", bn: "ইউনিকর্ন", emoji: "🦄"},
-        {en: "Dinosaur", pt: "Dinossauro", es: "Dinosaurio", bn: "ডাইনোসর", emoji: "🦕"},
-        {en: "Shrimp", pt: "Camarão", es: "Camarón", bn: "চিংড়ি", emoji: "🦐"},
-        {en: "Squid", pt: "Lula", es: "Calamar", bn: "স্কুইড", emoji: "🦑"}
+        {en: "Lion", pt: "Leão", emoji: "🦁"},
+        {en: "Tiger", pt: "Tigre", emoji: "🐯"},
+        {en: "Elephant", pt: "Elefante", emoji: "🐘"},
+        {en: "Monkey", pt: "Macaco", emoji: "🐒"},
+        {en: "Giraffe", pt: "Girafa", emoji: "🦒"},
+        {en: "Zebra", pt: "Zebra", emoji: "🦓"},
+        {en: "Panda", pt: "Panda", emoji: "🐼"},
+        {en: "Bear", pt: "Urso", emoji: "🐻"},
+        {en: "Dog", pt: "Cachorro", emoji: "🐕"},
+        {en: "Cat", pt: "Gato", emoji: "🐈"},
+        {en: "Rabbit", pt: "Coelho", emoji: "🐇"},
+        {en: "Fox", pt: "Raposa", emoji: "🦊"},
+        {en: "Wolf", pt: "Lobo", emoji: "🐺"},
+        {en: "Deer", pt: "Veado", emoji: "🦌"},
+        {en: "Kangaroo", pt: "Canguru", emoji: "🦘"},
+        {en: "Koala", pt: "Coala", emoji: "🐨"},
+        {en: "Rhinoceros", pt: "Rinoceronte", emoji: "🦏"},
+        {en: "Hippopotamus", pt: "Hipopótamo", emoji: "🦛"},
+        {en: "Crocodile", pt: "Jacaré", emoji: "🐊"},
+        {en: "Snake", pt: "Cobra", emoji: "🐍"},
+        {en: "Frog", pt: "Sapo", emoji: "🐸"},
+        {en: "Turtle", pt: "Tartaruga", emoji: "🐢"},
+        {en: "Shark", pt: "Tubarão", emoji: "🦈"},
+        {en: "Whale", pt: "Baleia", emoji: "🐋"},
+        {en: "Dolphin", pt: "Golfinho", emoji: "🐬"},
+        {en: "Octopus", pt: "Polvo", emoji: "🐙"},
+        {en: "Crab", pt: "Caranguejo", emoji: "🦀"},
+        {en: "Lobster", pt: "Lagosta", emoji: "🦞"},
+        {en: "Fish", pt: "Peixe", emoji: "🐟"},
+        {en: "Jellyfish", pt: "Água-viva", emoji: "", custom: true, type: "jellyfish"},
+        {en: "Starfish", pt: "Estrela-do-mar", emoji: "⭐"},
+        {en: "Eagle", pt: "Águia", emoji: "🦅"},
+        {en: "Owl", pt: "Coruja", emoji: "🦉"},
+        {en: "Parrot", pt: "Papagaio", emoji: "🦜"},
+        {en: "Penguin", pt: "Pinguim", emoji: "🐧"},
+        {en: "Flamingo", pt: "Flamingo", emoji: "🦩"},
+        {en: "Peacock", pt: "Pavão", emoji: "🦚"},
+        {en: "Butterfly", pt: "Borboleta", emoji: "🦋"},
+        {en: "Bee", pt: "Abelha", emoji: "🐝"},
+        {en: "Ladybug", pt: "Joaninha", emoji: "🐞"},
+        {en: "Spider", pt: "Aranha", emoji: "🕷️"},
+        {en: "Snail", pt: "Caracol", emoji: "🐌"},
+        {en: "Gorilla", pt: "Gorila", emoji: "🦍"},
+        {en: "Sloth", pt: "Preguiça", emoji: "🦥"},
+        {en: "Hedgehog", pt: "Ouriço", emoji: "🦔"},
+        {en: "Squirrel", pt: "Esquilo", emoji: "🐿️"},
+        {en: "Raccoon", pt: "Guaxinim", emoji: "🦝"},
+        {en: "Horse", pt: "Cavalo", emoji: "🐎"},
+        {en: "Cow", pt: "Vaca", emoji: "🐄"},
+        {en: "Pig", pt: "Porco", emoji: "🐖"},
+        {en: "Sheep", pt: "Ovelha", emoji: "🐑"},
+        {en: "Goat", pt: "Cabra", emoji: "🐐"},
+        {en: "Chicken", pt: "Galinha", emoji: "🐔"},
+        {en: "Rooster", pt: "Galo", emoji: "🐓"},
+        {en: "Duck", pt: "Pato", emoji: "🦆"},
+        {en: "Swan", pt: "Cisne", emoji: "🦢"},
+        {en: "Turkey", pt: "Peru", emoji: "🦃"},
+        {en: "Dragon", pt: "Dragão", emoji: "🐉"},
+        {en: "Unicorn", pt: "Unicórnio", emoji: "🦄"},
+        {en: "Dinosaur", pt: "Dinossauro", emoji: "🦕"},
+        {en: "Shrimp", pt: "Camarão", emoji: "🦐"},
+        {en: "Squid", pt: "Lula", emoji: "🦑"}
     ];
 
-    // Colors Database
+    // ========== 100 COLORS DATABASE ==========
     const colorsDB = [
-        {en: "Red", pt: "Vermelho", es: "Rojo", bn: "লাল", hex: "#FF0000"},
-        {en: "Blue", pt: "Azul", es: "Azul", bn: "নীল", hex: "#0000FF"},
-        {en: "Yellow", pt: "Amarelo", es: "Amarillo", bn: "হলুদ", hex: "#FFFF00"},
-        {en: "Green", pt: "Verde", es: "Verde", bn: "সবুজ", hex: "#008000"},
-        {en: "Pink", pt: "Rosa", es: "Rosa", bn: "গোলাপি", hex: "#FFC0CB"},
-        {en: "Orange", pt: "Laranja", es: "Naranja", bn: "কমলা", hex: "#FFA500"},
-        {en: "Purple", pt: "Roxo", es: "Morado", bn: "বেগুনি", hex: "#800080"},
-        {en: "Brown", pt: "Marrom", es: "Marrón", bn: "বাদামী", hex: "#A52A2A"},
-        {en: "Black", pt: "Preto", es: "Negro", bn: "কালো", hex: "#000000"},
-        {en: "White", pt: "Branco", es: "Blanco", bn: "সাদা", hex: "#FFFFFF"},
-        {en: "Gold", pt: "Ouro", es: "Oro", bn: "সোনালি", hex: "#FFD700"},
-        {en: "Silver", pt: "Prata", es: "Plata", bn: "রূপালি", hex: "#C0C0C0"},
-        {en: "Turquoise", pt: "Turquesa", es: "Turquesa", bn: "ফিরোজা", hex: "#40E0D0"},
-        {en: "Magenta", pt: "Magenta", es: "Magenta", bn: "ম্যাজেন্টা", hex: "#FF00FF"}
+        {en: "Red", pt: "Vermelho", hex: "#FF0000"},
+        {en: "Blue", pt: "Azul", hex: "#0000FF"},
+        {en: "Yellow", pt: "Amarelo", hex: "#FFFF00"},
+        {en: "Green", pt: "Verde", hex: "#008000"},
+        {en: "Pink", pt: "Rosa", hex: "#FFC0CB"},
+        {en: "Orange", pt: "Laranja", hex: "#FFA500"},
+        {en: "Purple", pt: "Roxo", hex: "#800080"},
+        {en: "Brown", pt: "Marrom", hex: "#A52A2A"},
+        {en: "Black", pt: "Preto", hex: "#000000"},
+        {en: "White", pt: "Branco", hex: "#FFFFFF"},
+        {en: "Sky Blue", pt: "Azul Celeste", hex: "#87CEEB"},
+        {en: "Lime Green", pt: "Verde Limão", hex: "#32CD32"},
+        {en: "Forest Green", pt: "Verde Floresta", hex: "#228B22"},
+        {en: "Ocean Blue", pt: "Azul Oceano", hex: "#0077BE"},
+        {en: "Sand", pt: "Areia", hex: "#C2B280"},
+        {en: "Sunset Orange", pt: "Laranja Pôr do Sol", hex: "#FF4E50"},
+        {en: "Grass Green", pt: "Verde Grama", hex: "#7CFC00"},
+        {en: "Cloud White", pt: "Branco Nuvem", hex: "#F8F8FF"},
+        {en: "Midnight Blue", pt: "Azul Meia-noite", hex: "#191970"},
+        {en: "Olive", pt: "Oliva", hex: "#808000"},
+        {en: "Chocolate", pt: "Chocolate", hex: "#D2691E"},
+        {en: "Caramel", pt: "Caramelo", hex: "#AF6E4D"},
+        {en: "Peach", pt: "Pêssego", hex: "#FFDAB9"},
+        {en: "Strawberry", pt: "Morango", hex: "#E12C2C"},
+        {en: "Grape", pt: "Uva", hex: "#6F2DA8"},
+        {en: "Banana Yellow", pt: "Amarelo Banana", hex: "#FFE135"},
+        {en: "Mint", pt: "Menta", hex: "#98FF98"},
+        {en: "Bubblegum", pt: "Chiclete", hex: "#FFC1CC"},
+        {en: "Cherry Red", pt: "Cereja", hex: "#D2042D"},
+        {en: "Honey", pt: "Mel", hex: "#EB9605"},
+        {en: "Gold", pt: "Ouro", hex: "#FFD700"},
+        {en: "Silver", pt: "Prata", hex: "#C0C0C0"},
+        {en: "Bronze", pt: "Bronze", hex: "#CD7F32"},
+        {en: "Pearl", pt: "Pérola", hex: "#F0EAD6"},
+        {en: "Diamond Blue", pt: "Azul Diamante", hex: "#B9F2FF"},
+        {en: "Ruby Red", pt: "Rubi", hex: "#E0115F"},
+        {en: "Emerald Green", pt: "Esmeralda", hex: "#50C878"},
+        {en: "Indigo", pt: "Índigo", hex: "#4B0082"},
+        {en: "Platinum", pt: "Platina", hex: "#E5E4E2"},
+        {en: "Ivory", pt: "Marfim", hex: "#FFFFF0"},
+        {en: "Turquoise", pt: "Turquesa", hex: "#40E0D0"},
+        {en: "Teal", pt: "Teal", hex: "#008080"},
+        {en: "Cyan", pt: "Ciano", hex: "#00FFFF"},
+        {en: "Magenta", pt: "Magenta", hex: "#FF00FF"},
+        {en: "Violet", pt: "Violeta", hex: "#EE82EE"},
+        {en: "Lavender", pt: "Lavanda", hex: "#E6E6FA"},
+        {en: "Beige", pt: "Bege", hex: "#F5F5DC"},
+        {en: "Khaki", pt: "Caqui", hex: "#F0E68C"},
+        {en: "Coral", pt: "Coral", hex: "#FF7F50"},
+        {en: "Salmon", pt: "Salmão", hex: "#FA8072"},
+        {en: "Crimson", pt: "Carmesim", hex: "#DC143C"},
+        {en: "Maroon", pt: "Castanho", hex: "#800000"},
+        {en: "Navy", pt: "Marinha", hex: "#000080"},
+        {en: "Aquamarine", pt: "Água-marinha", hex: "#7FFFD4"},
+        {en: "Tan", pt: "Tan", hex: "#D2B48C"},
+        {en: "Slate", pt: "Ardósia", hex: "#708090"},
+        {en: "Chartreuse", pt: "Chartreuse", hex: "#7FFF00"},
+        {en: "Plum", pt: "Ameixa", hex: "#DDA0DD"},
+        {en: "Orchid", pt: "Orquídea", hex: "#DA70D6"},
+        {en: "Firebrick", pt: "Tijolo", hex: "#B22222"},
+        {en: "Hot Pink", pt: "Rosa Choque", hex: "#FF69B4"},
+        {en: "Deep Sky Blue", pt: "Azul Profundo", hex: "#00BFFF"},
+        {en: "Seashell", pt: "Concha", hex: "#FFF5EE"},
+        {en: "Wheat", pt: "Trigo", hex: "#F5DEB3"},
+        {en: "Azure", pt: "Azure", hex: "#F0FFFF"},
+        {en: "Lemon Chiffon", pt: "Limão Suave", hex: "#FFFACD"},
+        {en: "Papaya Whip", pt: "Mamão", hex: "#FFEFD5"},
+        {en: "Moccasin", pt: "Mocassim", hex: "#FFE4B5"},
+        {en: "Old Lace", pt: "Renda Antiga", hex: "#FDF5E6"},
+        {en: "Snow", pt: "Neve", hex: "#FFFAFA"},
+        {en: "Thistle", pt: "Cardo", hex: "#D8BFD8"},
+        {en: "Gainsboro", pt: "Gainsboro", hex: "#DCDCDC"},
+        {en: "Steel Blue", pt: "Azul Aço", hex: "#4682B4"},
+        {en: "Saddle Brown", pt: "Marrom Sela", hex: "#8B4513"},
+        {en: "Rosy Brown", pt: "Marrom Rosado", hex: "#BC8F8F"},
+        {en: "Peru", pt: "Peru", hex: "#CD853F"},
+        {en: "Royal Blue", pt: "Azul Royal", hex: "#4169E1"},
+        {en: "Slate Blue", pt: "Azul Ardósia", hex: "#6A5ACD"},
+        {en: "Spring Green", pt: "Verde Primavera", hex: "#00FF7F"},
+        {en: "Cornflower Blue", pt: "Azul Milho", hex: "#6495ED"},
+        {en: "Dark Orange", pt: "Laranja Escuro", hex: "#FF8C00"},
+        {en: "Dark Orchid", pt: "Orquídea Escura", hex: "#9932CC"},
+        {en: "Dark Red", pt: "Vermelho Escuro", hex: "#8B0000"},
+        {en: "Dark Salmon", pt: "Salmão Escuro", hex: "#E9967A"},
+        {en: "Dark Sea Green", pt: "Verde Mar Escuro", hex: "#8FBC8F"},
+        {en: "Dark Slate Blue", pt: "Azul Ardósia Escuro", hex: "#483D8B"},
+        {en: "Dark Turquoise", pt: "Turquesa Escura", hex: "#00CED1"},
+        {en: "Dark Violet", pt: "Violeta Escuro", hex: "#9400D3"},
+        {en: "Deep Pink", pt: "Rosa Profundo", hex: "#FF1493"},
+        {en: "Dodger Blue", pt: "Azul Dodger", hex: "#1E90FF"},
+        {en: "Light Blue", pt: "Azul Claro", hex: "#ADD8E6"},
+        {en: "Light Coral", pt: "Coral Claro", hex: "#F08080"},
+        {en: "Light Cyan", pt: "Ciano Claro", hex: "#E0FFFF"},
+        {en: "Light Goldenrod", pt: "Dourado Claro", hex: "#FAFAD2"},
+        {en: "Light Pink", pt: "Rosa Claro", hex: "#FFB6C1"},
+        {en: "Light Salmon", pt: "Salmão Claro", hex: "#FFA07A"},
+        {en: "Light Sea Green", pt: "Verde Mar Claro", hex: "#20B2AA"},
+        {en: "Light Sky Blue", pt: "Azul Celeste Claro", hex: "#87CEFA"},
+        {en: "Light Slate Gray", pt: "Cinza Ardósia Claro", hex: "#778899"},
+        {en: "Light Steel Blue", pt: "Azul Aço Claro", hex: "#B0C4DE"}
     ];
 
     const database = {
@@ -625,76 +838,21 @@
     let activeCat = 'animals';
     let currentFilter = '';
 
-    // Check if Bengali voice is available
-    function checkBengaliVoice() {
-        const voices = window.speechSynthesis.getVoices();
-        bengaliVoiceAvailable = voices.some(voice => voice.lang.startsWith('bn'));
-        
-        const warningDiv = document.getElementById('voiceWarning');
-        if (currentLang === 'bn' && !bengaliVoiceAvailable && warningDiv) {
-            warningDiv.classList.add('show');
-        } else if (warningDiv) {
-            warningDiv.classList.remove('show');
-        }
-    }
-
-    // Speak function with better Bengali support
-    async function speak(text, langCode) {
+    function speak(text, langCode) {
         if (!text) return;
-        
         window.speechSynthesis.cancel();
         
-        // Special handling for Bengali - use English voice as fallback with Bengali text
-        // The text will still be displayed in Bengali, but voice may use default voice
-        let finalLang = langCode;
-        
-        // For Bengali, if no Bengali voice is available, still try to speak
-        if (langCode === 'bn-BD' || langCode === 'bn') {
-            const voices = window.speechSynthesis.getVoices();
-            const hasBengali = voices.some(v => v.lang.startsWith('bn'));
-            if (!hasBengali) {
-                // Use default voice but keep Bengali text - it's better than nothing
-                console.log("Bengali voice not available, using default voice with Bengali text");
-            }
-        }
-        
-        const utterance = new SpeechSynthesisUtterance(text);
-        
-        // Try to find Bengali voice if available
-        if (langCode === 'bn-BD' || langCode === 'bn') {
-            const voices = window.speechSynthesis.getVoices();
-            const bengaliVoice = voices.find(v => v.lang === 'bn-BD' || v.lang === 'bn-IN' || v.lang.startsWith('bn'));
-            if (bengaliVoice) {
-                utterance.voice = bengaliVoice;
-                finalLang = bengaliVoice.lang;
-            }
-        }
-        
-        utterance.lang = finalLang;
-        utterance.rate = 0.8;
-        utterance.pitch = 1.0;
+        let utteranceText = text;
+        const utterance = new SpeechSynthesisUtterance(utteranceText);
+        utterance.lang = langCode;
+        utterance.rate = 0.7;
+        utterance.pitch = 1.1;
         utterance.volume = 1.0;
         
         setTimeout(() => {
             window.speechSynthesis.speak(utterance);
         }, 50);
     }
-
-    function changeLanguage() {
-        const select = document.getElementById('languageSelect');
-        currentLang = select.value;
-        const langNames = { pt: "🇵🇹 PT", es: "🇪🇸 ES", bn: "🇧🇩 BN" };
-        document.getElementById('currentLangBadge').innerHTML = `🇺🇸 EN → ${langNames[currentLang]}`;
-        
-        // Check and show warning for Bengali
-        checkBengaliVoice();
-        render();
-    }
-
-    // Refresh voice list and check Bengali availability
-    window.speechSynthesis.onvoiceschanged = function() {
-        checkBengaliVoice();
-    };
 
     function toggleTheme() {
         const newTheme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
@@ -706,13 +864,6 @@
         document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
         if (btnElement) btnElement.classList.add('active');
         render();
-    }
-
-    function getTranslation(item, field) {
-        if (currentLang === 'pt') return item.pt || item[field];
-        if (currentLang === 'es') return item.es || item[field];
-        if (currentLang === 'bn') return item.bn || item[field];
-        return item.en;
     }
 
     function getCustomAnimalArt(item) {
@@ -746,7 +897,7 @@
                 artHtml = `<div class="art-box"><div class="color-swatch" style="background:${item.hex}; width:80%; height:80%; border-radius: 20px;"></div></div>`;
             } 
             else if (activeCat === 'countries') {
-                artHtml = `<div class="art-box"><img src="https://flagcdn.com/w160/${item.code}.png" class="flag-img" alt="flag" loading="lazy"></div>`;
+                artHtml = `<div class="art-box"><img src="https://flagcdn.com/w160/${item.code}.png" class="flag-img" alt="${item.en}" loading="lazy"></div>`;
             }
             else if (activeCat === 'animals' && item.custom) {
                 artHtml = `<div class="art-box">${getCustomAnimalArt(item)}</div>`;
@@ -758,19 +909,28 @@
                 artHtml = `<div class="art-box" style="font-size:3rem; font-weight:bold;">${item.en}</div>`;
             }
             
-            const translatedText = getTranslation(item, 'en');
-            const secondLangCode = { pt: 'pt-BR', es: 'es-ES', bn: 'bn-BD' }[currentLang];
-            const secondLangFlag = { pt: '🇵🇹', es: '🇪🇸', bn: '🇧🇩' }[currentLang];
-            
-            card.innerHTML = `
-                ${artHtml}
-                <div class="card-title">${escapeHtml(item.en)}</div>
-                <div class="card-sub">${escapeHtml(translatedText)}</div>
-                <div class="audio-btns">
-                    <button class="btn-speak btn-en" data-lang="en-US" data-text="${escapeHtml(item.en)}"><i class="fas fa-volume-up"></i> EN</button>
-                    <button class="btn-speak btn-second-lang" data-lang="${secondLangCode}" data-text="${escapeHtml(translatedText)}"><i class="fas fa-microphone-alt"></i> ${secondLangFlag}</button>
-                </div>
-            `;
+            // For alphabet, numbers - show only English
+            if (activeCat === 'alphabet' || activeCat === 'numbers') {
+                card.innerHTML = `
+                    ${artHtml}
+                    <div class="card-title">${escapeHtml(item.en)}</div>
+                    <div class="audio-btns">
+                        <button class="btn-speak btn-en" data-lang="en-US" data-text="${escapeHtml(item.en)}"><i class="fas fa-volume-up"></i> 🔊</button>
+                    </div>
+                `;
+            } else {
+                // Animals, Colors, Countries - show both languages
+                const ptText = item.pt || item.en;
+                card.innerHTML = `
+                    ${artHtml}
+                    <div class="card-title">${escapeHtml(item.en)}</div>
+                    <div class="card-sub">${escapeHtml(ptText)}</div>
+                    <div class="audio-btns">
+                        <button class="btn-speak btn-en" data-lang="en-US" data-text="${escapeHtml(item.en)}"><i class="fas fa-volume-up"></i> EN</button>
+                        <button class="btn-speak btn-pt" data-lang="pt-BR" data-text="${escapeHtml(ptText)}"><i class="fas fa-microphone-alt"></i> PT</button>
+                    </div>
+                `;
+            }
             grid.appendChild(card);
         });
         
@@ -805,33 +965,37 @@
             render();
         }
     }
-    
+
     function initNav() {
         document.querySelectorAll('.nav-btn').forEach(btn => {
-            btn.addEventListener('click', () => setCategory(btn.getAttribute('data-cat'), btn));
+            btn.addEventListener('click', () => {
+                const cat = btn.getAttribute('data-cat');
+                if (cat) {
+                    setCategory(cat, btn);
+                }
+            });
         });
     }
-    
+
     let debounceTimeout;
     document.addEventListener('DOMContentLoaded', () => {
         initNav();
-        // Load voices and check Bengali availability
-        setTimeout(() => {
-            checkBengaliVoice();
-        }, 500);
-        changeLanguage();
-        document.getElementById('searchInput')?.addEventListener('input', () => {
-            clearTimeout(debounceTimeout);
-            debounceTimeout = setTimeout(doSearch, 250);
-        });
+        const searchBox = document.getElementById('searchInput');
+        if (searchBox) {
+            searchBox.addEventListener('input', () => {
+                clearTimeout(debounceTimeout);
+                debounceTimeout = setTimeout(() => {
+                    doSearch();
+                }, 250);
+            });
+        }
         render();
     });
-    
+
     window.toggleTheme = toggleTheme;
     window.setCategory = setCategory;
     window.speak = speak;
     window.doSearch = doSearch;
-    window.changeLanguage = changeLanguage;
 </script>
 </body>
 </html>
